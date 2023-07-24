@@ -3,5 +3,5 @@ export default function Home() {
     <div>
       <h1>TeamGuru</h1>
     </div>
-  );
+  )
 }
