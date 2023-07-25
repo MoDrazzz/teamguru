@@ -1,5 +1,6 @@
 import AuthWrapper from '@/components/AuthWrapper'
 import Logo from '@/components/Logo'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -11,7 +12,9 @@ export default function Home() {
             <h1 className="text-3xl font-semibold">Welcome back</h1>
             <h2>
               Are you new?{' '}
-              <span className="text-primary-500 font-semibold">Sign Up</span>
+              <Link href="/signup" className="text-primary-500 font-semibold">
+                Sign Up
+              </Link>
             </h2>
           </div>
         </div>
