@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['400'] })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '600'] })
 
 export const metadata: Metadata = {
   title: 'TeamGuru',
@@ -13,7 +13,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body
+        className={`${poppins.className} bg-slate-200 h-screen text-slate-800`}
+      >
+        {children}
+      </body>
     </html>
   )
 }
