@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { RefObject } from 'react'
 
 interface Props {
@@ -5,6 +6,7 @@ interface Props {
   refObj: RefObject<HTMLInputElement>
   id: string
   placeholder: string
+  isError?: boolean
 }
 
 export default function Input({
@@ -12,13 +14,20 @@ export default function Input({
   refObj,
   id,
   placeholder,
+  isError = false,
 }: Props) {
   return (
     <input
       type={type}
       ref={refObj}
       id={id}
-      className="rounded-lg font-medium border-2 border-slate-400 px-3 py-2 text-sm w-full"
+      className={classNames(
+        'rounded-lg font-medium border-2 px-3 py-2 text-sm w-full',
+        {
+          'border-red-500 text-red-700': isError,
+          'border-slate-400': !isError,
+        },
+      )}
       placeholder={placeholder}
     />
   )
