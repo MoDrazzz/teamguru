@@ -3,26 +3,35 @@
 import { FormEvent, useRef, useState } from 'react'
 import { LoginErrors } from '@/types'
 import { FormField, Label, Input, InputError, Button } from '@/components'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-const initialErrorsState: LoginErrors = { email: '', password: '' }
+const initialErrorsState: LoginErrors = {
+  email: '',
+  password: '',
+  supabaseError: null,
+}
 
 const LoginForm = () => {
+  const supabase = createClientComponentClient()
+
   const [errors, setErrors] = useState(initialErrorsState)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (!emailRef.current || !passwordRef.current) return
 
     const newErrors: LoginErrors = { ...initialErrorsState }
 
-    const email = emailRef.current?.value
-    const password = passwordRef.current?.value
+    const email = emailRef.current.value
+    const password = passwordRef.current.value
 
-    if (!email?.trim().length) {
+    if (!email.trim().length) {
       newErrors.email = 'No email address provided'
     }
-    if (!password?.trim().length) {
+    if (!password.trim().length) {
       newErrors.password = 'No password provided'
     }
 
@@ -30,6 +39,18 @@ const LoginForm = () => {
       setErrors(newErrors)
       return
     }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      setErrors((prev) => ({ ...prev, supabaseError: error }))
+      return
+    }
+
+    console.log(data)
   }
 
   return (
@@ -41,8 +62,8 @@ const LoginForm = () => {
           type="email"
           id="email"
           placeholder="Enter your email..."
-          isError={!!errors.email}
-          onFocus={() => setErrors((prev) => ({ ...prev, email: '' }))}
+          isError={!!errors.email || !!errors.supabaseError}
+          onFocus={() => setErrors(initialErrorsState)}
         />
         <InputError message={errors.email} />
       </FormField>
@@ -53,10 +74,12 @@ const LoginForm = () => {
           type="password"
           id="password"
           placeholder="Enter your password..."
-          isError={!!errors.password}
-          onFocus={() => setErrors((prev) => ({ ...prev, password: '' }))}
+          isError={!!errors.password || !!errors.supabaseError}
+          onFocus={() => setErrors(initialErrorsState)}
         />
-        <InputError message={errors.password} />
+        <InputError
+          message={errors.supabaseError?.message ?? errors.password}
+        />
       </FormField>
       <Button onClick={handleSubmit} type="submit">
         Log In
