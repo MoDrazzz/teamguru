@@ -6,7 +6,7 @@ interface Props extends PropsWithChildren {
   type?: 'button' | 'submit'
 }
 
-export default function Button({ children, onClick, type = 'button' }: Props) {
+const Button = ({ children, onClick, type = 'button' }: Props) => {
   return (
     <button
       type={type}
@@ -17,3 +17,5 @@ export default function Button({ children, onClick, type = 'button' }: Props) {
     </button>
   )
 }
+
+export default Button

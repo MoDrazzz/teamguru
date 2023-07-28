@@ -1,16 +1,12 @@
 'use client'
 
 import { FormEvent, useRef, useState } from 'react'
-import Button from './Button'
-import FormField from './FormField'
-import Input from './Input'
-import Label from './Label'
-import InputError from './InputError'
 import { LoginErrors } from '@/types'
+import { FormField, Label, Input, InputError, Button } from '@/components'
 
 const initialErrorsState: LoginErrors = { email: '', password: '' }
 
-export default function LoginForm() {
+const LoginForm = () => {
   const [errors, setErrors] = useState(initialErrorsState)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
@@ -68,3 +64,5 @@ export default function LoginForm() {
     </form>
   )
 }
+
+export default LoginForm

@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react'
 
-export default function AuthWrapper({ children }: PropsWithChildren) {
+const AuthWrapper = ({ children }: PropsWithChildren) => {
   return <main className="rounded-xl p-3 bg-white">{children}</main>
 }
+
+export default AuthWrapper

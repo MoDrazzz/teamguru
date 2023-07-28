@@ -1,6 +1,4 @@
-import AuthWrapper from '@/components/AuthWrapper'
-import LoginForm from '@/components/LoginForm'
-import Logo from '@/components/Logo'
+import { AuthWrapper, LoginForm, Logo } from '@/components'
 import Link from 'next/link'
 
 export default function Home() {

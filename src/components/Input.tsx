@@ -10,14 +10,14 @@ interface Props {
   onFocus?: () => void
 }
 
-export default function Input({
+const Input = ({
   type = 'text',
   refObj,
   id,
   placeholder,
   isError = false,
   onFocus,
-}: Props) {
+}: Props) => {
   return (
     <input
       type={type}
@@ -35,3 +35,5 @@ export default function Input({
     />
   )
 }
+
+export default Input

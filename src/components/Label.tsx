@@ -4,10 +4,12 @@ interface Props extends PropsWithChildren {
   htmlFor: string
 }
 
-export default function Label({ htmlFor, children }: Props) {
+const Label = ({ htmlFor, children }: Props) => {
   return (
     <label htmlFor={htmlFor} className="text-sm text-slate-500 font-semibold">
       {children}
     </label>
   )
 }
+
+export default Label
