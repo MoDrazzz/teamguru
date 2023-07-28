@@ -7,6 +7,7 @@ interface Props {
   id: string
   placeholder: string
   isError?: boolean
+  onFocus?: () => void
 }
 
 export default function Input({
@@ -15,6 +16,7 @@ export default function Input({
   id,
   placeholder,
   isError = false,
+  onFocus,
 }: Props) {
   return (
     <input
@@ -29,6 +31,7 @@ export default function Input({
         },
       )}
       placeholder={placeholder}
+      onFocus={onFocus}
     />
   )
 }
