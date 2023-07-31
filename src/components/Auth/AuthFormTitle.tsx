@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/components'
 
 interface Props {
   variant: 'login' | 'signup'
@@ -14,10 +14,7 @@ const AuthFormTitle = ({ variant }: Props) => {
       </h1>
       <h2 className="text-sm sm:text-base">
         {isLogin ? 'Are you new?' : 'Already have an account?'}{' '}
-        <Link
-          href={isLogin ? '/signup' : '/login'}
-          className="text-primary-500 font-semibold"
-        >
+        <Link href={isLogin ? '/signup' : '/login'}>
           {isLogin ? 'Sign up' : 'Log in'}
         </Link>
       </h2>

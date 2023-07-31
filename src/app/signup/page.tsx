@@ -1,5 +1,4 @@
-import { AuthWrapper } from '@/components'
-import SignupHero from '@/components/SignupHero'
+import { AuthWrapper, SignupHero } from '@/components'
 
 export default function SignUp() {
   return (

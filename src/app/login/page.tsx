@@ -1,5 +1,4 @@
-import { AuthWrapper, LoginForm, Logo } from '@/components'
-import AuthFormTitle from '@/components/AuthFormTitle'
+import { AuthWrapper, AuthFormTitle, LoginForm, Logo } from '@/components'
 
 export default function Login() {
   return (
