@@ -66,6 +66,7 @@ const LoginForm = () => {
           placeholder="Enter your email..."
           isError={!!errors.email || !!errors.supabaseError}
           onFocus={() => setErrors(initialErrorsState)}
+          autocomplete="email"
         />
         <InputError message={errors.email} />
       </FormField>
@@ -78,6 +79,7 @@ const LoginForm = () => {
           placeholder="Enter your password..."
           isError={!!errors.password || !!errors.supabaseError}
           onFocus={() => setErrors(initialErrorsState)}
+          autocomplete="current-password"
         />
         <InputError
           message={errors.supabaseError?.message ?? errors.password}

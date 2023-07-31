@@ -1,4 +1,9 @@
-import { AuthWrapper, SignupHero } from '@/components'
+import {
+  AuthFormTitle,
+  AuthWrapper,
+  SignupForm,
+  SignupHero,
+} from '@/components'
 
 export default function SignUp() {
   return (
@@ -6,6 +11,10 @@ export default function SignUp() {
       <AuthWrapper>
         <div className="flex">
           <SignupHero />
+          <div className="px-12 flex flex-col gap-8 py-8">
+            <AuthFormTitle variant="signup" />
+            <SignupForm />
+          </div>
         </div>
       </AuthWrapper>
     </div>
