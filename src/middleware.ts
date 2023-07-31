@@ -11,8 +11,13 @@ export async function middleware(req: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // if user is signed in and the current path is / redirect the user to /shell/dashboard
-  if (user && req.nextUrl.pathname === '/') {
+  // make /login default route, delete when landing page is ready
+  if (req.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/login', req.url))
+  }
+
+  // if user is signed in and the current path is /login redirect the user to /shell/dashboard
+  if (user && req.nextUrl.pathname === '/login') {
     return NextResponse.redirect(new URL('/shell/dashboard', req.url))
   }
 
@@ -21,14 +26,14 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/shell/dashboard', req.url))
   }
 
-  // if user is not signed in and the current path is not / redirect the user to /
-  if (!user && req.nextUrl.pathname !== '/') {
-    return NextResponse.redirect(new URL('/', req.url))
+  // if user is not signed in and the current path starts with /shell redirect the user to /login
+  if (!user && req.nextUrl.pathname.startsWith('/shell')) {
+    return NextResponse.redirect(new URL('/login', req.url))
   }
 
   return res
 }
 
 export const config = {
-  matcher: ['/', '/shell/:path*'],
+  matcher: ['/', '/login', '/shell/:path*'],
 }
