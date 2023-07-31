@@ -4,6 +4,7 @@ import { FormEvent, useRef, useState } from 'react'
 import { LoginErrors } from '@/types'
 import { FormField, Label, Input, InputError, Button } from '@/components'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
 
 const initialErrorsState: LoginErrors = {
   email: '',
@@ -13,6 +14,7 @@ const initialErrorsState: LoginErrors = {
 
 const LoginForm = () => {
   const supabase = createClientComponentClient()
+  const router = useRouter()
 
   const [errors, setErrors] = useState(initialErrorsState)
   const emailRef = useRef<HTMLInputElement>(null)
@@ -40,7 +42,7 @@ const LoginForm = () => {
       return
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
@@ -50,7 +52,7 @@ const LoginForm = () => {
       return
     }
 
-    console.log(data)
+    router.push('/shell')
   }
 
   return (
