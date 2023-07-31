@@ -11,7 +11,7 @@ const Button = ({ children, onClick, type = 'button' }: Props) => {
     <button
       type={type}
       onClick={onClick}
-      className="bg-primary-500 rounded-lg text-primary-50 px-5 py-2 font-semibold"
+      className="bg-primary-500 text-sm sm:text-base rounded-lg text-primary-50 px-4 sm:px-5 py-2 font-semibold"
     >
       {children}
     </button>

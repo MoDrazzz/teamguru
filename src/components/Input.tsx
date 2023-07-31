@@ -24,7 +24,7 @@ const Input = ({
       ref={refObj}
       id={id}
       className={classNames(
-        'rounded-lg font-medium border-2 px-3 py-2 text-sm w-full',
+        'rounded-lg font-medium border-2 px-3 py-2 text-xs sm:text-sm w-full',
         {
           'border-red-500 text-red-700': isError,
           'border-slate-400': !isError,

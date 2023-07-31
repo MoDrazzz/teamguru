@@ -6,7 +6,10 @@ interface Props extends PropsWithChildren {
 
 const Label = ({ htmlFor, children }: Props) => {
   return (
-    <label htmlFor={htmlFor} className="text-sm text-slate-500 font-semibold">
+    <label
+      htmlFor={htmlFor}
+      className="text-xs sm:text-sm text-slate-500 font-semibold"
+    >
       {children}
     </label>
   )
