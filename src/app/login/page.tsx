@@ -1,7 +1,7 @@
 import { AuthWrapper, LoginForm, Logo } from '@/components'
 import Link from 'next/link'
 
-export default function Home() {
+export default function Login() {
   return (
     <div className="grid place-items-center h-full">
       <AuthWrapper>
@@ -9,7 +9,7 @@ export default function Home() {
           <Logo />
           <div className="grid sm:gap-3 gap-2">
             <h1 className="text-2xl sm:text-3xl font-semibold">Welcome back</h1>
-            <h2 className='text-sm sm:text-base'>
+            <h2 className="text-sm sm:text-base">
               Are you new?{' '}
               <Link href="/signup" className="text-primary-500 font-semibold">
                 Sign Up
