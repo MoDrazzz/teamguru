@@ -18,17 +18,17 @@ export default function SignUp() {
                 </h4>
               </div>
             </div>
-            <div className='gap-3 grid'>
+            <div className="gap-3 grid">
               <Review
                 review="Provides an efficient and user-friendly way to track team progress."
                 avatarUrl="https://i.pravatar.cc/100"
                 name="Joanna Adamska"
                 title="CEO"
               />
-              <div className='flex gap-2 justify-center'>
-                <span className='block w-2 h-2 rounded-full bg-green-50' />
-                <span className='block w-2 h-2 rounded-full bg-green-50 opacity-50' />
-                <span className='block w-2 h-2 rounded-full bg-green-50 opacity-50' />
+              <div className="flex gap-2 justify-center">
+                <span className="block w-2 h-2 rounded-full bg-green-50" />
+                <span className="block w-2 h-2 rounded-full bg-green-50 opacity-50" />
+                <span className="block w-2 h-2 rounded-full bg-green-50 opacity-50" />
               </div>
             </div>
           </div>
