@@ -11,10 +11,10 @@ export default function SignUp() {
       <AuthWrapper>
         <div className="flex">
           <SignupHero />
-          <div className="px-12 flex flex-col gap-8 py-8">
+          <section className="px-12 flex flex-col gap-8 py-8">
             <AuthFormTitle variant="signup" />
             <SignupForm />
-          </div>
+          </section>
         </div>
       </AuthWrapper>
     </div>

@@ -9,6 +9,7 @@ export { default as SignupHero } from './Auth/SignupHero'
 
 // COMMON
 export { default as Alert } from './Alert'
+export { default as Avatar } from './Avatar'
 export { default as Button } from './Button'
 export { default as CodeBlock } from './CodeBlock'
 export { default as ErrorModal } from './ErrorModal'
@@ -21,3 +22,7 @@ export { default as Link } from './Link'
 export { default as Logo } from './Logo'
 export { default as Modal } from './Modal'
 export { default as Review } from './Review'
+export { default as Reviews } from './Reviews'
+
+// SKELETONS
+export { default as ReviewsSkeleton } from './Skeletons/ReviewsSkeleton'

@@ -1,30 +1,23 @@
-import Image from 'next/image'
+import { Avatar } from '@/components'
+import { Reviewer } from '@/types'
 
 interface Props {
   review: string
-  avatarUrl: string
-  name: string
-  title: string
+  reviewer: Reviewer
 }
 
-const Review = ({ review, avatarUrl, name, title }: Props) => {
+const Review = ({ review, reviewer }: Props) => {
   return (
-    <div className="rounded-lg bg-primary-800 text-primary-50 grid p-4 gap-4 text-sm">
+    <figure className="rounded-lg bg-primary-800 text-primary-50 grid p-4 gap-4 text-sm">
       <p>{review}</p>
       <div className="flex gap-3">
-        <Image
-          src={avatarUrl}
-          alt={`${name}'s Avatar`}
-          className="rounded-lg w-10 h-10"
-          width={40}
-          height={40}
-        />
+        <Avatar name={reviewer.name} url={reviewer.avatar_url} />
         <div className="grid">
-          <p className="font-medium">{name}</p>
-          <p className="text-xs">{title}</p>
+          <figcaption className="font-medium">{reviewer.name}</figcaption>
+          <figcaption className="text-xs">{reviewer.position}</figcaption>
         </div>
       </div>
-    </div>
+    </figure>
   )
 }
 
