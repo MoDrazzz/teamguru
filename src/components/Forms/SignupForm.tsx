@@ -1,6 +1,7 @@
 'use client'
 
 import { Button, FormField, Input, Label } from '@/components'
+import TooltipIcon from '@/components/TooltipIcon'
 import { FormEvent, useRef } from 'react'
 
 const SignupForm = () => {
@@ -71,7 +72,17 @@ const SignupForm = () => {
         />
       </FormField>
       <FormField>
-        <Label htmlFor="password">Password</Label>
+        <div className="flex items-center gap-2">
+          <Label htmlFor="password">Password</Label>
+          <TooltipIcon
+            tooltipMessage={[
+              'Password should be at least 8 characters long,',
+              'including both uppercase and lowercase letters,',
+              'at least one number and one special character.',
+            ]}
+            variant="info"
+          />
+        </div>
         <Input
           refObj={passwordRef}
           type="password"
