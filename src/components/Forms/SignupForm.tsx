@@ -40,8 +40,8 @@ const SignupForm = () => {
   }
 
   return (
-    <form className="grid gap-6 justify-items-start">
-      <div className="flex gap-4">
+    <form className="grid gap-6 justify-items-start w-96">
+      <div className="flex gap-4 w-full">
         <FormField>
           <Label htmlFor="firstName">First Name</Label>
           <Input

@@ -4,14 +4,14 @@ const ReviewsSkeleton = () => {
   return (
     <div className="gap-3 grid animate-pulse">
       <div className="rounded-lg bg-primary-800 grid p-4 gap-4">
-        <div className="rounded-full w-full h-4 bg-green-700" />
-        <div className="rounded-full w-full h-4 bg-green-700" />
-        <div className="rounded-full w-3/4 h-4 bg-green-700" />
+        <div className="rounded-full w-full h-4 bg-primary-700" />
+        <div className="rounded-full w-full h-4 bg-primary-700" />
+        <div className="rounded-full w-3/4 h-4 bg-primary-700" />
         <div className="flex gap-3">
-          <div className="rounded-lg w-10 h-10 bg-green-700" />
+          <div className="rounded-lg w-10 h-10 bg-primary-700" />
           <div className="grid h-full w-4/5">
-            <div className="rounded-full w-3/5 h-4 bg-green-700" />
-            <div className="self-end rounded-full w-1/4 h-4 bg-green-700" />
+            <div className="rounded-full w-3/5 h-4 bg-primary-700" />
+            <div className="self-end rounded-full w-1/4 h-4 bg-primary-700" />
           </div>
         </div>
       </div>
