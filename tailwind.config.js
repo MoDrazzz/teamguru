@@ -17,6 +17,10 @@ module.exports = {
       colors: {
         primary: colors.green,
       },
+      fontFamily: {
+        sans: ['var(--font-poppins)'],
+        mono: ['var(--font-source-code-pro)'],
+      },
     },
   },
   plugins: [],
