@@ -1,6 +1,6 @@
 'use client'
 
-import Icon from '@/components/Icon'
+import { Icon } from '@/components'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react'
 
@@ -33,7 +33,7 @@ const Modal = ({ isVisible, setIsVisible, children }: Props) => {
             className="absolute right-3 top-3 cursor-pointer"
             onClick={() => setIsVisible(false)}
           >
-            <Icon icon={faTimes} className="" />
+            <Icon icon={faTimes} className="text-xl" />
           </span>
           {children}
         </div>

@@ -1,9 +1,17 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Poppins, Source_Code_Pro } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600'] })
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-poppins',
+})
+const sourceCodePro = Source_Code_Pro({
+  subsets: ['latin'],
+  variable: '--font-source-code-pro',
+})
 
 export const metadata: Metadata = {
   title: 'TeamGuru',
@@ -14,7 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${poppins.className} bg-slate-200 h-screen text-slate-800`}
+        className={`${poppins.variable} ${sourceCodePro.variable} font-sans bg-slate-200 h-screen text-slate-800`}
       >
         {children}
       </body>
