@@ -3,6 +3,7 @@
 import { Button, FormField, Input, InputError, Label } from '@/components'
 import TooltipIcon from '@/components/TooltipIcon'
 import { SignupErrors } from '@/types/Errors'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useRef, useState } from 'react'
 
 const initialErrorsState: SignupErrors = {
@@ -22,6 +23,8 @@ const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
 
 const SignupForm = () => {
+  const supabase = createClientComponentClient()
+
   const firstNameRef = useRef<HTMLInputElement>(null)
   const lastNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
@@ -29,6 +32,24 @@ const SignupForm = () => {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
 
   const [errors, setErrors] = useState(initialErrorsState)
+
+  const clearForm = () => {
+    if (
+      !firstNameRef.current ||
+      !lastNameRef.current ||
+      !emailRef.current ||
+      !passwordRef.current ||
+      !passwordConfirmationRef.current
+    ) {
+      return
+    }
+
+    firstNameRef.current.value = ''
+    lastNameRef.current.value = ''
+    emailRef.current.value = ''
+    passwordRef.current.value = ''
+    passwordConfirmationRef.current.value = ''
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -84,13 +105,28 @@ const SignupForm = () => {
       return
     }
 
-    console.log({
-      firstName,
-      lastName,
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      passwordConfirmation,
     })
+
+    if (error || !data.user) {
+      setErrors((prev) => ({ ...prev, supabaseError: error }))
+      // TODO: Handle error
+      return
+    }
+
+    if (!data.user.identities?.length) {
+      // There is an existing user with this email address
+      // TODO: Handle error
+      clearForm()
+    }
+
+    setErrors(initialErrorsState)
+
+    // Signed Up Successfully
+    clearForm()
+    // TODO: Handle success
   }
 
   return (

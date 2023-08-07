@@ -52,6 +52,8 @@ const LoginForm = () => {
       return
     }
 
+    setErrors(initialErrorsState)
+
     router.push('/shell')
   }
 
