@@ -7,7 +7,7 @@ interface Props {
   isVisible: boolean
   setIsVisible: Dispatch<SetStateAction<boolean>>
   error: {
-    code: number
+    code?: number
     message: string
   }
 }
@@ -25,7 +25,8 @@ const ErrorModal = ({ isVisible, setIsVisible, error }: Props) => {
             Something went wrong! An error occurred.
           </h2>
           <CodeBlock>
-            {error.code}: {error.message}
+            {error.code && <>{error.code}: </>}
+            {error.message}
           </CodeBlock>
         </div>
         <p>

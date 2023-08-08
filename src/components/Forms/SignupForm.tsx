@@ -1,6 +1,13 @@
 'use client'
 
-import { Button, FormField, Input, InputError, Label } from '@/components'
+import {
+  Button,
+  ErrorModal,
+  FormField,
+  Input,
+  InputError,
+  Label,
+} from '@/components'
 import TooltipIcon from '@/components/TooltipIcon'
 import { SignupErrors } from '@/types/Errors'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -32,6 +39,7 @@ const SignupForm = () => {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
 
   const [errors, setErrors] = useState(initialErrorsState)
+  const [isErrorsModalVisible, setIsErrorsModalVisible] = useState(false)
 
   const clearForm = () => {
     if (
@@ -112,14 +120,16 @@ const SignupForm = () => {
 
     if (error || !data.user) {
       setErrors((prev) => ({ ...prev, supabaseError: error }))
-      // TODO: Handle error
+      setIsErrorsModalVisible(true)
       return
     }
 
     if (!data.user.identities?.length) {
-      // There is an existing user with this email address
-      // TODO: Handle error
-      clearForm()
+      setErrors((prev) => ({
+        ...prev,
+        email: 'Email already associated with an existing account',
+      }))
+      return
     }
 
     setErrors(initialErrorsState)
@@ -211,6 +221,16 @@ const SignupForm = () => {
       <Button onClick={handleSubmit} type="submit">
         Sign Up
       </Button>
+      {errors.supabaseError && (
+        <ErrorModal
+          error={{
+            message: errors.supabaseError.message,
+            code: errors.supabaseError.status,
+          }}
+          isVisible={isErrorsModalVisible}
+          setIsVisible={setIsErrorsModalVisible}
+        />
+      )}
     </form>
   )
 }
