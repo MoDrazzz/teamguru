@@ -39,6 +39,7 @@ const SignupForm = () => {
   const passwordRef = useRef<HTMLInputElement>(null)
   const passwordConfirmationRef = useRef<HTMLInputElement>(null)
 
+  const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState(initialErrorsState)
   const [isErrorsModalVisible, setIsErrorsModalVisible] = useState(false)
 
@@ -114,6 +115,8 @@ const SignupForm = () => {
       return
     }
 
+    setIsLoading(true)
+
     const { data, error: signupError } = await supabase.auth.signUp({
       email,
       password,
@@ -122,6 +125,7 @@ const SignupForm = () => {
     if (signupError || !data.user) {
       setErrors((prev) => ({ ...prev, error: signupError }))
       setIsErrorsModalVisible(true)
+      setIsLoading(false)
       return
     }
 
@@ -131,6 +135,7 @@ const SignupForm = () => {
         ...prev,
         email: 'Email already associated with an existing account',
       }))
+      setIsLoading(false)
       return
     }
 
@@ -153,6 +158,7 @@ const SignupForm = () => {
           },
         }))
         setIsErrorsModalVisible(true)
+        setIsLoading(false)
         return
       }
     } else {
@@ -173,10 +179,12 @@ const SignupForm = () => {
           },
         }))
         setIsErrorsModalVisible(true)
+        setIsLoading(false)
         return
       }
     }
     // Signed Up Successfully
+    setIsLoading(false)
     setErrors(initialErrorsState)
     clearForm()
     // TODO: Handle success
@@ -261,7 +269,12 @@ const SignupForm = () => {
         />
         <InputError message={errors.passwordConfirmation} />
       </FormField>
-      <Button onClick={handleSubmit} type="submit">
+      <Button
+        onClick={handleSubmit}
+        disabled={isLoading}
+        isLoading={isLoading}
+        type="submit"
+      >
         Sign Up
       </Button>
       {errors.error && (

@@ -23,6 +23,7 @@ export { default as Logo } from './Logo'
 export { default as Modal } from './Modal'
 export { default as Review } from './Review'
 export { default as Reviews } from './Reviews'
+export { default as Spinner } from './Spinner'
 export { default as Tooltip } from './Tooltip'
 export { default as TooltipIcon } from './TooltipIcon'
 
