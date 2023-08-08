@@ -1,5 +1,10 @@
 import { AuthError } from '@supabase/supabase-js'
 
+export interface Error {
+  code?: number | string
+  message: string
+}
+
 export interface LoginErrors {
   email: string
   password: string
@@ -12,5 +17,5 @@ export interface SignupErrors {
   email: string
   password: string
   passwordConfirmation: string
-  supabaseError: AuthError | null
+  error: Error | null
 }

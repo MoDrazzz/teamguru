@@ -7,9 +7,10 @@ import {
   Input,
   InputError,
   Label,
+  TooltipIcon,
 } from '@/components'
-import TooltipIcon from '@/components/TooltipIcon'
-import { SignupErrors } from '@/types/Errors'
+import { SignupErrors } from '@/types'
+import { isWithinOneMinute } from '@/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useRef, useState } from 'react'
 
@@ -19,7 +20,7 @@ const initialErrorsState: SignupErrors = {
   email: '',
   password: '',
   passwordConfirmation: '',
-  supabaseError: null,
+  error: null,
 }
 
 const emailRegex =
@@ -113,17 +114,18 @@ const SignupForm = () => {
       return
     }
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error: signupError } = await supabase.auth.signUp({
       email,
       password,
     })
 
-    if (error || !data.user) {
-      setErrors((prev) => ({ ...prev, supabaseError: error }))
+    if (signupError || !data.user) {
+      setErrors((prev) => ({ ...prev, error: signupError }))
       setIsErrorsModalVisible(true)
       return
     }
 
+    // Check if user already exists (with their email confirmed)
     if (!data.user.identities?.length) {
       setErrors((prev) => ({
         ...prev,
@@ -132,9 +134,50 @@ const SignupForm = () => {
       return
     }
 
-    setErrors(initialErrorsState)
+    // Create user profile if account was created within the last minute or update it if it already exists (user signed up but didn't confirm their email)
+    if (isWithinOneMinute(data.user.created_at)) {
+      const { error: profilesInsertError } = await supabase
+        .from('profiles')
+        .insert({
+          first_name: firstName,
+          last_name: lastName,
+          user_id: data.user.id,
+        })
 
+      if (profilesInsertError) {
+        setErrors((prev) => ({
+          ...prev,
+          error: {
+            code: profilesInsertError.code,
+            message: profilesInsertError.message,
+          },
+        }))
+        setIsErrorsModalVisible(true)
+        return
+      }
+    } else {
+      const { error: profilesUpdateError } = await supabase
+        .from('profiles')
+        .update({
+          first_name: firstName,
+          last_name: lastName,
+        })
+        .eq('user_id', data.user.id)
+
+      if (profilesUpdateError) {
+        setErrors((prev) => ({
+          ...prev,
+          error: {
+            code: profilesUpdateError.code,
+            message: profilesUpdateError.message,
+          },
+        }))
+        setIsErrorsModalVisible(true)
+        return
+      }
+    }
     // Signed Up Successfully
+    setErrors(initialErrorsState)
     clearForm()
     // TODO: Handle success
   }
@@ -221,11 +264,11 @@ const SignupForm = () => {
       <Button onClick={handleSubmit} type="submit">
         Sign Up
       </Button>
-      {errors.supabaseError && (
+      {errors.error && (
         <ErrorModal
           error={{
-            message: errors.supabaseError.message,
-            code: errors.supabaseError.status,
+            code: errors.error.code,
+            message: errors.error.message,
           }}
           isVisible={isErrorsModalVisible}
           setIsVisible={setIsErrorsModalVisible}

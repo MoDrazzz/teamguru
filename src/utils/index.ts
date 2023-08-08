@@ -1,0 +1,1 @@
+export { isWithinOneMinute } from './isWithinOneMinute'
