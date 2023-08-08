@@ -1,3 +1,4 @@
+export { default as Alert } from './Alert'
 export { default as AuthWrapper } from './AuthWrapper'
 export { default as Button } from './Button'
 export { default as CodeBlock } from './CodeBlock'
