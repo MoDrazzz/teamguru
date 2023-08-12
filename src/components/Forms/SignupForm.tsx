@@ -1,9 +1,11 @@
 'use client'
 
 import {
+  Alert,
   Button,
   ErrorModal,
   FormField,
+  Icon,
   Input,
   InputError,
   Label,
@@ -11,6 +13,7 @@ import {
 } from '@/components'
 import { SignupErrors } from '@/types'
 import { isWithinOneMinute } from '@/utils'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useRef, useState } from 'react'
 
@@ -42,6 +45,11 @@ const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState(initialErrorsState)
   const [isErrorsModalVisible, setIsErrorsModalVisible] = useState(false)
+  const [success, setSuccess] = useState({
+    isSuccess: false,
+    firstName: '',
+    email: '',
+  })
 
   const clearForm = () => {
     if (
@@ -59,6 +67,33 @@ const SignupForm = () => {
     emailRef.current.value = ''
     passwordRef.current.value = ''
     passwordConfirmationRef.current.value = ''
+  }
+
+  const handleResendEmail = async () => {
+    if (!emailRef.current) {
+      return
+    }
+
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: success.email,
+    })
+
+    if (error) {
+      setErrors((prev) => ({
+        ...prev,
+        error: {
+          code: error.status,
+          message: error.message,
+        },
+      }))
+      setIsErrorsModalVisible(true)
+    } else {
+      setSuccess((prev) => ({
+        ...prev,
+        isSuccess: false,
+      }))
+    }
   }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -115,6 +150,7 @@ const SignupForm = () => {
       return
     }
 
+    setErrors(initialErrorsState)
     setIsLoading(true)
 
     const { data, error: signupError } = await supabase.auth.signUp({
@@ -187,7 +223,11 @@ const SignupForm = () => {
     setIsLoading(false)
     setErrors(initialErrorsState)
     clearForm()
-    // TODO: Handle success
+    setSuccess({
+      isSuccess: true,
+      firstName,
+      email,
+    })
   }
 
   return (
@@ -286,6 +326,21 @@ const SignupForm = () => {
           isVisible={isErrorsModalVisible}
           setIsVisible={setIsErrorsModalVisible}
         />
+      )}
+      {success.isSuccess && (
+        <div className="absolute w-full left-0 bottom-full mb-4">
+          <Alert variant="info">
+            Thank you for signing up, {success.firstName}! You’re almost there.
+            Just click the link in the email we’ve sent to verify. Didn’t get
+            it?{' '}
+            <span
+              className="font-semibold cursor-pointer"
+              onClick={handleResendEmail}
+            >
+              Resend email <Icon icon={faPaperPlane} />
+            </span>
+          </Alert>
+        </div>
       )}
     </form>
   )
