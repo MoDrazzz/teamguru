@@ -47,21 +47,21 @@ export interface Database {
       reviews: {
         Row: {
           content: string
-          created_at: string | null
+          created_at: string
           id: string
           profile_id: string
           reviewer_position: string
         }
         Insert: {
           content: string
-          created_at?: string | null
+          created_at?: string
           id?: string
           profile_id: string
           reviewer_position: string
         }
         Update: {
           content?: string
-          created_at?: string | null
+          created_at?: string
           id?: string
           profile_id?: string
           reviewer_position?: string
@@ -77,7 +77,17 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      random_three_reviews: {
+        Row: {
+          content: string
+          id: string
+          reviewer_avatar_url: string
+          reviewer_first_name: string
+          reviewer_last_name: string
+          reviewer_position: string
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

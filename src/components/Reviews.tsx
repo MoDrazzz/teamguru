@@ -24,11 +24,15 @@ const Reviews = () => {
 
   useEffect(() => {
     const getReviews = async () => {
-      const { data: reviews, error } = await supabase.from('reviews').select(`
+      const { data: reviews, error } = await supabase.from(
+        'random_three_reviews',
+      ).select(`
         id,
         content,
         reviewer_position,
-        profiles (id,first_name,last_name,avatar_url)
+        reviewer_first_name,
+        reviewer_last_name,
+        reviewer_avatar_url
       `)
 
       if (!reviews || error) {
@@ -40,11 +44,9 @@ const Reviews = () => {
           id: review.id,
           content: review.content,
           reviewer: {
-            name: `${review.profiles!.first_name} ${
-              review.profiles!.last_name
-            }`,
+            name: `${review.reviewer_first_name} ${review.reviewer_last_name}`,
             position: review.reviewer_position,
-            avatar_url: review.profiles!.avatar_url,
+            avatar_url: review.reviewer_avatar_url,
           },
         })),
       )
