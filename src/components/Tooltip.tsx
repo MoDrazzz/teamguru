@@ -36,7 +36,7 @@ const Tooltip = ({ tooltipTargetRef, message }: Props) => {
   return (
     <span
       className={classNames(
-        'absolute z-50 left-1/2 -translate-x-1/2 top-full mt-1 w-max px-3 py-2 rounded-md bg-slate-800 transition-transform',
+        'absolute left-1/2 top-full z-50 mt-1 w-max -translate-x-1/2 rounded-md bg-slate-800 px-3 py-2 transition-transform',
         {
           'scale-100': isTooltipVisible,
           'scale-0': !isTooltipVisible,
@@ -45,7 +45,7 @@ const Tooltip = ({ tooltipTargetRef, message }: Props) => {
     >
       <p
         className={classNames('text-xs font-medium text-slate-50', {
-          'text-center whitespace-pre-wrap': isMessageArray,
+          'whitespace-pre-wrap text-center': isMessageArray,
         })}
       >
         {isMessageArray ? message.join('\n') : message}

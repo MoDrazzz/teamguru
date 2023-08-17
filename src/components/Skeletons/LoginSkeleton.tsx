@@ -1,14 +1,18 @@
-import { AuthFormTitleSkeleton, FormFieldSkeleton, LogoSkeleton } from '@/components'
+import {
+  AuthFormTitleSkeleton,
+  FormFieldSkeleton,
+  LogoSkeleton,
+} from '@/components'
 
 const LoginSkeleton = () => {
   return (
-    <div className="px-8 animate-pulse py-4 sm:px-12 sm:py-8 grid gap-6 sm:gap-8">
+    <div className="grid animate-pulse gap-6 px-8 py-4 sm:gap-8 sm:px-12 sm:py-8">
       <LogoSkeleton />
       <AuthFormTitleSkeleton variant="login" />
-      <form className="grid gap-6 w-56 sm:w-80 justify-items-start">
+      <form className="grid w-56 justify-items-start gap-6 sm:w-80">
         <FormFieldSkeleton />
         <FormFieldSkeleton />
-        <div className="w-24 h-10 bg-slate-200 animate-pulse rounded-lg" />
+        <div className="h-10 w-24 animate-pulse rounded-lg bg-slate-200" />
       </form>
     </div>
   )

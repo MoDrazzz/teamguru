@@ -22,11 +22,11 @@ const Modal = ({ isVisible, setIsVisible, children }: Props) => {
   return (
     isVisible && (
       <div
-        className="fixed w-screen h-screen top-0 left-0 grid place-items-center z-40 bg-slate-900 bg-opacity-50"
+        className="fixed left-0 top-0 z-40 grid h-screen w-screen place-items-center bg-slate-900 bg-opacity-50"
         onClick={() => setIsVisible(false)}
       >
         <div
-          className="relative bg-slate-50 rounded-lg p-12"
+          className="relative rounded-lg bg-slate-50 p-12"
           onClick={(e) => e.stopPropagation()}
         >
           <span

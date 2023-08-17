@@ -26,7 +26,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${sourceCodePro.variable} font-sans bg-slate-200 h-screen text-slate-800`}
+        className={`${poppins.variable} ${sourceCodePro.variable} h-screen bg-slate-200 font-sans text-slate-800`}
       >
         {children}
       </body>

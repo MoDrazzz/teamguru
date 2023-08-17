@@ -2,7 +2,7 @@ import { AuthWrapper, LoginSkeleton } from '@/components'
 
 export default function SignupLoading() {
   return (
-    <div className="grid place-items-center h-full">
+    <div className="grid h-full place-items-center">
       <AuthWrapper>
         <LoginSkeleton />
       </AuthWrapper>

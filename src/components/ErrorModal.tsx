@@ -12,13 +12,13 @@ interface Props {
 const ErrorModal = ({ isVisible, setIsVisible, error }: Props) => {
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
-      <div className="grid gap-8 w-96">
+      <div className="grid w-96 gap-8">
         <div className="grid justify-items-center">
           <Icon icon={faExclamationCircle} className="text-8xl text-red-500" />
-          <h1 className="font-semibold mt-3 text-5xl text-red-500">Oops...</h1>
+          <h1 className="mt-3 text-5xl font-semibold text-red-500">Oops...</h1>
         </div>
         <div>
-          <h2 className="font-semibold mb-3">
+          <h2 className="mb-3 font-semibold">
             Something went wrong! An error occurred.
           </h2>
           <CodeBlock>

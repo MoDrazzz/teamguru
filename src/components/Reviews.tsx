@@ -79,17 +79,17 @@ const Reviews = () => {
   return !reviews.length ? (
     <ReviewsSkeleton />
   ) : (
-    <div className="gap-3 grid">
+    <div className="grid gap-3">
       <Review
         review={reviews[activeReview].content}
         reviewer={reviews[activeReview].reviewer}
       />
-      <div className="flex gap-2 justify-center">
+      <div className="flex justify-center gap-2">
         {reviews.map((_, index) => (
           <span
             key={index}
             className={classNames(
-              'block w-2 h-2 rounded-full cursor-pointer bg-primary-50',
+              'block h-2 w-2 cursor-pointer rounded-full bg-primary-50',
               {
                 'opacity-50': activeReview !== index,
               },

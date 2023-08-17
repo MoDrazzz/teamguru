@@ -8,8 +8,8 @@ const AuthFormTitle = ({ variant }: Props) => {
   const isLogin = variant === 'login'
 
   return (
-    <div className="grid sm:gap-3 gap-2">
-      <h1 className="text-2xl sm:text-3xl font-semibold">
+    <div className="grid gap-2 sm:gap-3">
+      <h1 className="text-2xl font-semibold sm:text-3xl">
         {isLogin ? 'Welcome back' : 'Sign up'}
       </h1>
       <h2 className="text-sm sm:text-base">

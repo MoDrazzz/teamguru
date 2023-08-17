@@ -4,7 +4,7 @@ interface Props {
 
 const InputError = ({ message }: Props) => {
   return (
-    <span className="select-none text-sm font-medium text-red-500 absolute top-full left-0 w-max">
+    <span className="absolute left-0 top-full w-max select-none text-sm font-medium text-red-500">
       {message}
     </span>
   )

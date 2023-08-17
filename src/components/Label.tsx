@@ -8,7 +8,7 @@ const Label = ({ htmlFor, children }: Props) => {
   return (
     <label
       htmlFor={htmlFor}
-      className="text-xs sm:text-sm text-slate-500 font-semibold"
+      className="text-xs font-semibold text-slate-500 sm:text-sm"
     >
       {children}
     </label>
