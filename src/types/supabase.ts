@@ -100,3 +100,5 @@ export interface Database {
     }
   }
 }
+
+export type UserProfile = Database["public"]["Tables"]["profiles"]["Row"]
