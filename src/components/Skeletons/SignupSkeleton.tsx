@@ -20,7 +20,7 @@ const SignupSkeleton = () => {
         <ReviewsSkeleton />
       </section>
       <section className="px-12 flex flex-col gap-8 py-8">
-        <AuthFormTitleSkeleton />
+        <AuthFormTitleSkeleton variant="signup" />
         <form className="grid gap-6 justify-items-start w-96">
           <div className="flex gap-4 w-full">
             <FormFieldSkeleton />
