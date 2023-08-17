@@ -8,7 +8,7 @@ interface Props {
 
 const Review = ({ review, reviewer }: Props) => {
   return (
-    <figure className="rounded-lg bg-primary-800 text-primary-50 grid p-4 gap-4 text-sm">
+    <figure className="grid gap-4 rounded-lg bg-primary-800 p-4 text-sm text-primary-50">
       <p>{review}</p>
       <div className="flex gap-3">
         <Avatar name={reviewer.name} url={reviewer.avatar_url} />

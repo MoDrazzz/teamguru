@@ -231,8 +231,8 @@ const SignupForm = () => {
   }
 
   return (
-    <form className="grid gap-6 justify-items-start w-96">
-      <div className="flex gap-4 w-full">
+    <form className="grid w-96 justify-items-start gap-6">
+      <div className="flex w-full gap-4">
         <FormField>
           <Label htmlFor="firstName">First Name</Label>
           <Input
@@ -328,13 +328,13 @@ const SignupForm = () => {
         />
       )}
       {success.isSuccess && (
-        <div className="absolute w-full left-0 bottom-full mb-4">
+        <div className="absolute bottom-full left-0 mb-4 w-full">
           <Alert variant="info">
             Thank you for signing up, {success.firstName}! You’re almost there.
             Just click the link in the email we’ve sent to verify. Didn’t get
             it?{' '}
             <span
-              className="font-semibold cursor-pointer"
+              className="cursor-pointer font-semibold"
               onClick={handleResendEmail}
             >
               Resend email <Icon icon={faPaperPlane} />

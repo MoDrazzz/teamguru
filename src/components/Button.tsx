@@ -22,7 +22,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={classNames(
-        'relative bg-primary-500 text-sm sm:text-base rounded-lg text-primary-50 px-4 sm:px-5 py-2 font-semibold',
+        'relative rounded-lg bg-primary-500 px-4 py-2 text-sm font-semibold text-primary-50 sm:px-5 sm:text-base',
         {
           'opacity-80': disabled,
         },
@@ -31,7 +31,7 @@ const Button = ({
     >
       {children}
       {isLoading && (
-        <span className="absolute w-full h-full left-0 top-0 bg-slate-800 bg-opacity-50 z-20 rounded-lg flex justify-center items-center">
+        <span className="absolute left-0 top-0 z-20 flex h-full w-full items-center justify-center rounded-lg bg-slate-800 bg-opacity-50">
           <Spinner />
         </span>
       )}

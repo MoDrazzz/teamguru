@@ -58,7 +58,7 @@ const LoginForm = () => {
   }
 
   return (
-    <form className="grid gap-6 w-56 sm:w-80 justify-items-start">
+    <form className="grid w-56 justify-items-start gap-6 sm:w-80">
       <FormField>
         <Label htmlFor="email">Email</Label>
         <Input

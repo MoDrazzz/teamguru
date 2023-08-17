@@ -25,7 +25,7 @@ const Alert = ({ variant, children }: Props) => {
   return (
     <div
       className={classNames(
-        'flex w-full gap-4 items-center px-8 py-4 border-l-4',
+        'flex w-full items-center gap-4 border-l-4 px-8 py-4',
         {
           'border-red-500 bg-red-200': variant === 'error',
           'border-yellow-500 bg-yellow-200': variant === 'warning',
@@ -45,10 +45,10 @@ const Alert = ({ variant, children }: Props) => {
       />
       <p
         className={classNames({
-          'text-red-700 font-medium': variant === 'error',
-          'text-yellow-700 font-medium': variant === 'warning',
-          'text-sky-700 font-medium': variant === 'info',
-          'text-green-700 font-medium': variant === 'success',
+          'font-medium text-red-700': variant === 'error',
+          'font-medium text-yellow-700': variant === 'warning',
+          'font-medium text-sky-700': variant === 'info',
+          'font-medium text-green-700': variant === 'success',
         })}
       >
         {children}

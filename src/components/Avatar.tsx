@@ -30,7 +30,7 @@ const Avatar = ({ name, url }: Props) => {
     <Image
       src={src}
       alt={`${name}'s Avatar`}
-      className="rounded-lg w-10 h-10"
+      className="h-10 w-10 rounded-lg"
       width={40}
       height={40}
     />
