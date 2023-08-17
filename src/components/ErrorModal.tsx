@@ -1,15 +1,12 @@
-import { Modal, CodeBlock, Link } from '@/components'
-import { Icon } from '@/components'
+import { Modal, CodeBlock, Icon, Link } from '@/components'
+import { Error } from '@/types'
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
   isVisible: boolean
   setIsVisible: Dispatch<SetStateAction<boolean>>
-  error: {
-    code: number
-    message: string
-  }
+  error: Error
 }
 
 const ErrorModal = ({ isVisible, setIsVisible, error }: Props) => {
@@ -25,7 +22,8 @@ const ErrorModal = ({ isVisible, setIsVisible, error }: Props) => {
             Something went wrong! An error occurred.
           </h2>
           <CodeBlock>
-            {error.code}: {error.message}
+            {error.code && <>{error.code}: </>}
+            {error.message}
           </CodeBlock>
         </div>
         <p>

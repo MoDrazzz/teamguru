@@ -2,12 +2,18 @@ import classNames from 'classnames'
 import { RefObject } from 'react'
 
 interface Props {
-  type?: string
+  type?: 'text' | 'email' | 'password'
   refObj: RefObject<HTMLInputElement>
   id: string
   placeholder: string
   isError?: boolean
   onFocus?: () => void
+  autocomplete?:
+    | 'email'
+    | 'given-name'
+    | 'family-name'
+    | 'new-password'
+    | 'current-password'
 }
 
 const Input = ({
@@ -17,6 +23,7 @@ const Input = ({
   placeholder,
   isError = false,
   onFocus,
+  autocomplete,
 }: Props) => {
   return (
     <input
@@ -32,6 +39,7 @@ const Input = ({
       )}
       placeholder={placeholder}
       onFocus={onFocus}
+      autoComplete={autocomplete || undefined}
     />
   )
 }
