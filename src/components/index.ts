@@ -30,5 +30,7 @@ export { default as TooltipIcon } from './TooltipIcon'
 // SKELETONS
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
 export { default as FormFieldSkeleton } from './Skeletons/FormFieldSkeleton'
+export { default as LoginSkeleton } from './Skeletons/LoginSkeleton'
+export { default as LogoSkeleton } from './Skeletons/LogoSkeleton'
 export { default as ReviewsSkeleton } from './Skeletons/ReviewsSkeleton'
 export { default as SignupSkeleton } from './Skeletons/SignupSkeleton'
