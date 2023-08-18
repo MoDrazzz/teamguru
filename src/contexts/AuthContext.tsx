@@ -73,6 +73,24 @@ const AuthContext = ({ children }: PropsWithChildren) => {
     }
 
     getUserProfile()
+
+    const profileChannel = supabase
+      .channel('realtime profile')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'profiles',
+          filter: `user_id=eq.${user.id}`,
+        },
+        getUserProfile,
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(profileChannel)
+    }
   }, [user, supabase])
 
   const logout = async () => {
