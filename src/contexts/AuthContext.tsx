@@ -1,5 +1,6 @@
 'use client'
 
+import { Database, UserProfile } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Session, User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
@@ -14,18 +15,21 @@ import {
 interface AuthContextValue {
   session: Session | null
   user: User | null
+  userProfile: UserProfile | null
   logout: () => Promise<void>
 }
 
 const Context = createContext<AuthContextValue>({
   session: null,
   user: null,
+  userProfile: null,
   logout: async () => {},
 })
 
 const AuthContext = ({ children }: PropsWithChildren) => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<Database>()
   const [user, setUser] = useState<User | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const router = useRouter()
 
@@ -47,6 +51,48 @@ const AuthContext = ({ children }: PropsWithChildren) => {
     })
   }, [supabase.auth])
 
+  useEffect(() => {
+    if (!user) {
+      return
+    }
+
+    const getUserProfile = async () => {
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single()
+
+      if (error) {
+        await supabase.auth.signOut()
+      }
+
+      if (profile) {
+        setUserProfile(profile)
+      }
+    }
+
+    getUserProfile()
+
+    const profileChannel = supabase
+      .channel('realtime profile')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'profiles',
+          filter: `user_id=eq.${user.id}`,
+        },
+        getUserProfile,
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(profileChannel)
+    }
+  }, [user, supabase])
+
   const logout = async () => {
     router.replace('/')
     await supabase.auth.signOut()
@@ -56,6 +102,7 @@ const AuthContext = ({ children }: PropsWithChildren) => {
     <Context.Provider
       value={{
         user,
+        userProfile,
         session,
         logout,
       }}
