@@ -19,10 +19,13 @@ const NavItem = ({ title, icon, href }: Props) => {
   return (
     <Link
       href={href}
-      className={classNames('flex w-full items-center gap-3 rounded-md py-2 px-3', {
-        'bg-primary-500 text-green-50': isActive,
-        'text-slate-400': !isActive,
-      })}
+      className={classNames(
+        'flex w-full items-center gap-3 rounded-md px-3 py-2 transition-colors',
+        {
+          'bg-primary-500 text-green-50': isActive,
+          'text-slate-400 hover:bg-slate-200 hover:text-slate-500': !isActive,
+        },
+      )}
     >
       <span className="flex w-7 items-center justify-center">
         <Icon icon={icon} className="text-xl" />

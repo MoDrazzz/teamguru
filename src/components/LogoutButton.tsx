@@ -18,10 +18,13 @@ const LogoutButton = () => {
   return (
     <button
       onClick={handleLogout}
-      className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-slate-500"
+      className="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-slate-500"
     >
       <span className="flex w-7 items-center justify-center">
-        <Icon icon={faSignOutAlt} className="text-xl" />
+        <Icon
+          icon={faSignOutAlt}
+          className="group-hover:animate-wiggle text-xl"
+        />
       </span>
       <p className="text-lg font-semibold">Logout</p>
     </button>
