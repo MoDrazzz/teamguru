@@ -14,7 +14,7 @@ interface Props {
 
 const NavItem = ({ title, icon, href }: Props) => {
   const pathname = usePathname()
-  const isActive = pathname === href
+  const isActive = pathname.startsWith(href)
 
   return (
     <Link
