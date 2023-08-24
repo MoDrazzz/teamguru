@@ -1,3 +1,12 @@
+import { PageHeading } from '@/components'
+
 export default function ProfileSettings() {
-  return <h1>Settings - Profile</h1>
+  return (
+    <main className="w-full bg-slate-50 p-16">
+      <PageHeading
+        title="Profile"
+        subtitle="Manage your data or change your avatar."
+      />
+    </main>
+  )
 }

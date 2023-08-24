@@ -8,7 +8,7 @@ import {
 
 const SettingsSidebar = () => {
   return (
-    <aside className="w-48 border-r-2 border-slate-400 bg-slate-100 px-4 py-12">
+    <aside className="w-full border-r-2 border-slate-400 bg-slate-100 px-4 py-12">
       <h3 className="mb-10 text-xl font-semibold">Settings</h3>
       <nav className="flex flex-col gap-2">
         <NavItem
