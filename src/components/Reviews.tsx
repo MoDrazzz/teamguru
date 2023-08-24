@@ -44,7 +44,8 @@ const Reviews = () => {
           id: review.id,
           content: review.content,
           reviewer: {
-            name: `${review.reviewer_first_name} ${review.reviewer_last_name}`,
+            first_name: review.reviewer_first_name,
+            last_name: review.reviewer_last_name,
             position: review.reviewer_position,
             avatar_url: review.reviewer_avatar_url,
           },

@@ -17,6 +17,7 @@ export interface Database {
           first_name: string
           id: string
           last_name: string
+          position: string
           user_id: string
         }
         Insert: {
@@ -25,6 +26,7 @@ export interface Database {
           first_name: string
           id?: string
           last_name: string
+          position?: string
           user_id: string
         }
         Update: {
@@ -33,6 +35,7 @@ export interface Database {
           first_name?: string
           id?: string
           last_name?: string
+          position?: string
           user_id?: string
         }
         Relationships: [
@@ -50,21 +53,18 @@ export interface Database {
           created_at: string
           id: string
           profile_id: string
-          reviewer_position: string
         }
         Insert: {
           content: string
           created_at?: string
           id?: string
           profile_id: string
-          reviewer_position: string
         }
         Update: {
           content?: string
           created_at?: string
           id?: string
           profile_id?: string
-          reviewer_position?: string
         }
         Relationships: [
           {
@@ -101,4 +101,4 @@ export interface Database {
   }
 }
 
-export type UserProfile = Database["public"]["Tables"]["profiles"]["Row"]
+export type UserProfile = Database['public']['Tables']['profiles']['Row']
