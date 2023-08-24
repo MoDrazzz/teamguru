@@ -1,6 +1,22 @@
+import { ShellSkeleton, Sidebar } from '@/components'
 import { AuthContext } from '@/contexts'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, Suspense } from 'react'
+
+async function LayoutToBeSuspensed({ children }: PropsWithChildren) {
+  return (
+    <AuthContext>
+      <div className="flex h-full">
+        <Sidebar />
+        {children}
+      </div>
+    </AuthContext>
+  )
+}
 
 export default function ShellLayout({ children }: PropsWithChildren) {
-  return <AuthContext>{children}</AuthContext>
+  return (
+    <Suspense fallback={<ShellSkeleton />}>
+      <LayoutToBeSuspensed>{children}</LayoutToBeSuspensed>
+    </Suspense>
+  )
 }
