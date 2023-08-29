@@ -4,13 +4,16 @@ import classNames from 'classnames'
 import { PropsWithChildren } from 'react'
 
 interface Props {
+  type?: 'button' | 'submit'
   icon: IconProp
   color?: 'sky' | 'red' | 'green'
-  onClick: () => void
+  // eslint-disable-next-line no-unused-vars
+  onClick: (...args: any[]) => void
   disabled?: boolean
 }
 
 const ButtonAlt = ({
+  type = 'button',
   children,
   icon,
   color = 'sky',
@@ -31,9 +34,10 @@ const ButtonAlt = ({
           'border-green-500 bg-green-200 text-green-700': color === 'green',
           'hover:border-green-700 hover:text-green-900':
             color === 'green' && !disabled,
-          'opacity-80': disabled,
+          'opacity-70': disabled,
         },
       )}
+      type={type}
       onClick={onClick}
       disabled={disabled}
     >

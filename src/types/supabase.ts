@@ -17,7 +17,7 @@ export interface Database {
           first_name: string
           id: string
           last_name: string
-          position: string
+          bio: string
           user_id: string
         }
         Insert: {
@@ -26,7 +26,7 @@ export interface Database {
           first_name: string
           id?: string
           last_name: string
-          position?: string
+          bio?: string
           user_id: string
         }
         Update: {
@@ -35,7 +35,7 @@ export interface Database {
           first_name?: string
           id?: string
           last_name?: string
-          position?: string
+          bio?: string
           user_id?: string
         }
         Relationships: [
@@ -84,7 +84,7 @@ export interface Database {
           reviewer_avatar_url: string
           reviewer_first_name: string
           reviewer_last_name: string
-          reviewer_position: string
+          reviewer_bio: string
         }
         Relationships: []
       }

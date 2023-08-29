@@ -1,6 +1,6 @@
 export interface Reviewer {
   first_name: string
   last_name: string
-  position: string
+  bio: string
   avatar_url: string
 }

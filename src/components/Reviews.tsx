@@ -29,7 +29,7 @@ const Reviews = () => {
       ).select(`
         id,
         content,
-        reviewer_position,
+        reviewer_bio,
         reviewer_first_name,
         reviewer_last_name,
         reviewer_avatar_url
@@ -46,7 +46,7 @@ const Reviews = () => {
           reviewer: {
             first_name: review.reviewer_first_name,
             last_name: review.reviewer_last_name,
-            position: review.reviewer_position,
+            bio: review.reviewer_bio,
             avatar_url: review.reviewer_avatar_url,
           },
         })),

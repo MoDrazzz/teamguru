@@ -13,7 +13,7 @@ const Profile = ({ userProfile }: Props) => {
       <Avatar name={userFullName} url={userProfile.avatar_url} />
       <div className="grid">
         <figcaption className="font-medium">{userFullName}</figcaption>
-        <figcaption className="text-xs">{userProfile.position}</figcaption>
+        <figcaption className="text-xs">{userProfile.bio}</figcaption>
       </div>
     </figure>
   )

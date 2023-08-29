@@ -4,7 +4,8 @@ import { faCancel, faEdit, faSave } from '@fortawesome/free-solid-svg-icons'
 interface Props {
   editAction: () => void
   cancelAction: () => void
-  saveAction: () => void
+  // eslint-disable-next-line no-unused-vars
+  saveAction: (...args: any[]) => void
   isEditMode: boolean
   isSaveDisabled: boolean
 }
@@ -21,10 +22,12 @@ const EditButton = ({
       {isEditMode ? (
         <>
           <ButtonAlt
+            key="saveBtn"
             disabled={isSaveDisabled}
             onClick={saveAction}
             icon={faSave}
             color="green"
+            type="submit"
           >
             Save
           </ButtonAlt>
