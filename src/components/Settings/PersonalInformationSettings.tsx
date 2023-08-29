@@ -2,12 +2,14 @@
 
 import { EditButton, FormField, InputAlt, Label, Title } from '@/components'
 import { useAuth } from '@/contexts'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useEffect, useState } from 'react'
 
 const PersonalInformationSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaveDisabled, setIsSaveDisabled] = useState(true)
   const { userProfile } = useAuth()
+  const supabase = createClientComponentClient()
 
   const initialFormValues = {
     firstName: userProfile?.first_name || '',
@@ -20,6 +22,7 @@ const PersonalInformationSettings = () => {
   useEffect(() => {
     if (!userProfile) return
 
+    // is one of fields is empty?
     if (
       !formValues.firstName.trim().length ||
       !formValues.lastName.trim().length ||
@@ -29,6 +32,7 @@ const PersonalInformationSettings = () => {
       return
     }
 
+    // is every field the same as in the database?
     if (
       formValues.firstName.trim() === userProfile.first_name.trim() &&
       formValues.lastName.trim() === userProfile.last_name.trim() &&
@@ -39,7 +43,7 @@ const PersonalInformationSettings = () => {
     }
 
     setIsSaveDisabled(false)
-  }, [formValues, userProfile])
+  }, [formValues, userProfile, supabase])
 
   const handleCancel = () => {
     setFormValues(initialFormValues)
@@ -48,6 +52,20 @@ const PersonalInformationSettings = () => {
 
   const handleSave = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    const updateUserProfile = async () => {
+      await supabase
+        .from('profiles')
+        .update({
+          first_name: formValues.firstName,
+          last_name: formValues.lastName,
+          bio: formValues.bio,
+        })
+        .eq('id', userProfile?.id)
+    }
+
+    updateUserProfile()
+
     setIsEditMode(false)
   }
 
