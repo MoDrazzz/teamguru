@@ -106,7 +106,7 @@ const PersonalInformationSettings = () => {
         <Label htmlFor="bio">Bio</Label>
         <InputAlt
           id="bio"
-          placeholder="Bio..."
+          placeholder="Bio... (eg. Team Lead)"
           value={formValues.bio}
           onChange={(event) =>
             setFormValues((prev) => ({
@@ -117,6 +117,7 @@ const PersonalInformationSettings = () => {
           disabled={!isEditMode}
           isError={false}
           onFocus={() => {}}
+          autocomplete="organization-title"
         />
       </FormField>
     </form>

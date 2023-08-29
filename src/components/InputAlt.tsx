@@ -17,6 +17,7 @@ interface Props {
     | 'family-name'
     | 'new-password'
     | 'current-password'
+    | 'organization-title'
 }
 
 const InputAlt = ({
