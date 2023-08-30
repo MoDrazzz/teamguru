@@ -1,6 +1,12 @@
 'use client'
 
-import { PageHeading, PersonalInformationSettings, Profile, Title } from '@/components'
+import {
+  AvatarSettings,
+  PageHeading,
+  PersonalInformationSettings,
+  Profile,
+  Title,
+} from '@/components'
 import { useAuth } from '@/contexts'
 
 export default function ProfileSettings() {
@@ -19,6 +25,7 @@ export default function ProfileSettings() {
         <Profile userProfile={userProfile} />
       </div>
       <PersonalInformationSettings />
+      <AvatarSettings />
     </main>
   )
 }
