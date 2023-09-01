@@ -8,6 +8,7 @@ import {
   Modal,
   Cropper,
   Icon,
+  Button,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
@@ -19,7 +20,8 @@ const AvatarSettings = () => {
   const [isUploadModalVisible, setIsUploadModalVisible] = useState(false)
   const [modalStep, setModalStep] = useState<'upload' | 'crop'>('upload')
   const [error, setError] = useState<string>('')
-  const [newAvatarUrl, setNewAvatarUrl] = useState('')
+  const [uploadedAvatarUrl, setUploadedAvatarUrl] = useState('')
+  const [newAvatar, setNewAvatar] = useState<File | null>(null)
 
   const cropperRef = useRef<ReactCropperElement>(null)
   const { userProfile } = useAuth()
@@ -43,13 +45,34 @@ const AvatarSettings = () => {
       return
     }
 
-    setNewAvatarUrl(URL.createObjectURL(acceptedFiles[0]))
+    setUploadedAvatarUrl(URL.createObjectURL(acceptedFiles[0]))
     setModalStep('crop')
+  }
+  const handleCrop = ({ isSkipped }: { isSkipped: boolean }) => {
+    if (!cropperRef.current) return
+
+    const cropper = isSkipped
+      ? cropperRef.current.cropper.reset()
+      : cropperRef.current.cropper
+
+    cropper.getCroppedCanvas().toBlob((blob) => {
+      if (!blob) return
+
+      const avatar = new File([blob], `${Date.now()}.png`, {
+        type: 'image/png',
+      })
+
+      setNewAvatar(avatar)
+    })
+
+    setIsUploadModalVisible(false)
+    setIsEditMode(true)
+    setError('')
   }
 
   useEffect(() => {
     if (!isUploadModalVisible) {
-      setNewAvatarUrl('')
+      setUploadedAvatarUrl('')
       setModalStep('upload')
     }
   }, [isUploadModalVisible])
@@ -69,11 +92,19 @@ const AvatarSettings = () => {
           cancelAction={handleCancel}
         />
       </div>
-      <Avatar
-        name={`${userProfile.first_name} ${userProfile.last_name}`}
-        url={userProfile.avatar_url}
-        size="lg"
-      />
+      {newAvatar ? (
+        <Avatar
+          name={`${userProfile.first_name} ${userProfile.last_name}`}
+          src={URL.createObjectURL(newAvatar)}
+          size="lg"
+        />
+      ) : (
+        <Avatar
+          name={`${userProfile.first_name} ${userProfile.last_name}`}
+          url={userProfile.avatar_url}
+          size="lg"
+        />
+      )}
       {error && <p className="text-sm font-semibold text-red-500">{error}</p>}
       {isUploadModalVisible && (
         <Modal
@@ -99,7 +130,7 @@ const AvatarSettings = () => {
             <div className="flex flex-col gap-4">
               <div className="h-96 w-[512px] bg-slate-200">
                 <Cropper
-                  src={newAvatarUrl}
+                  src={uploadedAvatarUrl}
                   refObj={cropperRef}
                   aspectRatio={1 / 1}
                   minCropBoxWidth={384}
@@ -123,6 +154,12 @@ const AvatarSettings = () => {
                   }}
                 />
                 <Icon icon={faImage} className="text-3xl" />
+              </div>
+              <div className="flex justify-between">
+                <Button isRed onClick={() => handleCrop({ isSkipped: true })}>
+                  Skip
+                </Button>
+                <Button onClick={handleCrop}>Confirm</Button>
               </div>
             </div>
           )}

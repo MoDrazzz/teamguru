@@ -8,6 +8,7 @@ interface Props extends PropsWithChildren {
   type?: 'button' | 'submit'
   disabled?: boolean
   isLoading?: boolean
+  isRed?: boolean
 }
 
 const Button = ({
@@ -16,15 +17,18 @@ const Button = ({
   type = 'button',
   disabled,
   isLoading,
+  isRed,
 }: Props) => {
   return (
     <button
       type={type}
       onClick={onClick}
       className={classNames(
-        'relative rounded-lg bg-primary-500 px-4 py-2 text-sm font-semibold text-primary-50 sm:px-5 sm:text-base',
+        'relative rounded-lg px-4 py-2 text-sm font-semibold sm:px-5 sm:text-base',
         {
           'opacity-80': disabled,
+          'bg-primary-500 text-primary-50': !isRed,
+          'bg-red-500 text-red-50': isRed,
         },
       )}
       disabled={disabled}

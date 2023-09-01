@@ -7,15 +7,18 @@ import { useEffect, useState } from 'react'
 
 interface Props {
   name: string
-  url: string
+  url?: string
   size?: 'sm' | 'lg'
+  src?: string
 }
 
-const Avatar = ({ name, url, size = 'sm' }: Props) => {
+const Avatar = ({ name, url, size = 'sm', src: srcProp }: Props) => {
   const supabase = createClientComponentClient()
   const [src, setSrc] = useState<string>('/avatar-placeholder.png')
 
   useEffect(() => {
+    if (srcProp || !url) return
+
     const getAvatar = async () => {
       const { data: avatar, error } = await supabase.storage
         .from('public/avatars')
@@ -26,11 +29,11 @@ const Avatar = ({ name, url, size = 'sm' }: Props) => {
       setSrc(URL.createObjectURL(avatar))
     }
     getAvatar()
-  }, [supabase, url])
+  }, [supabase, url, srcProp])
 
   return (
     <Image
-      src={src}
+      src={srcProp || src}
       alt={`${name}'s Avatar`}
       className={classNames('rounded-lg', {
         'h-40 w-40': size === 'lg',
