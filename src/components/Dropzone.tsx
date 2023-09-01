@@ -40,7 +40,7 @@ const Dropzone = ({ onDrop, accept, multiple, label }: Props) => {
       })}
     >
       <input {...getInputProps()} />
-      <p className="text-center text-xs font-semibold">
+      <p className="text-center text-sm font-semibold">
         {label || 'Drag and drop some files here, or click to select files'}
       </p>
     </div>
