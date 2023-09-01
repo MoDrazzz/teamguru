@@ -79,6 +79,7 @@ const AvatarSettings = () => {
         <Modal
           isVisible={isUploadModalVisible}
           setIsVisible={setIsUploadModalVisible}
+          disableBackdropClick
         >
           {modalStep === 'upload' && (
             <div className="h-64 w-64">
