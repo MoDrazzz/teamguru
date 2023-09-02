@@ -12,6 +12,7 @@ import {
 } from '@/components'
 import { useAuth } from '@/contexts'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useRef, useState } from 'react'
 import { ReactCropperElement } from 'react-cropper'
 
@@ -26,15 +27,42 @@ const AvatarSettings = () => {
   const cropperRef = useRef<ReactCropperElement>(null)
   const { userProfile } = useAuth()
 
+  const supabase = createClientComponentClient()
+
   const handleEdit = () => {
     setIsUploadModalVisible(true)
     setError('')
   }
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!newAvatar || !userProfile) return
+
+    const { data, error } = await supabase.storage
+      .from('avatars')
+      .upload(`${userProfile.id}.png`, newAvatar, {
+        cacheControl: '1',
+        upsert: true,
+      })
+
+    if (!data || error) {
+      setError('Something went wrong. Please try again.')
+      return
+    }
+
+    await supabase
+      .from('profiles')
+      .update({
+        avatar_url: `${userProfile.id}.png`,
+      })
+      .eq('id', userProfile.id)
+
+    console.log(data, error)
+
     setIsEditMode(false)
+    setNewAvatar(null)
   }
   const handleCancel = () => {
     setIsEditMode(false)
+    setNewAvatar(null)
   }
   const handleDrop = (acceptedFiles: File[]) => {
     if (!acceptedFiles.length) return
@@ -63,11 +91,11 @@ const AvatarSettings = () => {
       })
 
       setNewAvatar(avatar)
+      setIsUploadModalVisible(false)
+      setModalStep('upload')
+      setUploadedAvatarUrl('')
+      setIsEditMode(true)
     })
-
-    setIsUploadModalVisible(false)
-    setIsEditMode(true)
-    setError('')
   }
 
   useEffect(() => {
