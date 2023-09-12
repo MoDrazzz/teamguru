@@ -1,39 +1,44 @@
 'use client'
 
+import { UserProfile } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 interface Props {
-  name: string
-  url?: string
+  profile: UserProfile
   size?: 'sm' | 'lg'
-  src?: string
+  customSrc?: string
 }
 
-const Avatar = ({ name, url, size = 'sm', src: srcProp }: Props) => {
+const Avatar = ({ profile, size = 'sm', customSrc }: Props) => {
   const supabase = createClientComponentClient()
-  const [src, setSrc] = useState<string>('/avatar-placeholder.png')
+  const [src, setSrc] = useState('/avatar-placeholder.png')
 
   useEffect(() => {
-    if (srcProp || !url) return
+    if (customSrc || !profile.avatar_id?.length) return
 
     const getAvatar = async () => {
       const { data: avatar, error } = await supabase.storage
         .from('public/avatars')
-        .download(url)
+        .download(`${profile.id}/${profile.avatar_id}.png`)
 
       if (!avatar || error) return
 
       setSrc(URL.createObjectURL(avatar))
     }
     getAvatar()
-  }, [supabase, url, srcProp])
+  }, [supabase, customSrc, profile])
+
+  // TODO: Avatar Skeleton
+  if (!profile) return null
+
+  const name = `${profile.first_name} ${profile.last_name}`
 
   return (
     <Image
-      src={srcProp || src}
+      src={customSrc || src}
       alt={`${name}'s Avatar`}
       className={classNames('rounded-lg', {
         'h-40 w-40': size === 'lg',

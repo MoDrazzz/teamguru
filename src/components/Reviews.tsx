@@ -1,16 +1,10 @@
 'use client'
 
-import { Database, Reviewer } from '@/types'
+import { Database, Review as ReviewType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { ReviewsSkeleton, Review } from '@/components'
 import classNames from 'classnames'
 import { useCallback, useEffect, useRef, useState } from 'react'
-
-interface ReviewType {
-  id: string
-  content: string
-  reviewer: Reviewer
-}
 
 const Reviews = () => {
   const supabase = createClientComponentClient<Database>()
@@ -24,33 +18,24 @@ const Reviews = () => {
 
   useEffect(() => {
     const getReviews = async () => {
-      const { data: reviews, error } = await supabase.from(
-        'random_three_reviews',
-      ).select(`
+      const { data: reviews, error } = await supabase
+        .from('random_three_reviews')
+        .select(
+          `
         id,
         content,
-        reviewer_bio,
-        reviewer_first_name,
-        reviewer_last_name,
-        reviewer_avatar_url
-      `)
+        reviewer:profile_id (
+          *
+        )
+      `,
+        )
+        .returns<ReviewType[]>()
 
       if (!reviews || error) {
         return
       }
 
-      setReviews(
-        reviews.map((review) => ({
-          id: review.id,
-          content: review.content,
-          reviewer: {
-            first_name: review.reviewer_first_name,
-            last_name: review.reviewer_last_name,
-            bio: review.reviewer_bio,
-            avatar_url: review.reviewer_avatar_url,
-          },
-        })),
-      )
+      setReviews(reviews)
     }
 
     getReviews()
@@ -81,10 +66,7 @@ const Reviews = () => {
     <ReviewsSkeleton />
   ) : (
     <div className="grid gap-3">
-      <Review
-        review={reviews[activeReview].content}
-        reviewer={reviews[activeReview].reviewer}
-      />
+      <Review key={reviews[activeReview].id} review={reviews[activeReview]} />
       <div className="flex justify-center gap-2">
         {reviews.map((_, index) => (
           <span

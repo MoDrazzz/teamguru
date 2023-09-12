@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@/contexts'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { v4 as generateUUID } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { ReactCropperElement } from 'react-cropper'
 
@@ -36,12 +37,11 @@ const AvatarSettings = () => {
   const handleSave = async () => {
     if (!newAvatar || !userProfile) return
 
+    const newAvatarId = generateUUID()
+
     const { data, error } = await supabase.storage
       .from('avatars')
-      .upload(`${userProfile.id}.png`, newAvatar, {
-        cacheControl: '1',
-        upsert: true,
-      })
+      .upload(`${userProfile.id}/${newAvatarId}.png`, newAvatar)
 
     if (!data || error) {
       setError('Something went wrong. Please try again.')
@@ -51,11 +51,9 @@ const AvatarSettings = () => {
     await supabase
       .from('profiles')
       .update({
-        avatar_url: `${userProfile.id}.png`,
+        avatar_id: newAvatarId,
       })
       .eq('id', userProfile.id)
-
-    console.log(data, error)
 
     setIsEditMode(false)
     setNewAvatar(null)
@@ -122,16 +120,12 @@ const AvatarSettings = () => {
       </div>
       {newAvatar ? (
         <Avatar
-          name={`${userProfile.first_name} ${userProfile.last_name}`}
-          src={URL.createObjectURL(newAvatar)}
+          profile={userProfile}
+          customSrc={URL.createObjectURL(newAvatar)}
           size="lg"
         />
       ) : (
-        <Avatar
-          name={`${userProfile.first_name} ${userProfile.last_name}`}
-          url={userProfile.avatar_url}
-          size="lg"
-        />
+        <Avatar profile={userProfile} size="lg" />
       )}
       {error && <p className="text-sm font-semibold text-red-500">{error}</p>}
       {isUploadModalVisible && (

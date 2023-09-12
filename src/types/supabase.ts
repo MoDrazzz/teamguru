@@ -12,30 +12,30 @@ export interface Database {
     Tables: {
       profiles: {
         Row: {
-          avatar_url: string
+          avatar_id: string | null
+          bio: string
           created_at: string
           first_name: string
           id: string
           last_name: string
-          bio: string
           user_id: string
         }
         Insert: {
-          avatar_url?: string
+          avatar_id?: string | null
+          bio?: string
           created_at?: string
           first_name: string
           id?: string
           last_name: string
-          bio?: string
           user_id: string
         }
         Update: {
-          avatar_url?: string
+          avatar_id?: string | null
+          bio?: string
           created_at?: string
           first_name?: string
           id?: string
           last_name?: string
-          bio?: string
           user_id?: string
         }
         Relationships: [
@@ -81,12 +81,16 @@ export interface Database {
         Row: {
           content: string
           id: string
-          reviewer_avatar_url: string
-          reviewer_first_name: string
-          reviewer_last_name: string
-          reviewer_bio: string
+          profile_id: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'reviews_profile_id_fkey'
+            columns: ['profile_id']
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
       }
     }
     Functions: {
