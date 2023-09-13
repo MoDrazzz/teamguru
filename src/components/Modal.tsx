@@ -7,9 +7,15 @@ import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react'
 interface Props extends PropsWithChildren {
   isVisible: boolean
   setIsVisible: Dispatch<SetStateAction<boolean>>
+  disableBackdropClick?: boolean
 }
 
-const Modal = ({ isVisible, setIsVisible, children }: Props) => {
+const Modal = ({
+  isVisible,
+  setIsVisible,
+  disableBackdropClick,
+  children,
+}: Props) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsVisible(false)
@@ -23,7 +29,7 @@ const Modal = ({ isVisible, setIsVisible, children }: Props) => {
     isVisible && (
       <div
         className="fixed left-0 top-0 z-40 grid h-screen w-screen place-items-center bg-slate-900 bg-opacity-50"
-        onClick={() => setIsVisible(false)}
+        onClick={disableBackdropClick ? undefined : () => setIsVisible(false)}
       >
         <div
           className="relative rounded-lg bg-slate-50 p-12"

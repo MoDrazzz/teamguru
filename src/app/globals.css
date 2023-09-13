@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cropper-crop-box {
+  @apply overflow-hidden shadow-md;
+}

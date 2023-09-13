@@ -21,14 +21,19 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/shell/dashboard', req.url))
   }
 
-  // if user is signed in and the current path is /shell redirect the user to /shell/dashboard
-  if (user && req.nextUrl.pathname === '/shell') {
-    return NextResponse.redirect(new URL('/shell/dashboard', req.url))
-  }
-
   // if user is not signed in and the current path starts with /shell redirect the user to /login
   if (!user && req.nextUrl.pathname.startsWith('/shell')) {
     return NextResponse.redirect(new URL('/login', req.url))
+  }
+
+  // if user is signed in and the current path is /shell redirect the user to /shell/dashboard
+  if (req.nextUrl.pathname === '/shell') {
+    return NextResponse.redirect(new URL('/shell/dashboard', req.url))
+  }
+
+  // if user is signed in and the current path is /shell/settings redirect the user to /shell/settings/profile
+  if (req.nextUrl.pathname === '/shell/settings') {
+    return NextResponse.redirect(new URL('/shell/settings/profile', req.url))
   }
 
   return res

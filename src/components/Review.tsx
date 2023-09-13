@@ -1,22 +1,15 @@
-import { Avatar } from '@/components'
-import { Reviewer } from '@/types'
+import { Profile } from '@/components'
+import { Review as ReviewType } from '@/types'
 
 interface Props {
-  review: string
-  reviewer: Reviewer
+  review: ReviewType
 }
 
-const Review = ({ review, reviewer }: Props) => {
+const Review = ({ review: { content, reviewer } }: Props) => {
   return (
     <figure className="grid gap-4 rounded-lg bg-primary-800 p-4 text-sm text-primary-50">
-      <p>{review}</p>
-      <div className="flex gap-3">
-        <Avatar name={reviewer.name} url={reviewer.avatar_url} />
-        <div className="grid">
-          <figcaption className="font-medium">{reviewer.name}</figcaption>
-          <figcaption className="text-xs">{reviewer.position}</figcaption>
-        </div>
-      </div>
+      <p>{content}</p>
+      <Profile userProfile={reviewer} />
     </figure>
   )
 }
