@@ -9,6 +9,7 @@ import {
   Cropper,
   Icon,
   Button,
+  Spinner,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import { faImage } from '@fortawesome/free-solid-svg-icons'
@@ -24,6 +25,7 @@ const AvatarSettings = () => {
   const [error, setError] = useState<string>('')
   const [uploadedAvatarUrl, setUploadedAvatarUrl] = useState('')
   const [newAvatar, setNewAvatar] = useState<File | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
 
   const cropperRef = useRef<ReactCropperElement>(null)
   const { userProfile } = useAuth()
@@ -39,11 +41,13 @@ const AvatarSettings = () => {
 
     const newAvatarId = generateUUID()
 
-    const { data, error } = await supabase.storage
+    setIsUploading(true)
+
+    const { data: avatarData, error: avatarError } = await supabase.storage
       .from('avatars')
       .upload(`${userProfile.id}/${newAvatarId}.png`, newAvatar)
 
-    if (!data || error) {
+    if (!avatarData || avatarError) {
       setError('Something went wrong. Please try again.')
       return
     }
@@ -55,6 +59,7 @@ const AvatarSettings = () => {
       })
       .eq('id', userProfile.id)
 
+    setIsUploading(false)
     setIsEditMode(false)
     setNewAvatar(null)
   }
@@ -112,18 +117,26 @@ const AvatarSettings = () => {
         <Title>Avatar</Title>
         <EditButton
           isEditMode={isEditMode}
-          isSaveDisabled={false}
+          isSaveDisabled={isUploading}
           editAction={handleEdit}
           saveAction={handleSave}
           cancelAction={handleCancel}
         />
       </div>
       {newAvatar ? (
-        <Avatar
-          profile={userProfile}
-          customSrc={URL.createObjectURL(newAvatar)}
-          size="lg"
-        />
+        <div className="relative w-fit">
+          <Avatar
+            profile={userProfile}
+            customSrc={URL.createObjectURL(newAvatar)}
+            size="lg"
+          />
+          {isUploading && (
+            <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-2 rounded-lg bg-slate-900 bg-opacity-50">
+              <Spinner />
+              <p className="text-sm font-medium text-slate-50">Uploading...</p>
+            </div>
+          )}
+        </div>
       ) : (
         <Avatar profile={userProfile} size="lg" />
       )}
