@@ -5,7 +5,7 @@ import { PropsWithChildren, Suspense } from 'react'
 async function LayoutToBeSuspensed({ children }: PropsWithChildren) {
   return (
     <AuthContext>
-      <div className="flex h-full">
+      <div className="grid h-full grid-cols-[16rem_1fr]">
         <Sidebar />
         {children}
       </div>
