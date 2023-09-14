@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  AvatarSettingsSkeleton,
   Title,
   EditButton,
   Avatar,
@@ -107,8 +108,7 @@ const AvatarSettings = () => {
     }
   }, [isUploadModalVisible])
 
-  // TODO: add skeleton
-  if (!userProfile) return null
+  if (!userProfile) return <AvatarSettingsSkeleton />
 
   return (
     <div className="grid gap-3">

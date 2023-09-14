@@ -1,11 +1,19 @@
-import { SettingsSidebar } from '@/components'
-import { PropsWithChildren } from 'react'
+import { SettingsSidebar, SettingsSkeleton } from '@/components'
+import { PropsWithChildren, Suspense } from 'react'
 
-export default function SettingsLayout({ children }: PropsWithChildren) {
+async function LayoutToBeSuspensed({ children }: PropsWithChildren) {
   return (
     <div className="grid w-full grid-cols-[12rem_1fr]">
       <SettingsSidebar />
       {children}
     </div>
+  )
+}
+
+export default function SettingsLayout({ children }: PropsWithChildren) {
+  return (
+    <Suspense fallback={<SettingsSkeleton />}>
+      <LayoutToBeSuspensed>{children}</LayoutToBeSuspensed>
+    </Suspense>
   )
 }

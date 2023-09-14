@@ -5,6 +5,7 @@ import {
   PageHeading,
   PersonalInformationSettings,
   Profile,
+  ProfileSettingsSkeleton,
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
@@ -12,7 +13,7 @@ import { useAuth } from '@/contexts'
 export default function ProfileSettings() {
   const { userProfile } = useAuth()
 
-  if (!userProfile) return
+  if (!userProfile) return <ProfileSettingsSkeleton />
 
   return (
     <main className="flex w-full flex-col gap-8 bg-slate-50 p-16">
