@@ -1,6 +1,13 @@
 'use client'
 
-import { EditButton, FormField, InputAlt, Label, Title } from '@/components'
+import {
+  EditButton,
+  FormField,
+  InputAlt,
+  Label,
+  PersonalInformationSettingsSkeleton,
+  Title,
+} from '@/components'
 import { useAuth } from '@/contexts'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useEffect, useState } from 'react'
@@ -69,8 +76,7 @@ const PersonalInformationSettings = () => {
     setIsEditMode(false)
   }
 
-  // TODO: add skeleton
-  if (!userProfile) return null
+  if (!userProfile) return <PersonalInformationSettingsSkeleton />
 
   return (
     <form className="grid grid-cols-[12rem_12rem] gap-3">
