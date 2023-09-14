@@ -14,6 +14,7 @@ export { default as SettingsSidebar } from './Settings/SettingsSidebar'
 
 // SKELETONS
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
+export { default as AvatarSettingsSkeleton } from './Skeletons/AvatarSettingsSkeleton'
 export { default as AvatarSkeleton } from './Skeletons/AvatarSkeleton'
 export { default as FormFieldAltSkeleton } from './Skeletons/FormFieldAltSkeleton'
 export { default as FormFieldSkeleton } from './Skeletons/FormFieldSkeleton'
