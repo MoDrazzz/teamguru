@@ -1,6 +1,7 @@
 'use client'
 
-import { UserProfile } from '@/types'
+import { AvatarSkeleton } from '@/components'
+import { AvatarSize, UserProfile } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import classNames from 'classnames'
 import Image from 'next/image'
@@ -8,21 +9,26 @@ import { useEffect, useState } from 'react'
 
 interface Props {
   profile: UserProfile
-  size?: 'sm' | 'lg'
+  size?: AvatarSize
   customSrc?: string
 }
 
 const Avatar = ({ profile, size = 'sm', customSrc }: Props) => {
   const supabase = createClientComponentClient()
   const [src, setSrc] = useState('/avatar-placeholder.png')
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     if (customSrc || !profile.avatar_id?.length) return
 
     const getAvatar = async () => {
+      setIsFetching(true)
+
       const { data: avatar, error } = await supabase.storage
         .from('public/avatars')
         .download(`${profile.id}/${profile.avatar_id}.png`)
+
+      setIsFetching(false)
 
       if (!avatar || error) return
 
@@ -31,8 +37,7 @@ const Avatar = ({ profile, size = 'sm', customSrc }: Props) => {
     getAvatar()
   }, [supabase, customSrc, profile])
 
-  // TODO: Avatar Skeleton
-  if (!profile) return null
+  if (!profile || isFetching) return <AvatarSkeleton size={size} />
 
   const name = `${profile.first_name} ${profile.last_name}`
 

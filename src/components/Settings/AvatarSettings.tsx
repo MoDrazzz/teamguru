@@ -61,7 +61,6 @@ const AvatarSettings = () => {
 
     setIsUploading(false)
     setIsEditMode(false)
-    setNewAvatar(null)
   }
   const handleCancel = () => {
     setIsEditMode(false)
