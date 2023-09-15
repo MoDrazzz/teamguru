@@ -17,6 +17,7 @@ const LoginForm = () => {
   const router = useRouter()
 
   const [errors, setErrors] = useState(initialErrorsState)
+  const [isLoading, setIsLoading] = useState(false)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
@@ -42,6 +43,8 @@ const LoginForm = () => {
       return
     }
 
+    setIsLoading(true)
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -49,12 +52,13 @@ const LoginForm = () => {
 
     if (error) {
       setErrors((prev) => ({ ...prev, supabaseError: error }))
+      setIsLoading(false)
       return
     }
 
-    setErrors(initialErrorsState)
-
     router.push('/shell')
+    setErrors(initialErrorsState)
+    setIsLoading(false)
   }
 
   return (
@@ -87,7 +91,12 @@ const LoginForm = () => {
           message={errors.supabaseError?.message ?? errors.password}
         />
       </FormField>
-      <Button onClick={handleSubmit} type="submit">
+      <Button
+        onClick={handleSubmit}
+        type="submit"
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
         Log In
       </Button>
     </form>
