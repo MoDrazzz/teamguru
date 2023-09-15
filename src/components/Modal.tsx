@@ -39,7 +39,10 @@ const Modal = ({
             className="absolute right-3 top-3 cursor-pointer"
             onClick={() => setIsVisible(false)}
           >
-            <Icon icon={faTimes} className="text-xl" />
+            <Icon
+              icon={faTimes}
+              className="text-xl text-slate-600 transition-colors hover:text-slate-900"
+            />
           </span>
           {children}
         </div>
