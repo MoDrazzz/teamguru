@@ -10,7 +10,7 @@ interface Props {
   title: string
   icon: IconProp
   href: string
-  variant?: 'primary' | 'secondary'
+  color?: 'primary' | 'slate'
   size?: 'sm' | 'md'
 }
 
@@ -18,7 +18,7 @@ const NavItem = ({
   title,
   icon,
   href,
-  variant = 'primary',
+  color = 'primary',
   size = 'md',
 }: Props) => {
   const pathname = usePathname()
@@ -30,12 +30,12 @@ const NavItem = ({
       className={classNames(
         'flex w-full items-center gap-3 rounded-md px-3 py-2 transition-colors',
         {
-          'bg-primary-500 text-primary-50': isActive && variant === 'primary',
+          'bg-primary-500 text-primary-50': isActive && color === 'primary',
           'text-slate-400 hover:bg-slate-200 hover:text-slate-500':
-            !isActive && variant === 'primary',
-          'bg-slate-700 text-slate-50': isActive && variant === 'secondary',
+            !isActive && color === 'primary',
+          'bg-slate-700 text-slate-50': isActive && color === 'slate',
           'text-slate-500 hover:bg-slate-300 hover:text-slate-600':
-            !isActive && variant === 'secondary',
+            !isActive && color === 'slate',
         },
       )}
     >
