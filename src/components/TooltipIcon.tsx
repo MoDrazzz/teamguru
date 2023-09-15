@@ -19,7 +19,10 @@ const TooltipIcon = ({ variant, tooltipMessage }: Props) => {
 
   return (
     <span className="relative flex w-fit" ref={tooltipTargetRef}>
-      <Icon className="h-3 w-3 text-slate-500" icon={icon} />
+      <Icon
+        className="h-3 w-3 text-slate-500 transition-colors hover:text-slate-700"
+        icon={icon}
+      />
       <Tooltip tooltipTargetRef={tooltipTargetRef} message={tooltipMessage} />
     </span>
   )
