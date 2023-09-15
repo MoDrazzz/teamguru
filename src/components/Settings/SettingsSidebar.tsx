@@ -15,28 +15,28 @@ const SettingsSidebar = () => {
           title="Profile"
           icon={faUser}
           href="/shell/settings/profile"
-          variant="secondary"
+          color="slate"
           size="sm"
         />
         <NavItem
           title="Email"
           icon={faAt}
           href="/shell/settings/email"
-          variant="secondary"
+          color="slate"
           size="sm"
         />
         <NavItem
           title="Password"
           icon={faLock}
           href="/shell/settings/password"
-          variant="secondary"
+          color="slate"
           size="sm"
         />
         <NavItem
           title="Appearance"
           icon={faPalette}
           href="/shell/settings/appearance"
-          variant="secondary"
+          color="slate"
           size="sm"
         />
       </nav>

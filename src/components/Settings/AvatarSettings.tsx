@@ -190,7 +190,10 @@ const AvatarSettings = () => {
                 <Icon icon={faImage} className="text-3xl" />
               </div>
               <div className="flex justify-between">
-                <Button isRed onClick={() => handleCrop({ isSkipped: true })}>
+                <Button
+                  color="red"
+                  onClick={() => handleCrop({ isSkipped: true })}
+                >
                   Skip
                 </Button>
                 <Button onClick={handleCrop}>Confirm</Button>

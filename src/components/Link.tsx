@@ -7,7 +7,10 @@ interface Props extends PropsWithChildren {
 
 const Link = ({ href, children }: Props) => {
   return (
-    <NextLink href={href} className="font-semibold text-primary-500">
+    <NextLink
+      href={href}
+      className="font-semibold text-primary-500 transition-colors hover:text-primary-600"
+    >
       {children}
     </NextLink>
   )
