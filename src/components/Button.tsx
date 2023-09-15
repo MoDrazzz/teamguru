@@ -24,11 +24,11 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={classNames(
-        'relative rounded-lg px-4 py-2 text-sm font-semibold sm:px-5 sm:text-base',
+        'relative rounded-lg px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:text-base',
         {
           'opacity-80': disabled,
-          'bg-primary-500 text-primary-50': !isRed,
-          'bg-red-500 text-red-50': isRed,
+          'bg-primary-500 text-primary-50 hover:bg-primary-600': !isRed,
+          'bg-red-500 text-red-50 hover:bg-red-600': isRed,
         },
       )}
       disabled={disabled}
