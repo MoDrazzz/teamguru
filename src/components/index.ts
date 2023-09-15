@@ -37,6 +37,7 @@ export { default as SignupSkeleton } from './Skeletons/SignupSkeleton'
 // COMMON
 export { default as Alert } from './Alert'
 export { default as Avatar } from './Avatar'
+export { default as AvatarReminder } from './AvatarReminder'
 export { default as Button } from './Button'
 export { default as ButtonAlt } from './ButtonAlt'
 export { default as EditButton } from './EditButton'
