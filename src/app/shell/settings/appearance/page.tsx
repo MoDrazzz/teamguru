@@ -1,4 +1,4 @@
-import { PageHeading } from '@/components'
+import { PageHeading, ThemeSettings } from '@/components'
 
 export default function AppearanceSettings() {
   return (
@@ -7,6 +7,7 @@ export default function AppearanceSettings() {
         title="Appearance"
         subtitle="Choose your favourite theme to make the application even better."
       />
+      <ThemeSettings />
     </main>
   )
 }

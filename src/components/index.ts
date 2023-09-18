@@ -11,6 +11,8 @@ export { default as SignupForm } from './Forms/SignupForm'
 export { default as AvatarSettings } from './Settings/AvatarSettings'
 export { default as PersonalInformationSettings } from './Settings/PersonalInformationSettings'
 export { default as SettingsSidebar } from './Settings/SettingsSidebar'
+export { default as Theme } from './Settings/Theme'
+export { default as ThemeSettings } from './Settings/ThemeSettings'
 
 // SKELETONS
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
