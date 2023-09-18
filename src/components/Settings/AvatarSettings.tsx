@@ -111,7 +111,7 @@ const AvatarSettings = () => {
   if (!userProfile) return <AvatarSettingsSkeleton />
 
   return (
-    <div className="grid gap-3">
+    <section className="grid gap-3">
       <div className="flex gap-4">
         <Title>Avatar</Title>
         <EditButton
@@ -202,7 +202,7 @@ const AvatarSettings = () => {
           )}
         </Modal>
       )}
-    </div>
+    </section>
   )
 }
 

@@ -21,10 +21,10 @@ export default function ProfileSettings() {
         title="Profile"
         subtitle="Manage your data or change your avatar."
       />
-      <div className="grid gap-3">
+      <section className="grid gap-3">
         <Title>Preview</Title>
         <Profile userProfile={userProfile} />
-      </div>
+      </section>
       <PersonalInformationSettings />
       <AvatarSettings />
     </main>
