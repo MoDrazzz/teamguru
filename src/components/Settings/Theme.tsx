@@ -1,6 +1,7 @@
+'use client'
 import classNames from 'classnames'
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
-import { Dispatch, SetStateAction } from 'react'
 
 const themes = {
   light: {
@@ -22,12 +23,13 @@ const themes = {
 
 interface Props {
   theme: keyof typeof themes
-  setTheme: Dispatch<SetStateAction<keyof typeof themes>>
-  isActive: boolean
 }
 
-const Theme = ({ theme, setTheme, isActive }: Props) => {
+const Theme = ({ theme }: Props) => {
   const { url, alt, label } = themes[theme]
+  const { theme: activeTheme, setTheme } = useTheme()
+
+  const isActive = theme === activeTheme
 
   return (
     <div className="flex flex-col items-center gap-2">
