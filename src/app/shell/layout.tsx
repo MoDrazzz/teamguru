@@ -8,7 +8,7 @@ import { PropsWithChildren } from 'react'
 export default function ShellLayout({ children }: PropsWithChildren) {
   return (
     <AuthContext>
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" enableColorScheme={false}>
         <div className="grid h-full grid-cols-[16rem_1fr]">
           <Sidebar />
           {children}
