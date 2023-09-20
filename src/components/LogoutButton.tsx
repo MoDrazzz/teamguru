@@ -23,7 +23,7 @@ const LogoutButton = () => {
   return (
     <button
       onClick={handleLogout}
-      className="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-slate-500 transition-colors hover:text-slate-600"
+      className="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-slate-500 transition-colors hover:text-slate-600 dark:text-zinc-400 dark:hover:text-zinc-300"
     >
       <span className="flex w-7 items-center justify-center">
         <Icon
