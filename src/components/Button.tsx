@@ -27,9 +27,10 @@ const Button = ({
         'relative rounded-lg px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:text-base',
         {
           'opacity-80': disabled,
-          'bg-primary-500 text-primary-50 hover:bg-primary-600':
+          'bg-primary-500 text-primary-50 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700':
             color === 'primary',
-          'bg-red-500 text-red-50 hover:bg-red-600': color === 'red',
+          'bg-red-500 dark:hover:bg-red-700 text-red-50 hover:bg-red-600 dark:bg-red-600':
+            color === 'red',
         },
       )}
       disabled={disabled}

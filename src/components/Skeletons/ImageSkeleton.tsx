@@ -1,8 +1,8 @@
 const ImageSkeleton = () => {
   return (
-    <div className="flex h-full w-full items-center justify-center rounded bg-slate-200">
+    <div className="flex h-full w-full items-center justify-center rounded bg-slate-200 dark:bg-zinc-700">
       <svg
-        className="aspect-square h-[20%] min-h-[1.5rem] w-auto text-slate-400"
+        className="aspect-square h-[20%] min-h-[1.5rem] w-auto text-slate-400 dark:text-zinc-500"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"

@@ -13,8 +13,8 @@ const NavItemSkeleton = ({ size = 'md', colorWeight = '200' }: Props) => {
           className={classNames('rounded-lg', {
             'h-7 w-7': size === 'md',
             'h-5 w-5': size === 'sm',
-            'bg-slate-300': colorWeight === '300',
-            'bg-slate-200': colorWeight === '200',
+            'bg-slate-300 dark:bg-zinc-600': colorWeight === '300',
+            'bg-slate-200 dark:bg-zinc-700': colorWeight === '200',
           })}
         />
       </span>
@@ -22,8 +22,8 @@ const NavItemSkeleton = ({ size = 'md', colorWeight = '200' }: Props) => {
         className={classNames('w-24 rounded-full', {
           'h-7': size === 'md',
           'h-5': size === 'sm',
-          'bg-slate-300': colorWeight === '300',
-          'bg-slate-200': colorWeight === '200',
+          'bg-slate-300 dark:bg-zinc-600': colorWeight === '300',
+          'bg-slate-200 dark:bg-zinc-700': colorWeight === '200',
         })}
       />
     </div>

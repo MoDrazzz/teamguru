@@ -30,11 +30,13 @@ const NavItem = ({
       className={classNames(
         'flex w-full items-center gap-3 rounded-md px-3 py-2 transition-colors',
         {
-          'bg-primary-500 text-primary-50': isActive && color === 'primary',
-          'text-slate-400 hover:bg-slate-200 hover:text-slate-500':
+          'bg-primary-500 text-primary-50 dark:bg-primary-600':
+            isActive && color === 'primary',
+          'text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-300':
             !isActive && color === 'primary',
-          'bg-slate-700 text-slate-50': isActive && color === 'slate',
-          'text-slate-500 hover:bg-slate-300 hover:text-slate-600':
+          'bg-slate-700 text-slate-50 dark:bg-zinc-500 dark:text-zinc-50':
+            isActive && color === 'slate',
+          'text-slate-500 hover:bg-slate-300 hover:text-slate-600 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-300':
             !isActive && color === 'slate',
         },
       )}

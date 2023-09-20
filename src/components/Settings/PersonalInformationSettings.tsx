@@ -103,8 +103,6 @@ const PersonalInformationSettings = () => {
             }))
           }
           disabled={!isEditMode}
-          isError={false}
-          onFocus={() => {}}
           autocomplete="given-name"
         />
       </FormField>
@@ -121,8 +119,6 @@ const PersonalInformationSettings = () => {
             }))
           }
           disabled={!isEditMode}
-          isError={false}
-          onFocus={() => {}}
           autocomplete="family-name"
         />
       </FormField>
@@ -139,8 +135,6 @@ const PersonalInformationSettings = () => {
             }))
           }
           disabled={!isEditMode}
-          isError={false}
-          onFocus={() => {}}
           autocomplete="organization-title"
         />
       </FormField>
