@@ -22,7 +22,7 @@ const Cropper = ({
   return (
     <CropperComponent
       src={src}
-      className="h-full w-full"
+      className="h-full w-full dark:bg-zinc-600"
       aspectRatio={aspectRatio}
       ref={refObj}
       minCropBoxWidth={minCropBoxWidth}

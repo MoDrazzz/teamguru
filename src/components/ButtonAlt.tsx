@@ -23,7 +23,7 @@ const ButtonAlt = ({
   return (
     <button
       className={classNames(
-        'flex items-center gap-2 rounded-full border-2 px-3 py-1 text-xs font-semibold transition duration-300',
+        'flex items-center gap-2 rounded-full border-2 px-3 py-1 text-xs font-semibold transition duration-300 dark:shadow-[0_0_1px] dark:shadow-zinc-200',
         {
           'border-sky-500 bg-sky-200 text-sky-700': color === 'sky',
           'hover:border-sky-700 hover:text-sky-900':

@@ -9,8 +9,6 @@ interface Props {
   // eslint-disable-next-line no-unused-vars
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
-  isError?: boolean
-  onFocus?: () => void
   autocomplete?:
     | 'email'
     | 'given-name'
@@ -27,8 +25,6 @@ const InputAlt = ({
   value,
   onChange,
   disabled,
-  isError = false,
-  onFocus,
   autocomplete,
 }: Props) => {
   return (
@@ -40,13 +36,12 @@ const InputAlt = ({
       className={classNames(
         'w-full border-b-2 bg-transparent text-sm font-semibold outline-none transition-colors',
         {
-          'border-red-500 text-red-700': isError && !disabled,
-          'border-slate-400 focus:border-slate-700': !isError && !disabled,
+          'border-slate-400 focus:border-slate-700 dark:border-zinc-500 dark:focus:border-zinc-300':
+            !disabled,
           'border-transparent': disabled,
         },
       )}
       placeholder={placeholder}
-      onFocus={onFocus}
       autoComplete={autocomplete || undefined}
       disabled={disabled}
     />
