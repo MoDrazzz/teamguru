@@ -9,20 +9,20 @@ const ProfileSkeleton = ({ color = 'slate' }: Props) => {
       <div
         className={classNames('h-10 w-10 rounded-lg', {
           'bg-primary-700': color === 'primary',
-          'bg-slate-200': color === 'slate',
+          'bg-slate-200 dark:bg-zinc-700': color === 'slate',
         })}
       />
       <div className="grid h-full w-4/5">
         <div
           className={classNames('h-4 w-3/5 rounded-full', {
             'bg-primary-700': color === 'primary',
-            'bg-slate-200': color === 'slate',
+            'bg-slate-200 dark:bg-zinc-700': color === 'slate',
           })}
         />
         <div
           className={classNames('h-4 w-1/4 self-end rounded-full', {
             'bg-primary-700': color === 'primary',
-            'bg-slate-200': color === 'slate',
+            'bg-slate-200 dark:bg-zinc-700': color === 'slate',
           })}
         />
       </div>
