@@ -23,7 +23,7 @@ const Logo = ({ isClickable }: Props) => {
           TG
         </span>
       </div>
-      <span className="text-lg font-semibold dark:text-zinc-200 sm:text-2xl">
+      <span className="text-lg font-semibold sm:text-2xl">
         TeamGuru
       </span>
     </div>
