@@ -40,16 +40,16 @@ const Theme = ({ theme }: Props) => {
         width={256}
         height={136}
         className={classNames('w-64 rounded-lg border-2 transition-colors', {
-          'border-primary-500': isActive,
-          'border-slate-400': !isActive,
+          'border-primary-500 dark:border-primary-600': isActive,
+          'border-slate-400 dark:border-zinc-400': !isActive,
         })}
         onClick={() => setTheme(theme)}
       />
       <label
         htmlFor={theme}
         className={classNames('text-sm font-semibold transition-colors', {
-          'text-primary-500': isActive,
-          'text-slate-500': !isActive,
+          'text-primary-500 dark:text-primary-600': isActive,
+          'text-slate-500 dark:text-zinc-300': !isActive,
         })}
       >
         {label}
