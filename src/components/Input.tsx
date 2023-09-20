@@ -31,7 +31,7 @@ const Input = ({
       ref={refObj}
       id={id}
       className={classNames(
-        'w-full rounded-lg border-2 px-3 py-2 text-xs font-medium outline-none transition-colors sm:text-sm',
+        'w-full rounded-lg border-2 px-3 py-2 text-xs font-medium outline-none transition-colors sm:text-sm bg-slate-50',
         {
           'border-red-500 text-red-700': isError,
           'border-slate-400 focus:border-slate-600': !isError,

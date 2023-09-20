@@ -10,7 +10,12 @@ const LogoutButton = () => {
   const router = useRouter()
 
   const handleLogout = async () => {
+    const html = document.querySelector('html')
+    if (!html) return
+
     await supabase.auth.signOut()
+
+    html.classList.remove('dark', 'light')
 
     router.refresh()
   }

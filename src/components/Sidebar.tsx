@@ -1,5 +1,4 @@
-import { Identity, Logo, Navigation } from '@/components'
-import LogoutButton from '@/components/LogoutButton'
+import { Identity, Logo, LogoutButton, Navigation } from '@/components'
 
 const Sidebar = () => {
   return (
