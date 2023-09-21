@@ -11,9 +11,10 @@ import {
   Icon,
   Button,
   Spinner,
+  ButtonAlt,
 } from '@/components'
 import { useAuth } from '@/contexts'
-import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { faImage, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { v4 as generateUUID } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
@@ -119,7 +120,6 @@ const AvatarSettings = () => {
   }
   const handleSetDefault = () => {
     setNewAvatar('default')
-    setIsUploadModalVisible(false)
     setIsEditMode(true)
   }
 
@@ -143,6 +143,15 @@ const AvatarSettings = () => {
           saveAction={handleSave}
           cancelAction={handleCancel}
         />
+        {userProfile.avatar_id && !isEditMode && newAvatar !== 'default' && (
+          <ButtonAlt
+            color="yellow"
+            onClick={handleSetDefault}
+            icon={faRotateLeft}
+          >
+            Set as default
+          </ButtonAlt>
+        )}
       </div>
       {newAvatar ? (
         <div className="relative w-fit">
@@ -173,27 +182,17 @@ const AvatarSettings = () => {
           disableBackdropClick
         >
           {modalStep === 'upload' && (
-            <div className="grid justify-items-center gap-4">
-              <div className="h-64 w-64">
-                <Dropzone
-                  onDrop={handleDrop}
-                  accept={{
-                    'image/png': ['.png'],
-                    'image/jpeg': ['.jpeg'],
-                    'image/jpg': ['.jpg'],
-                  }}
-                  multiple={false}
-                  label="Drag and drop new avatar here, or click to open file dialog"
-                />
-              </div>
-              {userProfile.avatar_id && (
-                <>
-                  <p>Or...</p>
-                  <Button color="yellow" onClick={handleSetDefault}>
-                    Set as default
-                  </Button>
-                </>
-              )}
+            <div className="h-64 w-64">
+              <Dropzone
+                onDrop={handleDrop}
+                accept={{
+                  'image/png': ['.png'],
+                  'image/jpeg': ['.jpeg'],
+                  'image/jpg': ['.jpg'],
+                }}
+                multiple={false}
+                label="Drag and drop new avatar here, or click to open file dialog"
+              />
             </div>
           )}
           {modalStep === 'crop' && (
