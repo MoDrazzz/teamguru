@@ -1,6 +1,6 @@
 const ImageSkeleton = () => {
   return (
-    <div className="flex h-full w-full animate-pulse items-center justify-center rounded bg-slate-200 dark:bg-zinc-700">
+    <div className="skeleton flex h-full w-full items-center justify-center rounded">
       <svg
         className="aspect-square h-[20%] min-h-[1.5rem] w-auto text-slate-400 dark:text-zinc-500"
         aria-hidden="true"
