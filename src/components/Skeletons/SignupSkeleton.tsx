@@ -29,7 +29,7 @@ const SignupSkeleton = () => {
           <FormFieldSkeleton />
           <FormFieldSkeleton />
           <FormFieldSkeleton />
-          <div className="h-10 w-24 animate-pulse rounded-lg bg-slate-200" />
+          <div className="skeleton h-10 w-24 rounded-lg" />
         </form>
       </section>
     </div>
