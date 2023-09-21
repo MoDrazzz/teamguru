@@ -186,10 +186,14 @@ const AvatarSettings = () => {
                   label="Drag and drop new avatar here, or click to open file dialog"
                 />
               </div>
-              <p>Or...</p>
-              <Button color="yellow" onClick={handleSetDefault}>
-                Set as default
-              </Button>
+              {userProfile.avatar_id && (
+                <>
+                  <p>Or...</p>
+                  <Button color="yellow" onClick={handleSetDefault}>
+                    Set as default
+                  </Button>
+                </>
+              )}
             </div>
           )}
           {modalStep === 'crop' && (
