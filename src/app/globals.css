@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.cropper-crop-box {
-  @apply overflow-hidden shadow-md;
+@layer components {
+  .cropper-crop-box {
+    @apply overflow-hidden shadow-md;
+  }
+  .skeleton {
+    @apply animate-pulse bg-slate-200 dark:bg-zinc-700;
+  }
 }
