@@ -43,6 +43,12 @@ const AvatarSettings = () => {
 
     setIsUploading(true)
 
+    const deleteOldAvatar = async () => {
+      await supabase.storage
+        .from('avatars')
+        .remove([`${userProfile.id}/${userProfile.avatar_id}.png`])
+    }
+
     if (newAvatar === 'default') {
       await supabase
         .from('profiles')
@@ -50,6 +56,8 @@ const AvatarSettings = () => {
           avatar_id: null,
         })
         .eq('id', userProfile.id)
+
+      await deleteOldAvatar()
 
       setIsEditMode(false)
       setIsUploading(false)
@@ -69,6 +77,10 @@ const AvatarSettings = () => {
       setIsUploading(false)
       setNewAvatar(null)
       return
+    }
+
+    if (userProfile.avatar_id) {
+      await deleteOldAvatar()
     }
 
     await supabase
