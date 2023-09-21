@@ -9,7 +9,7 @@ interface Props {
 const AvatarSkeleton = ({ size = 'sm' }: Props) => {
   return (
     <div
-      className={classNames('animate-pulse rounded-lg', {
+      className={classNames('rounded-lg', {
         'h-40 w-40': size === 'lg',
         'h-10 w-10': size === 'sm',
       })}
