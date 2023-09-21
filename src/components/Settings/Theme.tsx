@@ -39,6 +39,8 @@ const Theme = ({ theme }: Props) => {
         alt={alt}
         width={256}
         height={136}
+        placeholder="blur"
+        blurDataURL={url}
         className={classNames('w-64 rounded-lg border-2 transition-colors', {
           'border-primary-500 dark:border-primary-600': isActive,
           'border-slate-400 dark:border-zinc-400': !isActive,
