@@ -25,7 +25,7 @@ const AvatarSettings = () => {
   const [modalStep, setModalStep] = useState<'upload' | 'crop'>('upload')
   const [error, setError] = useState<string>('')
   const [uploadedAvatarUrl, setUploadedAvatarUrl] = useState('')
-  const [newAvatar, setNewAvatar] = useState<File | null>(null)
+  const [newAvatar, setNewAvatar] = useState<File | null | 'default'>(null)
   const [isUploading, setIsUploading] = useState(false)
 
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -40,9 +40,23 @@ const AvatarSettings = () => {
   const handleSave = async () => {
     if (!newAvatar || !userProfile) return
 
-    const newAvatarId = generateUUID()
-
     setIsUploading(true)
+
+    if (newAvatar === 'default') {
+      await supabase
+        .from('profiles')
+        .update({
+          avatar_id: null,
+        })
+        .eq('id', userProfile.id)
+
+      setIsEditMode(false)
+      setIsUploading(false)
+
+      return
+    }
+
+    const newAvatarId = generateUUID()
 
     const { data: avatarData, error: avatarError } = await supabase.storage
       .from('avatars')
@@ -50,6 +64,9 @@ const AvatarSettings = () => {
 
     if (!avatarData || avatarError) {
       setError('Something went wrong. Please try again.')
+      setIsEditMode(false)
+      setIsUploading(false)
+      setNewAvatar(null)
       return
     }
 
@@ -100,6 +117,11 @@ const AvatarSettings = () => {
       setIsEditMode(true)
     })
   }
+  const handleSetDefault = () => {
+    setNewAvatar('default')
+    setIsUploadModalVisible(false)
+    setIsEditMode(true)
+  }
 
   useEffect(() => {
     if (!isUploadModalVisible) {
@@ -126,7 +148,11 @@ const AvatarSettings = () => {
         <div className="relative w-fit">
           <Avatar
             profile={userProfile}
-            customSrc={URL.createObjectURL(newAvatar)}
+            customSrc={
+              newAvatar === 'default'
+                ? '/avatar-placeholder.png'
+                : URL.createObjectURL(newAvatar)
+            }
             size="lg"
           />
           {isUploading && (
@@ -161,7 +187,7 @@ const AvatarSettings = () => {
                 />
               </div>
               <p>Or...</p>
-              <Button color="yellow" onClick={() => {}}>
+              <Button color="yellow" onClick={handleSetDefault}>
                 Set as default
               </Button>
             </div>
