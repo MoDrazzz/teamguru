@@ -8,13 +8,13 @@ const SignupSkeleton = () => {
   return (
     <div className="flex">
       <section className="flex w-96 flex-col justify-between rounded-lg bg-primary-500 p-8">
-        <div className="grid animate-pulse gap-16">
-          <div className="h-6 w-1/3 rounded-full bg-primary-600" />
+        <div className="grid gap-16">
+          <div className="h-6 w-1/3 animate-pulse rounded-full bg-primary-600" />
           <div>
-            <div className="h-8 w-[90%] rounded-full bg-primary-600" />
-            <div className="mt-1 h-8 w-2/5 rounded-full bg-primary-600" />
-            <div className="mt-3 h-5 w-full rounded-full bg-primary-600" />
-            <div className="mt-1 h-5 w-3/5 rounded-full bg-primary-600" />
+            <div className="h-8 w-[90%] animate-pulse rounded-full bg-primary-600" />
+            <div className="mt-1 h-8 w-2/5 animate-pulse rounded-full bg-primary-600" />
+            <div className="mt-3 h-5 w-full animate-pulse rounded-full bg-primary-600" />
+            <div className="mt-1 h-5 w-3/5 animate-pulse rounded-full bg-primary-600" />
           </div>
         </div>
         <ReviewsSkeleton />

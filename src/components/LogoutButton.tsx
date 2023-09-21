@@ -14,10 +14,9 @@ const LogoutButton = () => {
     if (!html) return
 
     await supabase.auth.signOut()
-
-    html.classList.remove('dark', 'light')
-
+    
     router.refresh()
+    html.classList.remove('dark', 'light')
   }
 
   return (
