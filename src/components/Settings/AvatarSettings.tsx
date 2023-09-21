@@ -147,17 +147,23 @@ const AvatarSettings = () => {
           disableBackdropClick
         >
           {modalStep === 'upload' && (
-            <div className="h-64 w-64">
-              <Dropzone
-                onDrop={handleDrop}
-                accept={{
-                  'image/png': ['.png'],
-                  'image/jpeg': ['.jpeg'],
-                  'image/jpg': ['.jpg'],
-                }}
-                multiple={false}
-                label="Drag and drop new avatar here, or click to open file dialog"
-              />
+            <div className="grid justify-items-center gap-4">
+              <div className="h-64 w-64">
+                <Dropzone
+                  onDrop={handleDrop}
+                  accept={{
+                    'image/png': ['.png'],
+                    'image/jpeg': ['.jpeg'],
+                    'image/jpg': ['.jpg'],
+                  }}
+                  multiple={false}
+                  label="Drag and drop new avatar here, or click to open file dialog"
+                />
+              </div>
+              <p>Or...</p>
+              <Button color="yellow" onClick={() => {}}>
+                Set as default
+              </Button>
             </div>
           )}
           {modalStep === 'crop' && (

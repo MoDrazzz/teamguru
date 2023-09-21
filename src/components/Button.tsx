@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
   type?: 'button' | 'submit'
   disabled?: boolean
   isLoading?: boolean
-  color?: 'primary' | 'red'
+  color?: 'primary' | 'red' | 'yellow'
 }
 
 const Button = ({
@@ -29,8 +29,10 @@ const Button = ({
           'opacity-80': disabled,
           'bg-primary-500 text-primary-50 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700':
             color === 'primary',
-          'bg-red-500 dark:hover:bg-red-700 text-red-50 hover:bg-red-600 dark:bg-red-600':
+          'bg-red-500 text-red-50 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700':
             color === 'red',
+          'bg-yellow-500 text-yellow-50 hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700':
+            color === 'yellow',
         },
       )}
       disabled={disabled}
