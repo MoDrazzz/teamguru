@@ -1,7 +1,5 @@
 import { ProfileSettingsSkeleton } from '@/components'
 
-const ProfileSettingsLoading = () => {
+export default function ProfileSettingsLoading() {
   return <ProfileSettingsSkeleton />
 }
-
-export default ProfileSettingsLoading
