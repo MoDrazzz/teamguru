@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react'
 interface Props {
   type?: 'button' | 'submit'
   icon: IconProp
-  color?: 'sky' | 'red' | 'green'
+  color?: 'sky' | 'red' | 'green' | 'yellow'
   // eslint-disable-next-line no-unused-vars
   onClick: (...args: any[]) => void
   disabled?: boolean
@@ -34,6 +34,9 @@ const ButtonAlt = ({
           'border-green-500 bg-green-200 text-green-700': color === 'green',
           'hover:border-green-700 hover:text-green-900':
             color === 'green' && !disabled,
+          'border-yellow-500 bg-yellow-200 text-yellow-700': color === 'yellow',
+          'hover:border-yellow-700 hover:text-yellow-900':
+            color === 'yellow' && !disabled,
           'opacity-70': disabled,
         },
       )}

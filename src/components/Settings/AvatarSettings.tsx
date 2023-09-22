@@ -11,9 +11,10 @@ import {
   Icon,
   Button,
   Spinner,
+  ButtonAlt,
 } from '@/components'
 import { useAuth } from '@/contexts'
-import { faImage } from '@fortawesome/free-solid-svg-icons'
+import { faImage, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { v4 as generateUUID } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
@@ -25,7 +26,7 @@ const AvatarSettings = () => {
   const [modalStep, setModalStep] = useState<'upload' | 'crop'>('upload')
   const [error, setError] = useState<string>('')
   const [uploadedAvatarUrl, setUploadedAvatarUrl] = useState('')
-  const [newAvatar, setNewAvatar] = useState<File | null>(null)
+  const [newAvatar, setNewAvatar] = useState<File | null | 'default'>(null)
   const [isUploading, setIsUploading] = useState(false)
 
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -40,9 +41,31 @@ const AvatarSettings = () => {
   const handleSave = async () => {
     if (!newAvatar || !userProfile) return
 
-    const newAvatarId = generateUUID()
-
     setIsUploading(true)
+
+    const deleteOldAvatar = async () => {
+      await supabase.storage
+        .from('avatars')
+        .remove([`${userProfile.id}/${userProfile.avatar_id}.png`])
+    }
+
+    if (newAvatar === 'default') {
+      await supabase
+        .from('profiles')
+        .update({
+          avatar_id: null,
+        })
+        .eq('id', userProfile.id)
+
+      await deleteOldAvatar()
+
+      setIsEditMode(false)
+      setIsUploading(false)
+
+      return
+    }
+
+    const newAvatarId = generateUUID()
 
     const { data: avatarData, error: avatarError } = await supabase.storage
       .from('avatars')
@@ -50,7 +73,14 @@ const AvatarSettings = () => {
 
     if (!avatarData || avatarError) {
       setError('Something went wrong. Please try again.')
+      setIsEditMode(false)
+      setIsUploading(false)
+      setNewAvatar(null)
       return
+    }
+
+    if (userProfile.avatar_id) {
+      await deleteOldAvatar()
     }
 
     await supabase
@@ -100,6 +130,10 @@ const AvatarSettings = () => {
       setIsEditMode(true)
     })
   }
+  const handleSetDefault = () => {
+    setNewAvatar('default')
+    setIsEditMode(true)
+  }
 
   useEffect(() => {
     if (!isUploadModalVisible) {
@@ -121,12 +155,25 @@ const AvatarSettings = () => {
           saveAction={handleSave}
           cancelAction={handleCancel}
         />
+        {userProfile.avatar_id && !isEditMode && newAvatar !== 'default' && (
+          <ButtonAlt
+            color="yellow"
+            onClick={handleSetDefault}
+            icon={faRotateLeft}
+          >
+            Set as default
+          </ButtonAlt>
+        )}
       </div>
       {newAvatar ? (
         <div className="relative w-fit">
           <Avatar
             profile={userProfile}
-            customSrc={URL.createObjectURL(newAvatar)}
+            customSrc={
+              newAvatar === 'default'
+                ? '/avatar-placeholder.png'
+                : URL.createObjectURL(newAvatar)
+            }
             size="lg"
           />
           {isUploading && (

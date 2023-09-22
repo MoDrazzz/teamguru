@@ -19,7 +19,10 @@ const Avatar = ({ profile, size = 'sm', customSrc }: Props) => {
   const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
-    if (customSrc || !profile.avatar_id?.length) return
+    if (customSrc || !profile.avatar_id?.length) {
+      setSrc('/avatar-placeholder.png')
+      return
+    }
 
     const getAvatar = async () => {
       setIsFetching(true)
