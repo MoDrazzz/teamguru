@@ -4,9 +4,10 @@ import classNames from 'classnames'
 
 interface Props {
   size?: AvatarSize
+  color?: 'primary' | 'slate'
 }
 
-const AvatarSkeleton = ({ size = 'sm' }: Props) => {
+const AvatarSkeleton = ({ size = 'sm', color = 'slate' }: Props) => {
   return (
     <div
       className={classNames('rounded-lg', {
@@ -14,7 +15,7 @@ const AvatarSkeleton = ({ size = 'sm' }: Props) => {
         'h-10 w-10': size === 'sm',
       })}
     >
-      <ImageSkeleton />
+      <ImageSkeleton color={color} />
     </div>
   )
 }
