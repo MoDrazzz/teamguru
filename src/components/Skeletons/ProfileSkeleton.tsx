@@ -1,3 +1,4 @@
+import { AvatarSkeleton } from '@/components'
 import classNames from 'classnames'
 
 interface Props {
@@ -6,12 +7,7 @@ interface Props {
 const ProfileSkeleton = ({ color = 'slate' }: Props) => {
   return (
     <div className="flex gap-3">
-      <div
-        className={classNames('h-10 w-10 rounded-lg', {
-          'animate-pulse bg-primary-700': color === 'primary',
-          skeleton: color === 'slate',
-        })}
-      />
+      <AvatarSkeleton color={color} />
       <div className="grid h-full w-4/5">
         <div
           className={classNames('h-4 w-3/5 rounded-full', {
@@ -20,13 +16,10 @@ const ProfileSkeleton = ({ color = 'slate' }: Props) => {
           })}
         />
         <div
-          className={classNames(
-            'h-4 w-1/4 self-end rounded-full',
-            {
-              'animate-pulse bg-primary-700': color === 'primary',
-              skeleton: color === 'slate',
-            },
-          )}
+          className={classNames('h-4 w-1/4 self-end rounded-full', {
+            'animate-pulse bg-primary-700': color === 'primary',
+            skeleton: color === 'slate',
+          })}
         />
       </div>
     </div>

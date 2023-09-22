@@ -1,6 +1,20 @@
-const ImageSkeleton = () => {
+import classNames from 'classnames'
+
+interface Props {
+  color?: 'primary' | 'slate'
+}
+
+const ImageSkeleton = ({ color = 'slate' }: Props) => {
   return (
-    <div className="skeleton flex h-full w-full items-center justify-center rounded">
+    <div
+      className={classNames(
+        'flex h-full w-full items-center justify-center rounded',
+        {
+          skeleton: color === 'slate',
+          'animate-pulse bg-primary-700': color === 'primary',
+        },
+      )}
+    >
       <svg
         className="aspect-square h-[20%] min-h-[1.5rem] w-auto text-slate-400 dark:text-zinc-500"
         aria-hidden="true"
