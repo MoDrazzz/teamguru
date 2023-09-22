@@ -16,7 +16,10 @@ const ImageSkeleton = ({ color = 'slate' }: Props) => {
       )}
     >
       <svg
-        className="aspect-square h-[20%] min-h-[1.5rem] w-auto text-slate-400 dark:text-zinc-500"
+        className={classNames('aspect-square h-[20%] min-h-[1.5rem] w-auto', {
+          'text-slate-400 dark:text-zinc-500': color === 'slate',
+          'text-primary-800': color === 'primary',
+        })}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
