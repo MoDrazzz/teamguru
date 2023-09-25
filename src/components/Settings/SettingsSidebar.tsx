@@ -1,7 +1,6 @@
 import { NavItem } from '@/components'
 import {
-  faAt,
-  faLock,
+  faAddressCard,
   faPalette,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
@@ -15,22 +14,15 @@ const SettingsSidebar = () => {
       <nav className="flex flex-col gap-2">
         <NavItem
           title="Profile"
-          icon={faUser}
+          icon={faAddressCard}
           href="/shell/settings/profile"
           color="slate"
           size="sm"
         />
         <NavItem
-          title="Email"
-          icon={faAt}
-          href="/shell/settings/email"
-          color="slate"
-          size="sm"
-        />
-        <NavItem
-          title="Password"
-          icon={faLock}
-          href="/shell/settings/password"
+          title="Account"
+          icon={faUser}
+          href="/shell/settings/account"
           color="slate"
           size="sm"
         />
