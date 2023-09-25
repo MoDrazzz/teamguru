@@ -1,4 +1,7 @@
-import { PageHeading } from '@/components'
+import {
+  PageHeading,
+  AccountSettings as AccountSettingsComponent,
+} from '@/components'
 
 export default function AccountSettings() {
   return (
@@ -7,6 +10,7 @@ export default function AccountSettings() {
         title="Account"
         subtitle="Update email or password to keep your account safe."
       />
+      <AccountSettingsComponent />
     </main>
   )
 }

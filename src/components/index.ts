@@ -8,6 +8,7 @@ export { default as LoginForm } from './Forms/LoginForm'
 export { default as SignupForm } from './Forms/SignupForm'
 
 // SETTINGS
+export { default as AccountSettings } from './Settings/AccountSettings'
 export { default as AvatarSettings } from './Settings/AvatarSettings'
 export { default as PersonalInformationSettings } from './Settings/PersonalInformationSettings'
 export { default as SettingsSidebar } from './Settings/SettingsSidebar'
