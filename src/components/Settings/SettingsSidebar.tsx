@@ -26,6 +26,7 @@ const SettingsSidebar = () => {
           href="/shell/settings/email"
           color="slate"
           size="sm"
+          disabled
         />
         <NavItem
           title="Password"
@@ -33,6 +34,7 @@ const SettingsSidebar = () => {
           href="/shell/settings/password"
           color="slate"
           size="sm"
+          disabled
         />
         <NavItem
           title="Appearance"
