@@ -12,7 +12,6 @@ export default function ShellLayout({ children }: PropsWithChildren) {
         attribute="class"
         enableColorScheme={false}
         defaultTheme="light"
-        enableSystem={false}
       >
         <div className="grid h-full grid-cols-[16rem_1fr] bg-slate-50 dark:bg-zinc-900">
           <Sidebar />
