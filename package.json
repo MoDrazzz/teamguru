@@ -41,6 +41,7 @@
     "eslint-config-prettier": "^8.8.0",
     "prettier": "3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "supabase": "^1.82.2"
+    "supabase": "^1.82.2",
+    "vitest": "^0.34.6"
   }
 }
