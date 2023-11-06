@@ -10,6 +10,7 @@ export { default as SignupForm } from './Forms/SignupForm'
 // SETTINGS
 export { default as AvatarSettings } from './Settings/AvatarSettings'
 export { default as PersonalInformationSettings } from './Settings/PersonalInformationSettings'
+export { default as SettingsNavigation } from './Settings/SettingsNavigation'
 export { default as SettingsSidebar } from './Settings/SettingsSidebar'
 export { default as Theme } from './Settings/Theme'
 export { default as ThemeSettings } from './Settings/ThemeSettings'
