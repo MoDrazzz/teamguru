@@ -12,6 +12,7 @@ interface Props {
   href: string
   color?: 'primary' | 'slate'
   size?: 'sm' | 'md'
+  disabled?: boolean
 }
 
 const NavItem = ({
@@ -20,13 +21,14 @@ const NavItem = ({
   href,
   color = 'primary',
   size = 'md',
+  disabled = false,
 }: Props) => {
   const pathname = usePathname()
   const isActive = pathname.startsWith(href)
 
   return (
     <Link
-      href={href}
+      href={disabled ? pathname : href}
       className={classNames(
         'flex w-full items-center gap-3 rounded-md px-3 py-2 transition-colors',
         {
@@ -38,6 +40,7 @@ const NavItem = ({
             isActive && color === 'slate',
           'text-slate-500 hover:bg-slate-300 hover:text-slate-600 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-zinc-300':
             !isActive && color === 'slate',
+          'opacity-50': disabled,
         },
       )}
     >
