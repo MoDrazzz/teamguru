@@ -36,6 +36,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
     "@types/uuid": "^9.0.3",
     "encoding": "^0.1.13",
     "eslint-config-prettier": "^8.8.0",
