@@ -22,6 +22,7 @@ const SettingsNavigation = () => {
         href="/shell/settings/email"
         color="slate"
         size="sm"
+        disabled
       />
       <NavItem
         title="Password"
@@ -29,6 +30,7 @@ const SettingsNavigation = () => {
         href="/shell/settings/password"
         color="slate"
         size="sm"
+        disabled
       />
       <NavItem
         title="Appearance"
