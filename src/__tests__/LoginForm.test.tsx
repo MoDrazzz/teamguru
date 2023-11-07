@@ -3,6 +3,7 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 import { LoginForm } from '@/components'
+import { EMPTY_INPUT_ERROR_REGEXP } from '@/utils'
 
 beforeAll(() => {
   vi.mock('next/navigation', () => require('next-router-mock'))
@@ -12,17 +13,15 @@ afterEach(() => {
   cleanup()
 })
 
-const EMPTY_INPUT_REGEXP = /No\s(.+?)\sprovided/
-
 describe('login form validations', () => {
   describe('empty input(s)', () => {
     it('detects both inputs are empty', () => {
       render(<LoginForm />)
-      const submitButton = screen.getByRole('button', { name: /Log In/i })
+      const submitButton = screen.getByRole('button', { name: 'Log In' })
 
       fireEvent.click(submitButton)
 
-      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_REGEXP)
+      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_ERROR_REGEXP)
 
       expect(emptyInputErrors.length).toBe(2)
     })
@@ -31,7 +30,7 @@ describe('login form validations', () => {
       render(<LoginForm />)
       const emailInput = screen.getByLabelText('Email')
       const passwordInput = screen.getByLabelText('Password')
-      const submitButton = screen.getByRole('button', { name: /Log In/i })
+      const submitButton = screen.getByRole('button', { name: 'Log In' })
 
       if (Math.random() > 0.5) {
         fireEvent.change(emailInput, { target: { value: 'email@example.com' } })
@@ -43,7 +42,7 @@ describe('login form validations', () => {
 
       fireEvent.click(submitButton)
 
-      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_REGEXP)
+      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_ERROR_REGEXP)
 
       expect(emptyInputErrors.length).toBe(1)
     })
@@ -52,7 +51,7 @@ describe('login form validations', () => {
       render(<LoginForm />)
       const emailInput = screen.getByLabelText('Email')
       const passwordInput = screen.getByLabelText('Password')
-      const submitButton = screen.getByRole('button', { name: /Log In/i })
+      const submitButton = screen.getByRole('button', { name: 'Log In' })
 
       fireEvent.change(emailInput, { target: { value: 'email@example.com' } })
       fireEvent.change(passwordInput, {
@@ -61,7 +60,7 @@ describe('login form validations', () => {
 
       fireEvent.click(submitButton)
 
-      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_REGEXP)
+      const emptyInputErrors = screen.queryAllByText(EMPTY_INPUT_ERROR_REGEXP)
 
       expect(emptyInputErrors.length).toBe(0)
     })
