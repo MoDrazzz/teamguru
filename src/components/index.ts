@@ -15,6 +15,10 @@ export { default as SettingsSidebar } from './Settings/SettingsSidebar'
 export { default as Theme } from './Settings/Theme'
 export { default as ThemeSettings } from './Settings/ThemeSettings'
 
+// TEAMS
+export { default as Team } from './Teams/Team'
+export { default as TeamFooter } from './Teams/TeamFooter'
+
 // SKELETONS
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
 export { default as AvatarSettingsSkeleton } from './Skeletons/AvatarSettingsSkeleton'
