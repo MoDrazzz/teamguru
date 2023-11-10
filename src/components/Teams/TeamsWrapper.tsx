@@ -1,50 +1,39 @@
-import { Team } from '@/components'
-import { UserProfile } from '@/types'
+'use client'
 
-const userProfiles: UserProfile[] = [
-  {
-    avatar_id: null,
-    bio: 'Team Leader',
-    created_at: '2021-08-18T18:00:00.000Z',
-    first_name: 'John',
-    id: '1',
-    last_name: 'Doe',
-    user_id: '1234',
-  },
-  {
-    avatar_id: null,
-    bio: 'Team Leader',
-    created_at: '2021-08-18T18:00:00.000Z',
-    first_name: 'John',
-    id: '1',
-    last_name: 'Doe',
-    user_id: '1234',
-  },
-  {
-    avatar_id: null,
-    bio: 'Team Leader',
-    created_at: '2021-08-18T18:00:00.000Z',
-    first_name: 'John',
-    id: '1',
-    last_name: 'Doe',
-    user_id: '1234',
-  },
-  {
-    avatar_id: null,
-    bio: 'Team Leader',
-    created_at: '2021-08-18T18:00:00.000Z',
-    first_name: 'John',
-    id: '1',
-    last_name: 'Doe',
-    user_id: '1234',
-  },
-]
+import { Team } from '@/components'
+import { Database, TeamData } from '@/types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useEffect, useState } from 'react'
 
 const TeamsWrapper = () => {
+  const supabase = createClientComponentClient<Database>()
+  const [teams, setTeams] = useState<TeamData[]>([])
+
+  useEffect(() => {
+    const getTeams = async () => {
+      const { data } = await supabase.from('teams').select(`
+        *,
+        members:profiles (
+          *,
+          role:roles (
+            *
+          )
+        )
+      `)
+
+      if (data) {
+        setTeams(data)
+      }
+    }
+
+    getTeams()
+  }, [supabase])
+
   return (
     <>
-      <Team members={userProfiles} name="California Team" />
-      <Team members={[]} name="Los Angeles Team" />
+      {teams.map((team) => (
+        <Team key={team.id} data={team} />
+      ))}
     </>
   )
 }

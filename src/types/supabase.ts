@@ -18,6 +18,9 @@ export interface Database {
           first_name: string
           id: string
           last_name: string
+          role_id: string | null
+          team_id: string | null
+          type: string | null
           user_id: string
         }
         Insert: {
@@ -27,6 +30,9 @@ export interface Database {
           first_name: string
           id?: string
           last_name: string
+          role_id?: string | null
+          team_id?: string | null
+          type?: string | null
           user_id: string
         }
         Update: {
@@ -36,12 +42,30 @@ export interface Database {
           first_name?: string
           id?: string
           last_name?: string
+          role_id?: string | null
+          team_id?: string | null
+          type?: string | null
           user_id?: string
         }
         Relationships: [
           {
+            foreignKeyName: 'profiles_role_id_fkey'
+            columns: ['role_id']
+            isOneToOne: false
+            referencedRelation: 'roles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'profiles_team_id_fkey'
+            columns: ['team_id']
+            isOneToOne: false
+            referencedRelation: 'teams'
+            referencedColumns: ['id']
+          },
+          {
             foreignKeyName: 'profiles_user_id_fkey'
             columns: ['user_id']
+            isOneToOne: false
             referencedRelation: 'users'
             referencedColumns: ['id']
           },
@@ -70,10 +94,47 @@ export interface Database {
           {
             foreignKeyName: 'reviews_profile_id_fkey'
             columns: ['profile_id']
+            isOneToOne: false
             referencedRelation: 'profiles'
             referencedColumns: ['id']
           },
         ]
+      }
+      roles: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      teams: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -87,6 +148,7 @@ export interface Database {
           {
             foreignKeyName: 'reviews_profile_id_fkey'
             columns: ['profile_id']
+            isOneToOne: false
             referencedRelation: 'profiles'
             referencedColumns: ['id']
           },
@@ -106,3 +168,5 @@ export interface Database {
 }
 
 export type UserProfile = Database['public']['Tables']['profiles']['Row']
+export type Team = Database['public']['Tables']['teams']['Row']
+export type Role = Database['public']['Tables']['roles']['Row']

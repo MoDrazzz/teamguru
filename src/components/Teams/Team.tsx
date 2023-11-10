@@ -1,14 +1,30 @@
 import { Avatar, TeamFooter, Icon, Title } from '@/components'
-import { UserProfile } from '@/types'
+import { TeamData, TeamMember } from '@/types'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
 interface Props {
-  name: string
-  members: UserProfile[]
+  data: TeamData
 }
 
-const Team = ({ name, members }: Props) => {
+const sortMembers = (members: TeamMember[]) => {
+  const sortedMembers = members.sort((memberA, memberB) => {
+    const memberAIsTeamLeader = (memberA.type = 'team_leader')
+    const memberBIsTeamLeader = (memberB.type = 'team_leader')
+
+    if (memberAIsTeamLeader && !memberBIsTeamLeader) {
+      return -1
+    } else if (memberBIsTeamLeader && !memberAIsTeamLeader) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+
+  return sortedMembers
+}
+
+const Team = ({ data: { name, members } }: Props) => {
   // TODO: Replace with real data
   const ongoingProjects = 3
   const assignedTasks = 12
@@ -25,12 +41,16 @@ const Team = ({ name, members }: Props) => {
           icon={faArrowRight}
         />
       </Link>
-      <div className="shadow-main grid w-full gap-3 rounded-xl bg-slate-50 p-4">
+      <div className="grid w-full gap-3 rounded-xl bg-slate-50 p-4 shadow-main">
         {members.length ? (
           <>
             <div className="flex gap-3">
-              {members.map((member) => (
-                <Avatar key={member.id} size="sm" profile={member} />
+              {sortMembers(members).map((member) => (
+                <Avatar
+                  key={member.id}
+                  size="sm"
+                  profile={member}
+                />
               ))}
             </div>
             <TeamFooter
