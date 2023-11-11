@@ -50,6 +50,7 @@ const Team = ({ data: { name, members } }: Props) => {
                   key={member.id}
                   size="sm"
                   profile={member}
+                  isTeamLeader={member.type === 'team_leader'}
                 />
               ))}
             </div>
