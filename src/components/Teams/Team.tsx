@@ -10,8 +10,8 @@ interface Props {
 
 const Team = ({ data: { name, members } }: Props) => {
   // TODO: Replace with real data
-  const ongoingProjects = 3
-  const assignedTasks = 12
+  const ongoingProjects = '-'
+  const assignedTasks = '-'
 
   return (
     <article className="grid w-full justify-items-start gap-3">
