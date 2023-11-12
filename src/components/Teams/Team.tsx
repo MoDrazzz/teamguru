@@ -37,11 +37,11 @@ const Team = ({ data: { name, members } }: Props) => {
       >
         <Title>{name}</Title>
         <Icon
-          className="text-lg text-slate-600 group-hover:animate-wiggle"
+          className="text-lg text-slate-600 dark:text-zinc-400 group-hover:animate-wiggle"
           icon={faArrowRight}
         />
       </Link>
-      <div className="grid w-full gap-3 rounded-xl bg-slate-50 p-4 shadow-main">
+      <div className="grid w-full gap-3 rounded-xl bg-slate-50 p-4 shadow-main dark:bg-zinc-900">
         {members.length ? (
           <>
             <div className="flex gap-3">
