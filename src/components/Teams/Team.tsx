@@ -51,6 +51,7 @@ const Team = ({ data: { name, members } }: Props) => {
                   size="sm"
                   profile={member}
                   isTeamLeader={member.type === 'team_leader'}
+                  withTooltip
                 />
               ))}
             </div>
