@@ -43,9 +43,18 @@ const TeamsWrapper = () => {
   return (
     <>
       {isLoading && <TeamSkeletons />}
-      {teams.map((team) => (
-        <Team key={team.id} data={team} />
-      ))}
+      {teams.length ? (
+        teams.map((team) => <Team key={team.id} data={team} />)
+      ) : (
+        <div className="flex h-1/2 w-full flex-col items-center justify-center">
+          <h3 className="mb-2 text-3xl font-semibold">
+            You have no teams yet
+          </h3>
+          <h4 className="text-xl text-slate-600 dark:text-zinc-400">
+            Create first team using the button above.
+          </h4>
+        </div>
+      )}
     </>
   )
 }
