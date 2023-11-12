@@ -3,6 +3,7 @@
 import { Team, TeamSkeleton } from '@/components'
 import { useAuth } from '@/contexts'
 import { Database, TeamData } from '@/types'
+import { sortTeams } from '@/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useState } from 'react'
 
@@ -44,12 +45,10 @@ const TeamsWrapper = () => {
     <>
       {isLoading && <TeamSkeletons />}
       {teams.length ? (
-        teams.map((team) => <Team key={team.id} data={team} />)
+        sortTeams(teams).map((team) => <Team key={team.id} data={team} />)
       ) : (
         <div className="flex h-1/2 w-full flex-col items-center justify-center">
-          <h3 className="mb-2 text-3xl font-semibold">
-            You have no teams yet
-          </h3>
+          <h3 className="mb-2 text-3xl font-semibold">You have no teams yet</h3>
           <h4 className="text-xl text-slate-600 dark:text-zinc-400">
             Create first team using the button above.
           </h4>
