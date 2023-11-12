@@ -6,7 +6,7 @@ import { useTeamsSearchContext } from '@/contexts'
 
 const TeamsSearchInput = () => {
   const [inputValue, setInputValue] = useState('')
-  const { setQuery } = useTeamsSearchContext()
+  const { teams, setQuery } = useTeamsSearchContext()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
@@ -19,6 +19,7 @@ const TeamsSearchInput = () => {
     <Input
       value={inputValue}
       onChange={handleInputChange}
+      disabled={!teams.length}
       placeholder="Filter by team or member name..."
     />
   )

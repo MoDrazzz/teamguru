@@ -12,12 +12,14 @@ import {
 } from 'react'
 
 interface TeamsSearchContextValue {
+  teams: TeamData[]
   setTeams: Dispatch<SetStateAction<TeamData[]>>
   setQuery: Dispatch<SetStateAction<string>>
   searchResult: TeamData[]
 }
 
 const Context = createContext<TeamsSearchContextValue>({
+  teams: [],
   setTeams: () => {},
   setQuery: () => {},
   searchResult: [],
@@ -53,6 +55,7 @@ const TeamsSearchContext = ({ children }: PropsWithChildren) => {
   return (
     <Context.Provider
       value={{
+        teams,
         setTeams,
         setQuery,
         searchResult,

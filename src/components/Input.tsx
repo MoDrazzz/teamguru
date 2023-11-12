@@ -17,6 +17,7 @@ interface Props {
     | 'family-name'
     | 'new-password'
     | 'current-password'
+  disabled?: boolean
 }
 
 const Input = ({
@@ -29,6 +30,7 @@ const Input = ({
   isError = false,
   onFocus,
   autocomplete,
+  disabled,
 }: Props) => {
   return (
     <input
@@ -43,11 +45,13 @@ const Input = ({
           'border-red-500 text-red-700': isError,
           'border-slate-400 focus:border-slate-600 dark:border-zinc-500 dark:focus:border-zinc-400':
             !isError,
+          'opacity-50 cursor-not-allowed': disabled,
         },
       )}
       placeholder={placeholder}
       onFocus={onFocus}
       autoComplete={autocomplete || undefined}
+      disabled={disabled}
     />
   )
 }
