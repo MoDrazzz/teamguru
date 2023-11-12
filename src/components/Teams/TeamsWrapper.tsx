@@ -1,6 +1,6 @@
 'use client'
 
-import { Team, TeamSkeleton } from '@/components'
+import { PageHeading, Team, TeamSkeleton } from '@/components'
 import { useAuth, useTeamsSearchContext } from '@/contexts'
 import { Database, TeamData } from '@/types'
 import { sortTeams } from '@/utils'
@@ -50,15 +50,26 @@ const TeamsWrapper = () => {
     <>
       {isLoading && <TeamSkeletons />}
       {teams.length ? (
-        sortTeams(searchResult).map((team) => (
-          <Team key={team.id} data={team} />
-        ))
+        searchResult.length ? (
+          sortTeams(searchResult).map((team) => (
+            <Team key={team.id} data={team} />
+          ))
+        ) : (
+          <div className="w-full py-8 text-center">
+            <PageHeading
+              title="No Team Found"
+              subtitle="There is no team or member with specified name."
+              noSpacer
+            />
+          </div>
+        )
       ) : (
-        <div className="flex h-1/2 w-full flex-col items-center justify-center">
-          <h3 className="mb-2 text-3xl font-semibold">You have no teams yet</h3>
-          <h4 className="text-xl text-slate-600 dark:text-zinc-400">
-            Create first team using the button above.
-          </h4>
+        <div className="w-full py-8 text-center">
+          <PageHeading
+            title="You Have No Teams Yet"
+            subtitle="Create first team using the button above."
+            noSpacer
+          />
         </div>
       )}
     </>
