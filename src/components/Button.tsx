@@ -24,7 +24,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={classNames(
-        'relative rounded-lg px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:text-base',
+        'relative shrink-0 rounded-lg px-4 py-2 text-sm font-semibold transition-colors sm:px-5 sm:text-base',
         {
           'opacity-80': disabled,
           'bg-primary-500 text-primary-50 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700':

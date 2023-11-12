@@ -18,6 +18,7 @@ export { default as ThemeSettings } from './Settings/ThemeSettings'
 // TEAMS
 export { default as Team } from './Teams/Team'
 export { default as TeamFooter } from './Teams/TeamFooter'
+export { default as TeamsSearchInput } from './Teams/TeamsSearchInput'
 export { default as TeamsWrapper } from './Teams/TeamsWrapper'
 
 // SKELETONS

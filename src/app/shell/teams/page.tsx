@@ -1,6 +1,12 @@
 'use client'
 
-import { Button, PageHeading, TeamsWrapper } from '@/components'
+import {
+  Button,
+  PageHeading,
+  TeamsWrapper,
+  TeamsSearchInput,
+} from '@/components'
+import { TeamsSearchContext } from '@/contexts'
 
 export default function Teams() {
   return (
@@ -9,8 +15,13 @@ export default function Teams() {
         title="Teams"
         subtitle="Manage your teams, members, and team roles."
       />
-      <Button onClick={() => {}}>Create new team</Button>
-      <TeamsWrapper />
+      <TeamsSearchContext>
+        <div className="flex w-full gap-3">
+          <Button onClick={() => {}}>Create new team</Button>
+          <TeamsSearchInput />
+        </div>
+        <TeamsWrapper />
+      </TeamsSearchContext>
     </div>
   )
 }
