@@ -17,18 +17,17 @@ interface Props {
 }
 
 interface AvatarWrapperProps extends PropsWithChildren {
-  isTeamLeader?: boolean
+  isTeamLeader: boolean
+  withTooltip: boolean
 }
 
-const AvatarWrapper = ({ children, isTeamLeader }: AvatarWrapperProps) => {
-  return isTeamLeader ? (
-    <div className="relative">
-      {children}
-      <Icon
-        icon={faCrown}
-        className="absolute -left-2 -top-2 -rotate-45 text-lg text-yellow-500"
-      />
-    </div>
+const AvatarWrapper = ({
+  children,
+  isTeamLeader,
+  withTooltip,
+}: AvatarWrapperProps) => {
+  return isTeamLeader || withTooltip ? (
+    <div className="relative">{children}</div>
   ) : (
     children
   )
@@ -73,7 +72,7 @@ const Avatar = ({
   const name = `${profile.first_name} ${profile.last_name}`
 
   return (
-    <AvatarWrapper isTeamLeader={isTeamLeader}>
+    <AvatarWrapper isTeamLeader={isTeamLeader} withTooltip={withTooltip}>
       <Image
         src={customSrc || src}
         alt={`${name}'s Avatar`}
@@ -85,6 +84,12 @@ const Avatar = ({
         height={size === 'lg' ? 160 : 40}
         ref={avatarRef}
       />
+      {isTeamLeader && (
+        <Icon
+          icon={faCrown}
+          className="absolute -left-2 -top-2 -rotate-45 text-lg text-yellow-500"
+        />
+      )}
       {withTooltip && <Tooltip tooltipTargetRef={avatarRef} message={name} />}
     </AvatarWrapper>
   )
