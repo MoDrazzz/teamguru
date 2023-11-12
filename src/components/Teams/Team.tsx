@@ -9,8 +9,8 @@ interface Props {
 
 const sortMembers = (members: TeamMember[]) => {
   const sortedMembers = members.sort((memberA, memberB) => {
-    const memberAIsTeamLeader = (memberA.type = 'team_leader')
-    const memberBIsTeamLeader = (memberB.type = 'team_leader')
+    const memberAIsTeamLeader = memberA.type === 'team_leader'
+    const memberBIsTeamLeader = memberB.type === 'team_leader'
 
     if (memberAIsTeamLeader && !memberBIsTeamLeader) {
       return -1
