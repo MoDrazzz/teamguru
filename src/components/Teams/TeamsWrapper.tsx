@@ -1,7 +1,7 @@
 'use client'
 
 import { Team, TeamSkeleton } from '@/components'
-import { useAuth } from '@/contexts'
+import { useAuth, useTeamsSearchContext } from '@/contexts'
 import { Database, TeamData } from '@/types'
 import { sortTeams } from '@/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -12,6 +12,7 @@ const TeamsWrapper = () => {
   const supabase = createClientComponentClient<Database>()
   const [teams, setTeams] = useState<TeamData[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const { setTeams: setSearchSource, searchResult } = useTeamsSearchContext()
 
   useEffect(() => {
     const getTeams = async () => {
@@ -36,6 +37,10 @@ const TeamsWrapper = () => {
     getTeams()
   }, [supabase])
 
+  useEffect(() => {
+    setSearchSource(teams)
+  }, [teams, setSearchSource])
+
   const TeamSkeletons = () =>
     Array.from({ length: 5 }).map((_, index) => <TeamSkeleton key={index} />)
 
@@ -45,7 +50,9 @@ const TeamsWrapper = () => {
     <>
       {isLoading && <TeamSkeletons />}
       {teams.length ? (
-        sortTeams(teams).map((team) => <Team key={team.id} data={team} />)
+        sortTeams(searchResult).map((team) => (
+          <Team key={team.id} data={team} />
+        ))
       ) : (
         <div className="flex h-1/2 w-full flex-col items-center justify-center">
           <h3 className="mb-2 text-3xl font-semibold">You have no teams yet</h3>
