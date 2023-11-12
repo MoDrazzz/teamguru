@@ -1,27 +1,11 @@
 import { Avatar, TeamFooter, Icon, Title } from '@/components'
-import { TeamData, TeamMember } from '@/types'
+import { TeamData } from '@/types'
+import { sortTeamMembers } from '@/utils'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
 interface Props {
   data: TeamData
-}
-
-const sortMembers = (members: TeamMember[]) => {
-  const sortedMembers = members.sort((memberA, memberB) => {
-    const memberAIsTeamLeader = memberA.type === 'team_leader'
-    const memberBIsTeamLeader = memberB.type === 'team_leader'
-
-    if (memberAIsTeamLeader && !memberBIsTeamLeader) {
-      return -1
-    } else if (memberBIsTeamLeader && !memberAIsTeamLeader) {
-      return 1
-    } else {
-      return 0
-    }
-  })
-
-  return sortedMembers
 }
 
 const Team = ({ data: { name, members } }: Props) => {
@@ -45,7 +29,7 @@ const Team = ({ data: { name, members } }: Props) => {
         {members.length ? (
           <>
             <div className="flex flex-wrap gap-3">
-              {sortMembers(members).map((member) => (
+              {sortTeamMembers(members).map((member) => (
                 <Avatar
                   key={member.id}
                   size="sm"
