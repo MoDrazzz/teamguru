@@ -43,6 +43,8 @@ export { default as ShellSkeleton } from './Skeletons/ShellSkeleton'
 export { default as SidebarSkeleton } from './Skeletons/SidebarSkeleton'
 export { default as SignupSkeleton } from './Skeletons/SignupSkeleton'
 export { default as TeamSkeleton } from './Skeletons/TeamSkeleton'
+export { default as TeamsSkeleton } from './Skeletons/TeamsSkeleton'
+export { default as TeamsWrapperSkeleton } from './Skeletons/TeamsWrapperSkeleton'
 export { default as ThemeSkeleton } from './Skeletons/ThemeSkeleton'
 
 // COMMON

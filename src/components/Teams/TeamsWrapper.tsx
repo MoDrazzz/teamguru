@@ -1,6 +1,6 @@
 'use client'
 
-import { PageHeading, Team, TeamSkeleton } from '@/components'
+import { PageHeading, Team, TeamsWrapperSkeleton } from '@/components'
 import { useAuth, useTeamsSearchContext } from '@/contexts'
 import { Database, TeamData } from '@/types'
 import { sortTeams } from '@/utils'
@@ -41,14 +41,11 @@ const TeamsWrapper = () => {
     setSearchSource(teams)
   }, [teams, setSearchSource])
 
-  const TeamSkeletons = () =>
-    Array.from({ length: 5 }).map((_, index) => <TeamSkeleton key={index} />)
-
-  if (!userProfile) return <TeamSkeletons />
+  if (!userProfile) return <TeamsWrapperSkeleton />
 
   return (
     <>
-      {isLoading && <TeamSkeletons />}
+      {isLoading && <TeamsWrapperSkeleton />}
       {teams.length ? (
         searchResult.length ? (
           sortTeams(searchResult).map((team) => (
