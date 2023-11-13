@@ -1,11 +1,8 @@
 import { Modal, CodeBlock, Icon, Link } from '@/components'
-import { Error } from '@/types'
+import { Error, ModalProps } from '@/types'
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
-import { Dispatch, SetStateAction } from 'react'
 
-interface Props {
-  isVisible: boolean
-  setIsVisible: Dispatch<SetStateAction<boolean>>
+interface Props extends ModalProps {
   error: Error
 }
 
