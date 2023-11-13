@@ -1,13 +1,30 @@
 'use client'
 
-import { Button, FormField, Input, Label, Modal, Title } from '@/components'
+import {
+  Button,
+  FormField,
+  Input,
+  InputError,
+  Label,
+  Modal,
+  Title,
+} from '@/components'
 import { ModalProps } from '@/types'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
-  const teamNameInputRef = useRef(null)
+  const teamNameInputRef = useRef<HTMLInputElement>(null)
+  const [error, setError] = useState('')
 
-  const handleCreateTeam = () => {}
+  const handleCreateTeam = () => {
+    if (!teamNameInputRef.current) return
+
+    const teamName = teamNameInputRef.current.value
+
+    if (teamName.trim().length === 0) {
+      setError('You have to specify team name')
+    }
+  }
 
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
@@ -19,7 +36,10 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
             refObj={teamNameInputRef}
             id="newTeamName"
             placeholder="Team name..."
+            isError={!!error.length}
+            onFocus={() => setError('')}
           />
+          <InputError message={error} />
         </FormField>
         <div className="flex justify-between">
           <Button onClick={() => setIsVisible(false)} color="red">
