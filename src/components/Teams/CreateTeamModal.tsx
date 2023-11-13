@@ -15,6 +15,7 @@ import { useRef, useState } from 'react'
 const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
   const teamNameInputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleCreateTeam = () => {
     if (!teamNameInputRef.current) return
@@ -23,7 +24,10 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
 
     if (teamName.trim().length === 0) {
       setError('You have to specify team name')
+      return
     }
+
+    setIsLoading(true)
   }
 
   return (
@@ -42,10 +46,16 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
           <InputError message={error} />
         </FormField>
         <div className="flex justify-between">
-          <Button onClick={() => setIsVisible(false)} color="red">
+          <Button
+            disabled={isLoading}
+            onClick={() => setIsVisible(false)}
+            color="red"
+          >
             Cancel
           </Button>
-          <Button onClick={handleCreateTeam}>Create</Button>
+          <Button isLoading={isLoading} onClick={handleCreateTeam}>
+            Create
+          </Button>
         </div>
       </div>
     </Modal>

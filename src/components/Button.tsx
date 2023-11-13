@@ -35,7 +35,7 @@ const Button = ({
             color === 'yellow',
         },
       )}
-      disabled={disabled}
+      disabled={disabled || isLoading}
     >
       {children}
       {isLoading && (
