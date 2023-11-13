@@ -9,15 +9,21 @@ import {
   Modal,
   Title,
 } from '@/components'
-import { ModalProps } from '@/types'
-import { useRef, useState } from 'react'
+import { Database, ModalProps } from '@/types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { FormEvent, useRef, useState } from 'react'
 
 const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
+  const supabase = createClientComponentClient<Database>()
   const teamNameInputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-  const handleCreateTeam = () => {
+  const handleCreateTeam = async (e: FormEvent<SubmitEvent>) => {
+    e.preventDefault()
+
     if (!teamNameInputRef.current) return
 
     const teamName = teamNameInputRef.current.value
@@ -28,11 +34,28 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
     }
 
     setIsLoading(true)
+
+    const { error: insertError } = await supabase
+      .from('teams')
+      .insert({ name: teamName })
+
+    setIsLoading(false)
+
+    if (insertError) {
+      if (insertError.code === '23505') {
+        setError('Team with specified name already exists')
+      } else {
+        setError(insertError.message)
+      }
+      return
+    }
+
+    router.push(`/shell/teams/${teamName}`)
   }
 
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
-      <div className="flex w-80 flex-col gap-6">
+      <form className="flex w-80 flex-col gap-6">
         <Title>New Team</Title>
         <FormField>
           <Label htmlFor="newTeamName">Name</Label>
@@ -53,11 +76,15 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
           >
             Cancel
           </Button>
-          <Button isLoading={isLoading} onClick={handleCreateTeam}>
+          <Button
+            type="submit"
+            isLoading={isLoading}
+            onClick={handleCreateTeam}
+          >
             Create
           </Button>
         </div>
-      </div>
+      </form>
     </Modal>
   )
 }
