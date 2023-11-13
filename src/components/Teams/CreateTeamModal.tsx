@@ -9,6 +9,7 @@ import {
   Modal,
   Title,
 } from '@/components'
+import { useAuth } from '@/contexts'
 import { Database, ModalProps } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
@@ -16,6 +17,7 @@ import { FormEvent, useRef, useState } from 'react'
 
 const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
   const supabase = createClientComponentClient<Database>()
+  const { userProfile } = useAuth()
   const teamNameInputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +26,7 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
   const handleCreateTeam = async (e: FormEvent<SubmitEvent>) => {
     e.preventDefault()
 
-    if (!teamNameInputRef.current) return
+    if (!teamNameInputRef.current || !userProfile) return
 
     const teamName = teamNameInputRef.current.value
 
@@ -37,7 +39,7 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
 
     const { error: insertError } = await supabase
       .from('teams')
-      .insert({ name: teamName })
+      .insert({ name: teamName, organisation_id: userProfile.organisation_id })
 
     setIsLoading(false)
 
