@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Production
 
-## Getting Started
+If you want to see the stable version, it's always present under this link:
 
-First, run the development server:
+**https://teamguru.vercel.app**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+There are multiple branches, every responsible for different feature. Exceptions:
+- `main`: Production
+- `dev`: Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+If you are here to review code, take `dev` branch into consideration. Happy to see you!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshots
 
-## Learn More
+You can't see everything using the production app, so here are the screenshots of recently implemented features.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img width="1792" alt="Login" src="https://github.com/MoDrazzz/teamguru/assets/44100186/28c016c9-d487-4125-9b21-c5b11ab80ef2">
+<img width="1792" alt="Signup" src="https://github.com/MoDrazzz/teamguru/assets/44100186/a306e503-9284-4174-8cca-d5e1f81a86db">
+<img width="1792" alt="Signup-validations" src="https://github.com/MoDrazzz/teamguru/assets/44100186/e879ede3-bf99-4c93-9839-25605a9c084a">
+<img width="1792" alt="Settings" src="https://github.com/MoDrazzz/teamguru/assets/44100186/b274d70c-d551-4b26-a40f-9c6dfb72e370">
+<img width="1792" alt="Settings-avatar" src="https://github.com/MoDrazzz/teamguru/assets/44100186/31c996e4-d0f8-4a0f-b37c-df7bbb81ddc4">
+<img width="1792" alt="Appearance" src="https://github.com/MoDrazzz/teamguru/assets/44100186/dc30e3ac-969c-493d-9957-ff1531a40a55">
+<img width="1757" alt="Teams-page" src="https://github.com/MoDrazzz/teamguru/assets/44100186/8c9927ae-8815-4b47-bf21-8ce29eeb9c7b">
+<img width="1509" alt="Teams-filtering" src="https://github.com/MoDrazzz/teamguru/assets/44100186/3d6fdfce-4c26-4642-ab0c-e2edbc0d5443">
+<img width="226" alt="Teams-tooltip" src="https://github.com/MoDrazzz/teamguru/assets/44100186/d592fae3-cd41-4a2b-882b-a65c18618aa9">
