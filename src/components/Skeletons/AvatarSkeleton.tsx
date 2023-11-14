@@ -10,7 +10,7 @@ interface Props {
 const AvatarSkeleton = ({ size = 'sm', color = 'slate' }: Props) => {
   return (
     <div
-      className={classNames('rounded-lg', {
+      className={classNames('rounded-lg overflow-hidden', {
         'h-40 w-40': size === 'lg',
         'h-10 w-10': size === 'sm',
       })}

@@ -7,13 +7,10 @@ interface Props {
 const ImageSkeleton = ({ color = 'slate' }: Props) => {
   return (
     <div
-      className={classNames(
-        'flex h-full w-full items-center justify-center rounded',
-        {
-          skeleton: color === 'slate',
-          'animate-pulse bg-primary-700': color === 'primary',
-        },
-      )}
+      className={classNames('flex h-full w-full items-center justify-center', {
+        skeleton: color === 'slate',
+        'animate-pulse bg-primary-700': color === 'primary',
+      })}
     >
       <svg
         className={classNames('aspect-square h-[20%] min-h-[1.5rem] w-auto', {

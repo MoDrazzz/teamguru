@@ -15,6 +15,13 @@ export { default as SettingsSidebar } from './Settings/SettingsSidebar'
 export { default as Theme } from './Settings/Theme'
 export { default as ThemeSettings } from './Settings/ThemeSettings'
 
+// TEAMS
+export { default as Team } from './Teams/Team'
+export { default as CreateTeamModal } from './Teams/CreateTeamModal'
+export { default as TeamFooter } from './Teams/TeamFooter'
+export { default as TeamsSearchInput } from './Teams/TeamsSearchInput'
+export { default as TeamsWrapper } from './Teams/TeamsWrapper'
+
 // SKELETONS
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
 export { default as AvatarSettingsSkeleton } from './Skeletons/AvatarSettingsSkeleton'
@@ -36,6 +43,9 @@ export { default as SettingsSkeleton } from './Skeletons/SettingsSkeleton'
 export { default as ShellSkeleton } from './Skeletons/ShellSkeleton'
 export { default as SidebarSkeleton } from './Skeletons/SidebarSkeleton'
 export { default as SignupSkeleton } from './Skeletons/SignupSkeleton'
+export { default as TeamSkeleton } from './Skeletons/TeamSkeleton'
+export { default as TeamsSkeleton } from './Skeletons/TeamsSkeleton'
+export { default as TeamsWrapperSkeleton } from './Skeletons/TeamsWrapperSkeleton'
 export { default as ThemeSkeleton } from './Skeletons/ThemeSkeleton'
 
 // COMMON

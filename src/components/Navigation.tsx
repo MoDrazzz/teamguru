@@ -12,12 +12,7 @@ const Navigation = () => {
   return (
     <nav className="grid gap-3">
       <NavItem title="Dashboard" icon={faHomeAlt} href={`/shell/dashboard`} />
-      <NavItem
-        title="Teams"
-        icon={faPeopleGroup}
-        href={`/shell/teams`}
-        disabled
-      />
+      <NavItem title="Teams" icon={faPeopleGroup} href={`/shell/teams`} />
       <NavItem
         title="Messages"
         icon={faEnvelope}
