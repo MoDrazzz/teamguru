@@ -1,13 +1,5 @@
 /* eslint-disable no-unused-vars */
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
-export interface Database {
+export interface DatabaseType {
   public: {
     Tables: {
       organisations: {
@@ -217,6 +209,9 @@ export interface Database {
   }
 }
 
-export type UserProfile = Database['public']['Tables']['profiles']['Row']
-export type Team = Database['public']['Tables']['teams']['Row']
-export type Role = Database['public']['Tables']['roles']['Row']
+type Tables<T extends keyof DatabaseType['public']['Tables']> =
+  DatabaseType['public']['Tables'][T]['Row']
+
+export type UserProfileType = Tables<'profiles'>
+export type TeamType = Tables<'teams'>
+export type RoleType = Tables<'roles'>

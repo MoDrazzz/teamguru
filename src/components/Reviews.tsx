@@ -1,13 +1,13 @@
 'use client'
 
-import { Database, Review as ReviewType } from '@/types'
+import { DatabaseType, ReviewType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { ReviewsSkeleton, Review } from '@/components'
 import classNames from 'classnames'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const Reviews = () => {
-  const supabase = createClientComponentClient<Database>()
+  const supabase = createClientComponentClient<DatabaseType>()
   const [reviews, setReviews] = useState<ReviewType[]>([])
   const [activeReview, setActiveReview] = useState(0)
 

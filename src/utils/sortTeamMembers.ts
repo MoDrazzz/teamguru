@@ -1,7 +1,7 @@
-import { TeamMember } from '@/types'
+import { TeamMemberType } from '@/types'
 import { sortObjectsArrayAlphabetically } from '@/utils'
 
-export function sortTeamMembers(members: TeamMember[]) {
+export function sortTeamMembers(members: TeamMemberType[]) {
   const sortedMembers = members.sort((memberA, memberB) => {
     const memberAIsTeamLeader = memberA.type === 'team_leader'
     const memberBIsTeamLeader = memberB.type === 'team_leader'

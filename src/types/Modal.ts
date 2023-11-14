@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 
-export interface ModalProps {
+export interface ModalPropsType {
   isVisible: boolean
   setIsVisible: Dispatch<SetStateAction<boolean>>
 }

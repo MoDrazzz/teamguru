@@ -1,12 +1,12 @@
 'use client'
 
 import { FormEvent, useRef, useState } from 'react'
-import { LoginErrors } from '@/types'
+import { LoginErrorsType } from '@/types'
 import { FormField, Label, Input, InputError, Button } from '@/components'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 
-const initialErrorsState: LoginErrors = {
+const initialErrorsState: LoginErrorsType = {
   email: '',
   password: '',
   supabaseError: null,
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
     if (!emailRef.current || !passwordRef.current) return
 
-    const newErrors: LoginErrors = { ...initialErrorsState }
+    const newErrors: LoginErrorsType = { ...initialErrorsState }
 
     const email = emailRef.current.value
     const password = passwordRef.current.value

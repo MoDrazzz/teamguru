@@ -1,5 +1,5 @@
 import { Profile } from '@/components'
-import { Review as ReviewType } from '@/types'
+import { ReviewType } from '@/types'
 
 interface Props {
   review: ReviewType
