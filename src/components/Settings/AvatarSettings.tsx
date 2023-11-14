@@ -161,7 +161,7 @@ const AvatarSettings = () => {
             onClick={handleSetDefault}
             icon={faRotateLeft}
           >
-            Set as default
+            Reset to default
           </ButtonAlt>
         )}
       </div>
