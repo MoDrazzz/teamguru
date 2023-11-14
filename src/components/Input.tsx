@@ -45,7 +45,7 @@ const Input = ({
           'border-red-500 text-red-700': isError,
           'border-slate-400 focus:border-slate-600 dark:border-zinc-500 dark:focus:border-zinc-400':
             !isError,
-          'opacity-50 cursor-not-allowed': disabled,
+          'cursor-not-allowed opacity-50': disabled,
         },
       )}
       placeholder={placeholder}

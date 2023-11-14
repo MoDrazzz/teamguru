@@ -11,7 +11,7 @@ const Identity = () => {
   return (
     <div className="grid justify-items-center gap-1">
       <p className="text-xs font-semibold">Logged as</p>
-      <p className="text-xl font-semibold text-center">
+      <p className="text-center text-xl font-semibold">
         {userProfile.first_name} {userProfile.last_name}
       </p>
     </div>
