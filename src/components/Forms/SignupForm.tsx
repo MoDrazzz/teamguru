@@ -11,7 +11,7 @@ import {
   Label,
   TooltipIcon,
 } from '@/components'
-import { SignupErrorsType } from '@/types'
+import { DatabaseType, SignupErrorsType } from '@/types'
 import { isWithinOneMinute } from '@/utils'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -33,7 +33,7 @@ const emailRegex =
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/
 
 const SignupForm = () => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
 
   const firstNameRef = useRef<HTMLInputElement>(null)
   const lastNameRef = useRef<HTMLInputElement>(null)

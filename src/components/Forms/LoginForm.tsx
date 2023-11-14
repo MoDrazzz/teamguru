@@ -1,7 +1,7 @@
 'use client'
 
 import { FormEvent, useRef, useState } from 'react'
-import { LoginErrorsType } from '@/types'
+import { DatabaseType, LoginErrorsType } from '@/types'
 import { FormField, Label, Input, InputError, Button } from '@/components'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
@@ -13,7 +13,7 @@ const initialErrorsState: LoginErrorsType = {
 }
 
 const LoginForm = () => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
   const router = useRouter()
 
   const [errors, setErrors] = useState(initialErrorsState)

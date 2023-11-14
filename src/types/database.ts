@@ -41,7 +41,7 @@ export interface DatabaseType {
           first_name: string
           id?: string
           last_name: string
-          organisation_id: string
+          organisation_id?: string
           role_id?: string | null
           team_id?: string | null
           type?: string | null

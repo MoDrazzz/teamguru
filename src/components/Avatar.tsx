@@ -1,7 +1,7 @@
 'use client'
 
 import { AvatarSkeleton, Icon, Tooltip } from '@/components'
-import { AvatarSizeType, UserProfileType } from '@/types'
+import { AvatarSizeType, DatabaseType, UserProfileType } from '@/types'
 import { faCrown } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import classNames from 'classnames'
@@ -40,7 +40,7 @@ const Avatar = ({
   isTeamLeader = false,
   withTooltip = false,
 }: Props) => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
   const [src, setSrc] = useState('/avatar-placeholder.png')
   const [isFetching, setIsFetching] = useState(false)
   const avatarRef = useRef(null)
