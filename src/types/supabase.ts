@@ -39,7 +39,7 @@ export interface Database {
           organisation_id: string
           role_id: string | null
           team_id: string | null
-          type: string | null
+          type: 'team_member' | 'team_leader' | 'organisation' | 'admin'
           user_id: string
         }
         Insert: {
