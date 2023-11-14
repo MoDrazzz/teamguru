@@ -7,5 +7,5 @@ export type {
   UserProfileType,
   TeamType,
   RoleType,
-} from './supabase'
+} from './Database'
 export type { TeamDataType, TeamMemberType } from './Teams'
