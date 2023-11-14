@@ -1,6 +1,6 @@
 'use client'
 
-import { TeamData } from '@/types'
+import { TeamDataType } from '@/types'
 import {
   Dispatch,
   PropsWithChildren,
@@ -12,10 +12,10 @@ import {
 } from 'react'
 
 interface TeamsSearchContextValue {
-  teams: TeamData[]
-  setTeams: Dispatch<SetStateAction<TeamData[]>>
+  teams: TeamDataType[]
+  setTeams: Dispatch<SetStateAction<TeamDataType[]>>
   setQuery: Dispatch<SetStateAction<string>>
-  searchResult: TeamData[]
+  searchResult: TeamDataType[]
 }
 
 const Context = createContext<TeamsSearchContextValue>({
@@ -26,9 +26,9 @@ const Context = createContext<TeamsSearchContextValue>({
 })
 
 const TeamsSearchContext = ({ children }: PropsWithChildren) => {
-  const [teams, setTeams] = useState<TeamData[]>([])
+  const [teams, setTeams] = useState<TeamDataType[]>([])
   const [query, setQuery] = useState('')
-  const [searchResult, setSearchResult] = useState<TeamData[]>([])
+  const [searchResult, setSearchResult] = useState<TeamDataType[]>([])
 
   useEffect(() => {
     const doesStartWithQuery = (string: string) =>

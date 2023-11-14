@@ -1,6 +1,6 @@
 'use client'
 
-import { Database, UserProfile } from '@/types'
+import { DatabaseType, UserProfileType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Session, User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
@@ -15,7 +15,7 @@ import {
 interface AuthContextValue {
   session: Session | null
   user: User | null
-  userProfile: UserProfile | null
+  userProfile: UserProfileType | null
   logout: () => Promise<void>
 }
 
@@ -27,9 +27,9 @@ const Context = createContext<AuthContextValue>({
 })
 
 const AuthContext = ({ children }: PropsWithChildren) => {
-  const supabase = createClientComponentClient<Database>()
+  const supabase = createClientComponentClient<DatabaseType>()
   const [user, setUser] = useState<User | null>(null)
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfileType | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const router = useRouter()
 

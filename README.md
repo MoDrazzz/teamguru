@@ -7,6 +7,7 @@ If you want to see the stable version, it's always present under this link:
 ## Project Structure
 
 There are multiple branches, every responsible for different feature. Exceptions:
+
 - `main`: Production
 - `dev`: Development
 

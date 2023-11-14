@@ -19,6 +19,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { v4 as generateUUID } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { ReactCropperElement } from 'react-cropper'
+import { DatabaseType } from '@/types'
 
 const AvatarSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false)
@@ -32,7 +33,7 @@ const AvatarSettings = () => {
   const cropperRef = useRef<ReactCropperElement>(null)
   const { userProfile } = useAuth()
 
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
 
   const handleEdit = () => {
     setIsUploadModalVisible(true)
@@ -161,7 +162,7 @@ const AvatarSettings = () => {
             onClick={handleSetDefault}
             icon={faRotateLeft}
           >
-            Set as default
+            Reset to default
           </ButtonAlt>
         )}
       </div>

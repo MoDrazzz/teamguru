@@ -1,11 +1,11 @@
 import { Avatar, TeamFooter, Icon, Title } from '@/components'
-import { TeamData } from '@/types'
+import { TeamDataType } from '@/types'
 import { sortTeamMembers } from '@/utils'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
 interface Props {
-  data: TeamData
+  data: TeamDataType
 }
 
 const Team = ({ data: { name, members } }: Props) => {

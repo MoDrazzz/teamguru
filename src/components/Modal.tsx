@@ -1,11 +1,11 @@
 'use client'
 
 import { Icon } from '@/components'
-import { ModalProps } from '@/types'
+import { ModalPropsType } from '@/types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { PropsWithChildren, useEffect } from 'react'
 
-interface Props extends PropsWithChildren, ModalProps {
+interface Props extends PropsWithChildren, ModalPropsType {
   disableBackdropClick?: boolean
 }
 
@@ -40,7 +40,7 @@ const Modal = ({
           >
             <Icon
               icon={faTimes}
-              className="text-xl text-slate-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition-colors hover:text-slate-900"
+              className="text-xl text-slate-600 transition-colors hover:text-slate-900 dark:text-zinc-400 dark:hover:text-zinc-300"
             />
           </span>
           {children}

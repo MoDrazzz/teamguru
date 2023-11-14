@@ -10,13 +10,13 @@ import {
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
-import { Database, ModalProps } from '@/types'
+import { DatabaseType, ModalPropsType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useRef, useState } from 'react'
 
-const CreateTeamModal = ({ isVisible, setIsVisible }: ModalProps) => {
-  const supabase = createClientComponentClient<Database>()
+const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
+  const supabase = createClientComponentClient<DatabaseType>()
   const { userProfile } = useAuth()
   const teamNameInputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState('')

@@ -1,7 +1,11 @@
-export type { AvatarSize } from './Avatar'
-export type { LoginErrors, SignupErrors, Error } from './Errors'
-export type { ModalProps } from './ModalProps'
-export type { Review } from './Review'
-export type { Database, UserProfile, Team, Role } from './supabase'
-export type { TeamData } from './TeamData'
-export type { TeamMember } from './TeamMember'
+export type { AvatarSizeType } from './Avatar'
+export type { LoginErrorsType, SignupErrorsType, ErrorType } from './Errors'
+export type { ModalPropsType } from './Modal'
+export type { ReviewType } from './Reviews'
+export type {
+  DatabaseType,
+  UserProfileType,
+  TeamType,
+  RoleType,
+} from './Database'
+export type { TeamDataType, TeamMemberType } from './Teams'

@@ -26,7 +26,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${sourceCodePro.variable} h-screen dark:bg-zinc-900 bg-slate-200 font-sans text-slate-800 dark:text-zinc-200`}
+        className={`${poppins.variable} ${sourceCodePro.variable} h-screen bg-slate-200 font-sans text-slate-800 dark:bg-zinc-900 dark:text-zinc-200`}
       >
         {children}
       </body>

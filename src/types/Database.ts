@@ -1,13 +1,5 @@
 /* eslint-disable no-unused-vars */
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
-export interface Database {
+export interface DatabaseType {
   public: {
     Tables: {
       organisations: {
@@ -39,7 +31,7 @@ export interface Database {
           organisation_id: string
           role_id: string | null
           team_id: string | null
-          type: string | null
+          type: 'team_member' | 'team_leader' | 'organisation' | 'admin'
           user_id: string
         }
         Insert: {
@@ -49,7 +41,7 @@ export interface Database {
           first_name: string
           id?: string
           last_name: string
-          organisation_id: string
+          organisation_id?: string
           role_id?: string | null
           team_id?: string | null
           type?: string | null
@@ -217,6 +209,9 @@ export interface Database {
   }
 }
 
-export type UserProfile = Database['public']['Tables']['profiles']['Row']
-export type Team = Database['public']['Tables']['teams']['Row']
-export type Role = Database['public']['Tables']['roles']['Row']
+type Tables<T extends keyof DatabaseType['public']['Tables']> =
+  DatabaseType['public']['Tables'][T]['Row']
+
+export type UserProfileType = Tables<'profiles'>
+export type TeamType = Tables<'teams'>
+export type RoleType = Tables<'roles'>

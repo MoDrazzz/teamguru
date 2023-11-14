@@ -11,13 +11,13 @@ import {
   Label,
   TooltipIcon,
 } from '@/components'
-import { SignupErrors } from '@/types'
+import { DatabaseType, SignupErrorsType } from '@/types'
 import { isWithinOneMinute } from '@/utils'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useRef, useState } from 'react'
 
-const initialErrorsState: SignupErrors = {
+const initialErrorsState: SignupErrorsType = {
   firstName: '',
   lastName: '',
   email: '',
@@ -33,7 +33,7 @@ const emailRegex =
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/
 
 const SignupForm = () => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
 
   const firstNameRef = useRef<HTMLInputElement>(null)
   const lastNameRef = useRef<HTMLInputElement>(null)
@@ -108,7 +108,7 @@ const SignupForm = () => {
       return
     }
 
-    const newErrors: SignupErrors = { ...initialErrorsState }
+    const newErrors: SignupErrorsType = { ...initialErrorsState }
 
     const firstName = firstNameRef.current.value
     const lastName = lastNameRef.current.value

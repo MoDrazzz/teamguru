@@ -2,15 +2,15 @@
 
 import { PageHeading, Team, TeamsWrapperSkeleton } from '@/components'
 import { useAuth, useTeamsSearchContext } from '@/contexts'
-import { Database, TeamData } from '@/types'
+import { DatabaseType, TeamDataType } from '@/types'
 import { sortTeams } from '@/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useState } from 'react'
 
 const TeamsWrapper = () => {
   const { userProfile } = useAuth()
-  const supabase = createClientComponentClient<Database>()
-  const [teams, setTeams] = useState<TeamData[]>([])
+  const supabase = createClientComponentClient<DatabaseType>()
+  const [teams, setTeams] = useState<TeamDataType[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { setTeams: setSearchSource, searchResult } = useTeamsSearchContext()
 

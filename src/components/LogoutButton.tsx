@@ -1,12 +1,13 @@
 'use client'
 
 import { Icon } from '@/components'
+import { DatabaseType } from '@/types'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 
 const LogoutButton = () => {
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -14,7 +15,7 @@ const LogoutButton = () => {
     if (!html) return
 
     await supabase.auth.signOut()
-    
+
     router.refresh()
     html.classList.remove('dark', 'light')
   }

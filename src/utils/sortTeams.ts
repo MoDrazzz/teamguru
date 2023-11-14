@@ -1,7 +1,7 @@
-import { TeamData } from '@/types'
+import { TeamDataType } from '@/types'
 import { sortObjectsArrayAlphabetically } from '@/utils'
 
-export function sortTeams(teams: TeamData[]) {
+export function sortTeams(teams: TeamDataType[]) {
   const sortedTeamsByMembers = teams.sort((teamA, teamB) => {
     const teamAHasMembers = !!teamA.members.length
     const teamBHasMembers = !!teamB.members.length
