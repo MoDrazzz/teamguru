@@ -1,5 +1,6 @@
 export type { AvatarSize } from './Avatar'
 export type { LoginErrors, SignupErrors, Error } from './Errors'
+export type { ModalProps } from './ModalProps'
 export type { Review } from './Review'
 export type { Database, UserProfile, Team, Role } from './supabase'
 export type { TeamData } from './TeamData'
