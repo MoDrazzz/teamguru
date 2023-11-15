@@ -7,6 +7,11 @@ export { default as SignupHero } from './Auth/SignupHero'
 export { default as LoginForm } from './Forms/LoginForm'
 export { default as SignupForm } from './Forms/SignupForm'
 
+// KEBAB MENU
+export { default as KebabDot } from './KebabMenu/KebabDot'
+export { default as KebabMenu } from './KebabMenu/KebabMenu'
+export { default as KebabMenuItem } from './KebabMenu/KebabMenuItem'
+
 // SETTINGS
 export { default as AvatarSettings } from './Settings/AvatarSettings'
 export { default as PersonalInformationSettings } from './Settings/PersonalInformationSettings'
