@@ -1,4 +1,4 @@
-import { Avatar, TeamFooter, Icon, Title } from '@/components'
+import { Avatar, TeamFooter, Icon, Title, ArticleWrapper } from '@/components'
 import { TeamDataType } from '@/types'
 import { sortTeamMembers } from '@/utils'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ const Team = ({ data: { name, members } }: Props) => {
   const assignedTasks = '-'
 
   return (
-    <article className="grid w-full justify-items-start gap-3">
+    <ArticleWrapper>
       <Link
         href={`/shell/teams/${name}`}
         className="group flex items-center gap-3"
@@ -25,7 +25,7 @@ const Team = ({ data: { name, members } }: Props) => {
           icon={faArrowRight}
         />
       </Link>
-      <div className="grid w-full gap-3 rounded-xl bg-slate-50 p-4 shadow-main dark:bg-zinc-900">
+      <div className="wrapper grid w-full gap-3 p-4">
         {members.length ? (
           <>
             <div className="flex flex-wrap gap-3">
@@ -51,7 +51,7 @@ const Team = ({ data: { name, members } }: Props) => {
           <p className="text-sm font-medium">This team is empty.</p>
         )}
       </div>
-    </article>
+    </ArticleWrapper>
   )
 }
 

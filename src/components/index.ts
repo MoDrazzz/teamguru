@@ -50,6 +50,7 @@ export { default as ThemeSkeleton } from './Skeletons/ThemeSkeleton'
 
 // COMMON
 export { default as Alert } from './Alert'
+export { default as ArticleWrapper } from './ArticleWrapper'
 export { default as Avatar } from './Avatar'
 export { default as AvatarReminder } from './AvatarReminder'
 export { default as Button } from './Button'
