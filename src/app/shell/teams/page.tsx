@@ -15,7 +15,7 @@ export default function Teams() {
     useState(false)
 
   return (
-    <div className="flex h-screen w-full flex-col items-start gap-6 overflow-auto bg-slate-200 p-16 dark:bg-zinc-800">
+    <>
       <PageHeading
         title="Teams"
         subtitle="Manage your teams, members, and team roles."
@@ -33,6 +33,6 @@ export default function Teams() {
         isVisible={isCreateTeamModalVisible}
         setIsVisible={setIsCreateTeamModalVisible}
       />
-    </div>
+    </>
   )
 }
