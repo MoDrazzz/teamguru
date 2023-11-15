@@ -9,7 +9,7 @@ const TeamSkeleton = () => {
       <div className="grid w-full gap-3 rounded-xl bg-slate-50 p-4 shadow-main dark:bg-zinc-900">
         <div className="flex gap-3">
           {Array.from({ length: 5 }).map((_, index) => (
-            <AvatarSkeleton key={index} size="sm" />
+            <AvatarSkeleton key={index} />
           ))}
         </div>
         <footer className="flex gap-6">
