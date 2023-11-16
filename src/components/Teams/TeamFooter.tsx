@@ -1,10 +1,12 @@
-interface Props {
+import { PropsWithChildren } from 'react'
+
+interface Props extends PropsWithChildren {
   items: string[]
 }
 
-const TeamFooter = ({ items }: Props) => {
+const TeamFooter = ({ items, children }: Props) => {
   return (
-    <footer className="flex gap-6">
+    <footer className="flex items-center gap-6">
       {items.map((item, index) => (
         <p
           key={index}
@@ -13,6 +15,7 @@ const TeamFooter = ({ items }: Props) => {
           {item}
         </p>
       ))}
+      <div className='ml-auto'>{children}</div>
     </footer>
   )
 }

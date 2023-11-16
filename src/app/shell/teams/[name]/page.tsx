@@ -1,6 +1,6 @@
 'use client'
 
-import { PageHeading } from '@/components'
+import { PageHeading, TeamMembers } from '@/components'
 import { useAuth } from '@/contexts'
 import { TeamDataType, DatabaseType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -49,5 +49,10 @@ export default function TeamPage({ params }: { params: { name: string } }) {
   // TODO: Replace with 404
   if (!team) return <h1>Team not found</h1>
 
-  return <PageHeading title={team.name} subtitle="See the insights." />
+  return (
+    <>
+      <PageHeading title={team.name} subtitle="See the insights." />
+      <TeamMembers members={team.members} />
+    </>
+  )
 }

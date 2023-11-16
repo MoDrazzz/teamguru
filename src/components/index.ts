@@ -20,10 +20,16 @@ export { default as SettingsSidebar } from './Settings/SettingsSidebar'
 export { default as Theme } from './Settings/Theme'
 export { default as ThemeSettings } from './Settings/ThemeSettings'
 
+// TABLES
+export { default as TableHead } from './Tables/TableHead'
+export { default as TableHeadData } from './Tables/TableHeadData'
+
 // TEAMS
 export { default as Team } from './Teams/Team'
 export { default as CreateTeamModal } from './Teams/CreateTeamModal'
 export { default as TeamFooter } from './Teams/TeamFooter'
+export { default as TeamMember } from './Teams/TeamMember'
+export { default as TeamMembers } from './Teams/TeamMembers'
 export { default as TeamsSearchInput } from './Teams/TeamsSearchInput'
 export { default as TeamsWrapper } from './Teams/TeamsWrapper'
 
