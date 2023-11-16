@@ -16,7 +16,7 @@ const Pagination = ({ page, setPage, length }: Props) => {
         icon={faArrowLeft}
         disabled={page === 1}
       />
-      <p className="w-14 text-center text-sm font-medium">
+      <p className="w-14 select-none text-center text-sm font-medium">
         {page} / {length}
       </p>
       <ButtonAlt

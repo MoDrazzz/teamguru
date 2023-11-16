@@ -17,7 +17,7 @@ const KebabMenuItem = ({
     )}
     onClick={onClick}
   >
-    <p className="whitespace-nowrap text-sm font-medium">{label}</p>
+    <p className="whitespace-nowrap text-sm select-none font-medium">{label}</p>
     <Icon className="text-xs" icon={icon} />
   </li>
 )
