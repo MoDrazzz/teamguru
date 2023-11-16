@@ -32,7 +32,6 @@ const Team = ({ data: { name, members } }: Props) => {
               {sortTeamMembers(members).map((member) => (
                 <Avatar
                   key={member.id}
-                  size="sm"
                   profile={member}
                   isTeamLeader={member.type === 'team_leader'}
                   withTooltip
