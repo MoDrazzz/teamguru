@@ -12,7 +12,7 @@ import {
   Title,
 } from '@/components'
 import { TeamMemberType } from '@/types'
-import { splitArray } from '@/utils'
+import { sortTeamMembers, splitArray } from '@/utils'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 
@@ -22,7 +22,7 @@ interface Props {
 
 const TeamMembers = ({ members }: Props) => {
   const [page, setPage] = useState(1)
-  const pages = splitArray(members, 4)
+  const pages = splitArray(sortTeamMembers(members), 4)
 
   const handleAddMember = () => {}
 

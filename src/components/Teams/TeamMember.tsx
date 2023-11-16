@@ -13,7 +13,11 @@ const TeamMember = ({ member }: Props) => {
       className="flex border-b-2 border-slate-400 px-8 py-3 last:border-b-0 dark:border-zinc-600"
     >
       <div className="flex w-64 items-center gap-4">
-        <Avatar profile={member} size="sm" />
+        <Avatar
+          profile={member}
+          size="sm"
+          isTeamLeader={member.type === 'team_leader'}
+        />
         <p className="font-semibold">
           {member.first_name} {member.last_name}
         </p>
