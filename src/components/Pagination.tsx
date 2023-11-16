@@ -10,20 +10,24 @@ interface Props {
 
 const Pagination = ({ page, setPage, length }: Props) => {
   return (
-    <div className="flex items-center">
-      <ButtonAlt
-        onClick={() => setPage((prev) => prev - 1)}
-        icon={faArrowLeft}
-        disabled={page === 1}
-      />
-      <p className="w-14 select-none text-center text-sm font-medium">
-        {page} / {length}
-      </p>
-      <ButtonAlt
-        onClick={() => setPage((prev) => prev + 1)}
-        icon={faArrowRight}
-        disabled={page === length}
-      />
+    <div className="flex h-6 items-center">
+      {length > 1 && (
+        <>
+          <ButtonAlt
+            onClick={() => setPage((prev) => prev - 1)}
+            icon={faArrowLeft}
+            disabled={page === 1}
+          />
+          <p className="w-14 select-none text-center text-sm font-medium">
+            {page} / {length}
+          </p>
+          <ButtonAlt
+            onClick={() => setPage((prev) => prev + 1)}
+            icon={faArrowRight}
+            disabled={page === length}
+          />
+        </>
+      )}
     </div>
   )
 }
