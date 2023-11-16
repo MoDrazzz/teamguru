@@ -31,7 +31,7 @@ const KebabMenu = ({ items }: Props) => {
       {isActive && (
         <ul
           ref={menuRef}
-          className="absolute right-0 top-full z-10 mt-1 rounded-md bg-slate-100 p-2 shadow-main dark:bg-zinc-800"
+          className="absolute right-0 top-full z-10 mt-1 rounded-md bg-slate-100 p-2 shadow-main dark:shadow-zinc-900 dark:bg-zinc-800"
         >
           {items.map((item, index) => (
             <KebabMenuItem key={index} {...item} />
