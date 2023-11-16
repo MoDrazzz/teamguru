@@ -2,6 +2,7 @@
 
 import {
   Button,
+  ButtonText,
   FormField,
   Input,
   InputError,
@@ -70,14 +71,10 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
           />
           <InputError message={error} />
         </FormField>
-        <div className="flex justify-between">
-          <Button
-            disabled={isLoading}
-            onClick={() => setIsVisible(false)}
-            color="red"
-          >
+        <div className="flex items-center justify-between">
+          <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>
             Cancel
-          </Button>
+          </ButtonText>
           <Button
             type="submit"
             isLoading={isLoading}

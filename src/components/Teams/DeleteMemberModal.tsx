@@ -42,7 +42,7 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
         <Profile userProfile={member} />
         <p>Are you sure this is what you mean?</p>
         <div className="flex w-full items-center justify-between">
-          <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
+          <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>Cancel</ButtonText>
           <Button
             isLoading={isLoading}
             onClick={handleDeleteMember}

@@ -12,6 +12,7 @@ import {
   Button,
   Spinner,
   ButtonAlt,
+  ButtonText,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import { faImage, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
@@ -238,12 +239,9 @@ const AvatarSettings = () => {
                 <Icon icon={faImage} className="text-3xl" />
               </div>
               <div className="flex justify-between">
-                <Button
-                  color="red"
-                  onClick={() => handleCrop({ isSkipped: true })}
-                >
+                <ButtonText onClick={() => handleCrop({ isSkipped: true })}>
                   Skip
-                </Button>
+                </ButtonText>
                 <Button onClick={handleCrop}>Confirm</Button>
               </div>
             </div>
