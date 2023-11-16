@@ -1,12 +1,17 @@
-import { Avatar, MessageIcon, KebabMenu } from '@/components'
+'use client'
+
+import { Avatar, MessageIcon, KebabMenu, DeleteMemberModal } from '@/components'
 import { TeamMemberType } from '@/types'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 
 interface Props {
   member: TeamMemberType
 }
 
 const TeamMember = ({ member }: Props) => {
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+
   return (
     <li
       key={member.id}
@@ -37,12 +42,17 @@ const TeamMember = ({ member }: Props) => {
             {
               label: 'Delete member',
               icon: faTrashAlt,
-              onClick: () => {},
+              onClick: () => setIsDeleteModalVisible(true),
               isRed: true,
             },
           ]}
         />
       </div>
+      <DeleteMemberModal
+        isVisible={isDeleteModalVisible}
+        setIsVisible={setIsDeleteModalVisible}
+        member={member}
+      />
     </li>
   )
 }
