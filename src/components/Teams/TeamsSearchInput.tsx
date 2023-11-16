@@ -20,7 +20,7 @@ const TeamsSearchInput = () => {
       value={inputValue}
       onChange={handleInputChange}
       disabled={!teams.length}
-      placeholder="Filter by team or member name..."
+      placeholder="Search by team or member name..."
     />
   )
 }

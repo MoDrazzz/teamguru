@@ -34,10 +34,10 @@ const TeamsSearchContext = ({ children }: PropsWithChildren) => {
     const doesStartWithQuery = (string: string) =>
       string.toLowerCase().startsWith(query.toLowerCase())
 
-    const sortedTeamsByTeamName = teams.filter((team) =>
+    const filteredTeamsByTeamName = teams.filter((team) =>
       doesStartWithQuery(team.name),
     )
-    const sortedTeamsByMembersNames = teams.filter((team) =>
+    const filteredTeamsByMembersNames = teams.filter((team) =>
       team.members.some(
         (member) =>
           doesStartWithQuery(member.first_name) ||
@@ -48,7 +48,7 @@ const TeamsSearchContext = ({ children }: PropsWithChildren) => {
 
     // Delete duplicates using Set constructor
     setSearchResult([
-      ...new Set(sortedTeamsByTeamName.concat(sortedTeamsByMembersNames)),
+      ...new Set(filteredTeamsByTeamName.concat(filteredTeamsByMembersNames)),
     ])
   }, [query, teams])
 
