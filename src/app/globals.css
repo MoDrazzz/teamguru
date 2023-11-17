@@ -15,4 +15,7 @@
   .wrapper {
     @apply rounded-xl bg-slate-50 shadow-main dark:bg-zinc-900;
   }
+  .w-inherit {
+    width: inherit;
+  }
 }

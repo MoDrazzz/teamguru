@@ -15,7 +15,7 @@ const TeamMember = ({ member }: Props) => {
   return (
     <li
       key={member.id}
-      className="flex border-b-2 border-slate-400 px-8 py-3 last:border-b-0 dark:border-zinc-600"
+      className="flex gap-6 border-b-2 border-slate-400 px-8 py-3 last:border-b-0 dark:border-zinc-600"
     >
       <div className="flex w-64 items-center gap-4">
         <Avatar
@@ -23,14 +23,14 @@ const TeamMember = ({ member }: Props) => {
           size="sm"
           isTeamLeader={member.type === 'team_leader'}
         />
-        <p className="font-semibold">
+        <p className="font-semibold truncate">
           {member.first_name} {member.last_name}
         </p>
       </div>
       <div className="flex w-40 items-center">
         <p className="truncate text-sm">{member.role?.name || 'No Role'}</p>
       </div>
-      <div className="flex w-32 items-center justify-end gap-6">
+      <div className="flex w-20 items-center justify-end gap-4">
         <MessageIcon receiver={member.id} />
         <KebabMenu
           items={[

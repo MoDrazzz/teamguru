@@ -27,7 +27,7 @@ const AvatarWrapper = ({
   withTooltip,
 }: AvatarWrapperProps) => {
   return isTeamLeader || withTooltip ? (
-    <div className="relative">{children}</div>
+    <div className="relative w-inherit max-w-max">{children}</div>
   ) : (
     children
   )
