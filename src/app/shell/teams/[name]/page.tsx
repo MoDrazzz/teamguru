@@ -42,6 +42,20 @@ export default function TeamPage({ params }: { params: { name: string } }) {
     }
 
     getTeam()
+
+    supabase
+      .channel('team_members')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'profiles',
+          filter: `organisation_id=eq.${userProfile.organisation_id}`,
+        },
+        getTeam,
+      )
+      .subscribe()
   }, [supabase, teamName, userProfile])
 
   // TODO: Replace with skeleton

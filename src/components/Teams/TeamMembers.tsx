@@ -15,7 +15,7 @@ import {
 import { TeamMemberType } from '@/types'
 import { sortTeamMembers, splitArray } from '@/utils'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 interface Props {
   members: TeamMemberType[]
@@ -51,6 +51,12 @@ const TeamMembers = ({ members }: Props) => {
       ...new Set(filteredMembersByName.concat(filteredMembersByRole)),
     ])
   }
+
+  useEffect(() => {
+    setPage(1)
+    setQuery('')
+    setFilteredMembers(members)
+  }, [members])
 
   return (
     <ArticleWrapper>
