@@ -42,6 +42,7 @@ const Tooltip = ({ tooltipTargetRef, message }: Props) => {
           'scale-0': !isTooltipVisible,
         },
       )}
+      onClick={(e) => e.stopPropagation()}
     >
       <p
         className={classNames(
