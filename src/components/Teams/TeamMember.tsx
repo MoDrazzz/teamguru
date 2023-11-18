@@ -19,9 +19,7 @@ const TeamMember = ({ member }: Props) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
   return (
-    <TeamMemberWrapper
-      key={member.id}
-    >
+    <TeamMemberWrapper>
       <MemberProfile member={member} />
       <div className="flex w-40 items-center">
         <p className="truncate text-sm">{member.role?.name || 'No Role'}</p>

@@ -29,6 +29,12 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     TeamMemberType[]
   >([])
   const [isFetching, setIsFetching] = useState(true)
+  const [selectedMembers, setSelectedMembers] = useState<TeamMemberType[]>([])
+
+  const unselectedMembersWithoutTeam = membersWithoutTeam.filter(
+    (member) =>
+      !selectedMembers.find((selectedMember) => selectedMember === member),
+  )
 
   const handleAddMembers = () => {}
 
@@ -55,6 +61,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
         setMembersWithoutTeam(data)
       }
 
+      setSelectedMembers([])
       setIsFetching(false)
     }
     getMembersWithoutTeam()
@@ -64,16 +71,19 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <div className="flex flex-col gap-6">
         <Title>Add Members</Title>
-          <AddMemberInput members={membersWithoutTeam} />
+        <AddMemberInput
+          members={unselectedMembersWithoutTeam}
+          setSelectedMembers={setSelectedMembers}
+        />
         <div className="flex flex-col">
           <TableHead>
             <TableHeadData width="16rem">Name</TableHeadData>
             <TableHeadData width="12rem">Role</TableHeadData>
           </TableHead>
-          <ul>
+          <ul className="min-w-[616px]">
             {isFetching
               ? 'Fetching...'
-              : membersWithoutTeam.map((member) => (
+              : selectedMembers.map((member) => (
                   <TeamMemberWrapper key={member.id}>
                     <MemberProfile member={member} />
                     <span className="block w-48" />

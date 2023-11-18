@@ -3,13 +3,20 @@
 import { Input, MemberProfile } from '@/components'
 import { TeamMemberType } from '@/types'
 import { filterMembersByName } from '@/utils'
-import { ChangeEvent, useState } from 'react'
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react'
 
 interface Props {
   members: TeamMemberType[]
+  setSelectedMembers: Dispatch<SetStateAction<TeamMemberType[]>>
 }
 
-const AddMemberInput = ({ members }: Props) => {
+const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
   const [searchInputValue, setSearchInputValue] = useState('')
   const [isListVisible, setIsListVisible] = useState(false)
   const [filteredMembers, setFilteredMembers] =
@@ -22,6 +29,11 @@ const AddMemberInput = ({ members }: Props) => {
 
     setFilteredMembers(filterMembersByName(members, query))
   }
+
+  useEffect(() => {
+    setSearchInputValue('')
+    setFilteredMembers(members)
+  }, [members])
 
   return (
     <div className="relative">
@@ -39,12 +51,17 @@ const AddMemberInput = ({ members }: Props) => {
               <li
                 className="w-full cursor-pointer rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-zinc-900"
                 key={member.id}
+                onMouseDown={() =>
+                  setSelectedMembers((prev) => [...prev, member])
+                }
               >
                 <MemberProfile member={member} />
               </li>
             ))
           ) : (
-            <p>No Members Found</p>
+            <p className="text-medium p-3 text-center text-lg">
+              No members without team found.
+            </p>
           )}
         </ul>
       )}
