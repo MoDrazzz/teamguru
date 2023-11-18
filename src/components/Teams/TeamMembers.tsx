@@ -14,7 +14,12 @@ import {
   Title,
 } from '@/components'
 import { TeamMemberType } from '@/types'
-import { sortTeamMembers, splitArray } from '@/utils'
+import {
+  doesStartWithValue,
+  filterMembersByName,
+  sortTeamMembers,
+  splitArray,
+} from '@/utils'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { ChangeEvent, useEffect, useState } from 'react'
 
@@ -36,17 +41,9 @@ const TeamMembers = ({ teamId, members }: Props) => {
     setQuery(newQuery)
     setPage(1)
 
-    const doesStartWithQuery = (string: string) =>
-      string.toLowerCase().startsWith(newQuery.toLowerCase())
-
-    const filteredMembersByName = members.filter(
-      (member) =>
-        doesStartWithQuery(member.first_name) ||
-        doesStartWithQuery(member.last_name) ||
-        doesStartWithQuery(`${member.first_name} ${member.last_name}`),
-    )
+    const filteredMembersByName = filterMembersByName(members, newQuery)
     const filteredMembersByRole = members.filter((member) =>
-      doesStartWithQuery(member.role?.name || 'No role'),
+      doesStartWithValue(member.role?.name || 'No role', newQuery),
     )
 
     // Delete duplicates using Set constructor

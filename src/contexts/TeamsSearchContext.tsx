@@ -1,6 +1,7 @@
 'use client'
 
 import { TeamDataType } from '@/types'
+import { doesStartWithValue, filterMembersByName } from '@/utils'
 import {
   Dispatch,
   PropsWithChildren,
@@ -31,19 +32,11 @@ const TeamsSearchContext = ({ children }: PropsWithChildren) => {
   const [searchResult, setSearchResult] = useState<TeamDataType[]>([])
 
   useEffect(() => {
-    const doesStartWithQuery = (string: string) =>
-      string.toLowerCase().startsWith(query.toLowerCase())
-
     const filteredTeamsByTeamName = teams.filter((team) =>
-      doesStartWithQuery(team.name),
+      doesStartWithValue(team.name, query),
     )
-    const filteredTeamsByMembersNames = teams.filter((team) =>
-      team.members.some(
-        (member) =>
-          doesStartWithQuery(member.first_name) ||
-          doesStartWithQuery(member.last_name) ||
-          doesStartWithQuery(`${member.first_name} ${member.last_name}`),
-      ),
+    const filteredTeamsByMembersNames = teams.filter(
+      (team) => filterMembersByName(team.members, query).length,
     )
 
     // Delete duplicates using Set constructor
