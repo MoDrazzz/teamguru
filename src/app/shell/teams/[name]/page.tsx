@@ -66,7 +66,7 @@ export default function TeamPage({ params }: { params: { name: string } }) {
   return (
     <>
       <PageHeading title={team.name} subtitle="See the insights." />
-      <TeamMembers members={team.members} />
+      <TeamMembers teamId={team.id} members={team.members} />
     </>
   )
 }

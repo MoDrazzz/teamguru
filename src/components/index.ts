@@ -25,6 +25,7 @@ export { default as TableHead } from './Tables/TableHead'
 export { default as TableHeadData } from './Tables/TableHeadData'
 
 // TEAMS
+export { default as AddMembersModal } from './Teams/AddMembersModal'
 export { default as CreateTeamModal } from './Teams/CreateTeamModal'
 export { default as Team } from './Teams/Team'
 export { default as DeleteMemberModal } from './Teams/DeleteMemberModal'
