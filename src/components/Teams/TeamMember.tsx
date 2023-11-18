@@ -1,6 +1,12 @@
 'use client'
 
-import { Avatar, MessageIcon, KebabMenu, DeleteMemberModal } from '@/components'
+import {
+  MemberProfile,
+  MessageIcon,
+  KebabMenu,
+  DeleteMemberModal,
+  TeamMemberWrapper,
+} from '@/components'
 import { TeamMemberType } from '@/types'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
@@ -13,20 +19,10 @@ const TeamMember = ({ member }: Props) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
   return (
-    <li
+    <TeamMemberWrapper
       key={member.id}
-      className="flex gap-6 border-b-2 border-slate-400 px-8 py-3 last:border-b-0 dark:border-zinc-600"
     >
-      <div className="flex w-64 items-center gap-4">
-        <Avatar
-          profile={member}
-          size="sm"
-          isTeamLeader={member.type === 'team_leader'}
-        />
-        <p className="font-semibold truncate">
-          {member.first_name} {member.last_name}
-        </p>
-      </div>
+      <MemberProfile member={member} />
       <div className="flex w-40 items-center">
         <p className="truncate text-sm">{member.role?.name || 'No Role'}</p>
       </div>
@@ -53,7 +49,7 @@ const TeamMember = ({ member }: Props) => {
         setIsVisible={setIsDeleteModalVisible}
         member={member}
       />
-    </li>
+    </TeamMemberWrapper>
   )
 }
 
