@@ -11,6 +11,7 @@ interface Props {
   id?: string
   isError?: boolean
   onFocus?: () => void
+  onBlur?: () => void
   autocomplete?:
     | 'email'
     | 'given-name'
@@ -29,6 +30,7 @@ const Input = ({
   placeholder,
   isError = false,
   onFocus,
+  onBlur,
   autocomplete,
   disabled,
 }: Props) => {
@@ -50,6 +52,7 @@ const Input = ({
       )}
       placeholder={placeholder}
       onFocus={onFocus}
+      onBlur={onBlur}
       autoComplete={autocomplete || undefined}
       disabled={disabled}
     />

@@ -1,10 +1,10 @@
 'use client'
 
 import {
+  AddMemberInput,
   Button,
   ButtonIcon,
   ButtonText,
-  Input,
   MemberProfile,
   Modal,
   TableHead,
@@ -16,7 +16,7 @@ import { useAuth } from '@/contexts'
 import { DatabaseType, ModalPropsType, TeamMemberType } from '@/types'
 import { faCrown, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props extends ModalPropsType {
   teamId: string
@@ -25,15 +25,11 @@ interface Props extends ModalPropsType {
 const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
   const supabase = createClientComponentClient<DatabaseType>()
   const { userProfile } = useAuth()
-  const [searchInputValue, setSearchInputValue] = useState('')
   const [membersWithoutTeam, setMembersWithoutTeam] = useState<
     TeamMemberType[]
   >([])
   const [isFetching, setIsFetching] = useState(true)
 
-  const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchInputValue(e.target.value)
-  }
   const handleAddMembers = () => {}
 
   useEffect(() => {
@@ -68,11 +64,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <div className="flex flex-col gap-6">
         <Title>Add Members</Title>
-        <Input
-          value={searchInputValue}
-          onChange={handleSearchInputChange}
-          placeholder="Search by name..."
-        />
+          <AddMemberInput members={membersWithoutTeam} />
         <div className="flex flex-col">
           <TableHead>
             <TableHeadData width="16rem">Name</TableHeadData>
