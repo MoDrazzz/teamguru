@@ -9,6 +9,7 @@ import {
   TableHeadData,
   Title,
   SelectedMember,
+  PageHeading,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import {
@@ -19,6 +20,7 @@ import {
   TeamMemberType,
 } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
 interface Props extends ModalPropsType {
@@ -101,15 +103,31 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
             ])
           }}
         />
-        <div className="flex flex-col">
-          <TableHead>
-            <TableHeadData width="16rem">Name</TableHeadData>
-            <TableHeadData width="12rem">Role</TableHeadData>
-          </TableHead>
-          <ul className="min-w-[616px]">
-            {isFetching
-              ? 'Fetching...'
-              : selectedMembers.map((selectedMember) => (
+        <div
+          className={classNames('min-h-[282px] min-w-[616px]', {
+            'flex flex-col': selectedMembers.length,
+            'grid place-items-center text-center':
+              isFetching || !selectedMembers.length,
+          })}
+        >
+          {isFetching || !selectedMembers.length ? (
+            <PageHeading
+              title={isFetching ? 'Fetching...' : 'No Members Selected'}
+              subtitle={
+                isFetching
+                  ? 'We are preparing data for you. Please, stand by.'
+                  : 'Select members you want to add using above search box.'
+              }
+              noSpacer
+            />
+          ) : (
+            <>
+              <TableHead>
+                <TableHeadData width="16rem">Name</TableHeadData>
+                <TableHeadData width="12rem">Role</TableHeadData>
+              </TableHead>
+              <ul>
+                {selectedMembers.map((selectedMember) => (
                   <SelectedMember
                     key={selectedMember.profile.id}
                     member={selectedMember}
@@ -117,7 +135,9 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
                     setSelectedMembers={setSelectedMembers}
                   />
                 ))}
-          </ul>
+              </ul>
+            </>
+          )}
         </div>
         <div className="flex w-full items-center justify-between">
           <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
