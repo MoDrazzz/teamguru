@@ -86,7 +86,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
               : selectedMembers.map((member) => (
                   <TeamMemberWrapper key={member.id}>
                     <MemberProfile member={member} />
-                    <span className="block w-48" />
+                    <div className="w-48" />
                     <div className="flex w-14 items-center justify-center gap-3">
                       <ButtonIcon
                         onClick={() => {}}

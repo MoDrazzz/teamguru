@@ -1,6 +1,6 @@
 'use client'
 
-import { Input, MemberProfile } from '@/components'
+import { Input, MemberProfile, Menu, MenuItem } from '@/components'
 import { TeamMemberType } from '@/types'
 import { filterMembersByName } from '@/utils'
 import {
@@ -18,7 +18,7 @@ interface Props {
 
 const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
   const [searchInputValue, setSearchInputValue] = useState('')
-  const [isListVisible, setIsListVisible] = useState(false)
+  const [isMenuActive, setIsMenuActive] = useState(false)
   const [filteredMembers, setFilteredMembers] =
     useState<TeamMemberType[]>(members)
 
@@ -40,31 +40,26 @@ const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
       <Input
         value={searchInputValue}
         onChange={handleSearchInputChange}
-        onFocus={() => setIsListVisible(true)}
-        onBlur={() => setIsListVisible(false)}
+        onFocus={() => setIsMenuActive(true)}
+        onBlur={() => setIsMenuActive(false)}
         placeholder="Search by name..."
       />
-      {isListVisible && (
-        <ul className="absolute top-full z-20 mt-0.5 flex w-full flex-col gap-0.5 rounded-lg border-2 border-slate-400 bg-slate-50 p-1 shadow-main dark:border-zinc-600 dark:bg-zinc-800">
-          {filteredMembers.length ? (
-            filteredMembers.map((member) => (
-              <li
-                className="w-full cursor-pointer rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-zinc-900"
-                key={member.id}
-                onMouseDown={() =>
-                  setSelectedMembers((prev) => [...prev, member])
-                }
-              >
-                <MemberProfile member={member} />
-              </li>
-            ))
-          ) : (
-            <p className="text-medium p-3 text-center text-lg">
-              No members without team found.
-            </p>
-          )}
-        </ul>
-      )}
+      <Menu isActive={isMenuActive}>
+        {filteredMembers.length ? (
+          filteredMembers.map((member) => (
+            <MenuItem
+              key={member.id}
+              onClick={() => setSelectedMembers((prev) => [...prev, member])}
+            >
+              <MemberProfile member={member} />
+            </MenuItem>
+          ))
+        ) : (
+          <p className="p-3 text-center font-medium">
+            No members without team found.
+          </p>
+        )}
+      </Menu>
     </div>
   )
 }
