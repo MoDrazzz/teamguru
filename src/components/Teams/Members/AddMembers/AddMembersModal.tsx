@@ -28,13 +28,14 @@ interface Props extends ModalPropsType {
   teamId: string
 }
 
-const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
+const AddMembersModal = ({ isVisible, setIsVisible, teamId }: Props) => {
   const supabase = createClientComponentClient<DatabaseType>()
   const { userProfile } = useAuth()
   const [membersWithoutTeam, setMembersWithoutTeam] = useState<
     TeamMemberType[]
   >([])
   const [isFetching, setIsFetching] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedMembers, setSelectedMembers] = useState<SelectedMemberType[]>(
     [],
   )
@@ -47,7 +48,23 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
       ),
   )
 
-  const handleAddMembers = () => {}
+  const handleAddMembers = async () => {
+    setIsLoading(true)
+
+    for (const selectedMember of selectedMembers) {
+      await supabase
+        .from('profiles')
+        .update({
+          team_id: teamId,
+          type: selectedMember.type,
+          role_id: selectedMember.role?.id || null,
+        })
+        .eq('id', selectedMember.profile.id)
+    }
+
+    setIsVisible(false)
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     if (!isVisible || !userProfile) return
@@ -158,7 +175,13 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
         </div>
         <div className="flex w-full items-center justify-between">
           <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
-          <Button onClick={handleAddMembers}>Add Members</Button>
+          <Button
+            isLoading={isLoading}
+            disabled={!selectedMembers.length}
+            onClick={handleAddMembers}
+          >
+            Add Members
+          </Button>
         </div>
       </div>
     </Modal>

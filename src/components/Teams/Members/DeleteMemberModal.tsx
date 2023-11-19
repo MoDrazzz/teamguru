@@ -21,6 +21,7 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
       .from('profiles')
       .update({
         team_id: null,
+        type: "team_member"
       })
       .eq('id', member.id)
 
