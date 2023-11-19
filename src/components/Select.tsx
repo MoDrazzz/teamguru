@@ -4,14 +4,15 @@ import { Icon, Menu, MenuItem } from '@/components'
 import { useOutsideClick } from '@/hooks'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
-import { Dispatch, SetStateAction, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 type Item = string
 
 interface Props {
   items: Item[]
   selectedItem: Item
-  setSelectedItem: Dispatch<SetStateAction<Item>>
+  // eslint-disable-next-line no-unused-vars
+  setSelectedItem: (item: Item) => void
 }
 
 const Select = ({ items, selectedItem, setSelectedItem }: Props) => {

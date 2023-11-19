@@ -7,19 +7,25 @@ import {
   ButtonText,
   MemberProfile,
   Modal,
+  Select,
   TableHead,
   TableHeadData,
   TeamMemberWrapper,
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
-import { DatabaseType, ModalPropsType, TeamMemberType } from '@/types'
+import { DatabaseType, ModalPropsType, RoleType, TeamMemberType } from '@/types'
 import { faCrown, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useState } from 'react'
 
 interface Props extends ModalPropsType {
   teamId: string
+}
+
+interface SelectedMember {
+  profile: TeamMemberType
+  role: RoleType | null
 }
 
 const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
@@ -29,11 +35,14 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     TeamMemberType[]
   >([])
   const [isFetching, setIsFetching] = useState(true)
-  const [selectedMembers, setSelectedMembers] = useState<TeamMemberType[]>([])
+  const [selectedMembers, setSelectedMembers] = useState<SelectedMember[]>([])
+  const [roles, setRoles] = useState<RoleType[]>([])
 
   const unselectedMembersWithoutTeam = membersWithoutTeam.filter(
     (member) =>
-      !selectedMembers.find((selectedMember) => selectedMember === member),
+      !selectedMembers.find(
+        (selectedMember) => selectedMember.profile === member,
+      ),
   )
 
   const handleAddMembers = () => {}
@@ -44,7 +53,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     const getMembersWithoutTeam = async () => {
       setIsFetching(true)
 
-      const { data } = await supabase
+      const { data: membersData } = await supabase
         .from('profiles')
         .select(
           `
@@ -57,8 +66,17 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
         .eq('organisation_id', userProfile.organisation_id)
         .is('team_id', null)
 
-      if (data) {
-        setMembersWithoutTeam(data)
+      if (membersData) {
+        setMembersWithoutTeam(membersData)
+      }
+
+      const { data: rolesData } = await supabase
+        .from('roles')
+        .select(`*`)
+        .eq('organisation_id', userProfile.organisation_id)
+
+      if (rolesData) {
+        setRoles(rolesData)
       }
 
       setSelectedMembers([])
@@ -73,7 +91,15 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
         <Title>Add Members</Title>
         <AddMemberInput
           members={unselectedMembersWithoutTeam}
-          setSelectedMembers={setSelectedMembers}
+          setSelectedMembers={(member: TeamMemberType) => {
+            setSelectedMembers((prev) => [
+              ...prev,
+              {
+                profile: member,
+                role: member.role || null,
+              },
+            ])
+          }}
         />
         <div className="flex flex-col">
           <TableHead>
@@ -84,9 +110,24 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
             {isFetching
               ? 'Fetching...'
               : selectedMembers.map((member) => (
-                  <TeamMemberWrapper key={member.id}>
-                    <MemberProfile member={member} />
-                    <div className="w-48" />
+                  <TeamMemberWrapper key={member.profile.id}>
+                    <MemberProfile member={member.profile} />
+                    <div className="w-48">
+                      <Select
+                        items={roles.map((role) => role.name)}
+                        selectedItem={member.role?.name || roles[0].name}
+                        setSelectedItem={(roleName: string) => {
+                          setSelectedMembers((prev) => {
+                            return prev.with(prev.indexOf(member), {
+                              profile: member.profile,
+                              role: roles.find(
+                                (role) => role.name === roleName,
+                              )!,
+                            },)
+                          })
+                        }}
+                      />
+                    </div>
                     <div className="flex w-14 items-center justify-center gap-3">
                       <ButtonIcon
                         onClick={() => {}}

@@ -3,17 +3,12 @@
 import { Input, MemberProfile, Menu, MenuItem } from '@/components'
 import { TeamMemberType } from '@/types'
 import { filterMembersByName } from '@/utils'
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 interface Props {
   members: TeamMemberType[]
-  setSelectedMembers: Dispatch<SetStateAction<TeamMemberType[]>>
+  // eslint-disable-next-line no-unused-vars
+  setSelectedMembers: (member: TeamMemberType) => void
 }
 
 const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
@@ -49,7 +44,7 @@ const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
           filteredMembers.map((member) => (
             <MenuItem
               key={member.id}
-              onClick={() => setSelectedMembers((prev) => [...prev, member])}
+              onClick={() => setSelectedMembers(member)}
             >
               <MemberProfile member={member} />
             </MenuItem>
