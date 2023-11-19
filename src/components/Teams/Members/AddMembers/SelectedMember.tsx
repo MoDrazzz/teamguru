@@ -41,7 +41,11 @@ const SelectedMember = ({ member, roles, setSelectedMembers }: Props) => {
           className="text-slate-600 transition-colors group-hover:text-slate-700 dark:text-zinc-400 dark:group-hover:text-zinc-300"
         />
         <ButtonIcon
-          onClick={() => {}}
+          onClick={() =>
+            setSelectedMembers((prev) =>
+              prev.filter((selectedMember) => member !== selectedMember),
+            )
+          }
           icon={faTrashAlt}
           tooltipMessage="Delete member"
           className="text-red-500 transition-colors group-hover:text-red-600 dark:text-red-600 dark:group-hover:text-red-500"
