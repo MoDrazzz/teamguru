@@ -11,4 +11,5 @@ export interface TeamDataType extends TeamType {
 export interface SelectedMemberType {
   profile: TeamMemberType
   role: RoleType | null
+  type: 'team_member' | 'team_leader'
 }

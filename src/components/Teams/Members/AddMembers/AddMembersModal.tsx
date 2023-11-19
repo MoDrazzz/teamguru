@@ -96,6 +96,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
               {
                 profile: member,
                 role: member.role || null,
+                type: 'team_member',
               },
             ])
           }}
