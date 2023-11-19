@@ -20,6 +20,7 @@ import {
   SelectedMemberType,
   TeamMemberType,
 } from '@/types'
+import { sortTeamMembers } from '@/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
@@ -109,7 +110,7 @@ const AddMembersModal = ({ isVisible, setIsVisible, teamId }: Props) => {
       <div className="flex flex-col gap-6">
         <Title>Add Members</Title>
         <SearchMemberInput
-          members={unselectedMembersWithoutTeam}
+          members={sortTeamMembers(unselectedMembersWithoutTeam)}
           setSelectedMembers={(member: TeamMemberType) => {
             setSelectedMembers((prev) => [
               ...prev,
