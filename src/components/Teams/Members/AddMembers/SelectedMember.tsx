@@ -23,18 +23,22 @@ const SelectedMember = ({ member, roles, setSelectedMembers }: Props) => {
     <TeamMemberWrapper>
       <MemberProfile member={member.profile} />
       <div className="w-48">
-        <Select
-          items={roles.map((role) => role.name)}
-          selectedItem={member.role?.name || roles[0].name}
-          setSelectedItem={(roleName) => {
-            setSelectedMembers((prev) => {
-              return prev.with(prev.indexOf(member), {
-                ...member,
-                role: roles.find((role) => role.name === roleName)!,
+        {roles.length ? (
+          <Select
+            items={roles.map((role) => role.name)}
+            selectedItem={member.role?.name || roles[0].name}
+            setSelectedItem={(roleName) => {
+              setSelectedMembers((prev) => {
+                return prev.with(prev.indexOf(member), {
+                  ...member,
+                  role: roles.find((role) => role.name === roleName)!,
+                })
               })
-            })
-          }}
-        />
+            }}
+          />
+        ) : (
+          <p className="text-sm">No role</p>
+        )}
       </div>
       <div className="flex w-14 items-center justify-center gap-3">
         <ButtonIcon

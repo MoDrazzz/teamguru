@@ -10,6 +10,7 @@ import {
   Title,
   SelectedMember,
   PageHeading,
+  TooltipIcon,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import {
@@ -124,7 +125,23 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
             <>
               <TableHead>
                 <TableHeadData width="16rem">Name</TableHeadData>
-                <TableHeadData width="12rem">Role</TableHeadData>
+                <TableHeadData width="12rem">
+                  {!roles.length ? (
+                    <span className="flex items-center gap-2">
+                      Role
+                      <TooltipIcon
+                        variant="error"
+                        tooltipMessage={[
+                          "You haven't set up any roles yet. To do this,",
+                          "go to the organisation tab. It's a good idea",
+                          'to do this before adding team members.',
+                        ]}
+                      />
+                    </span>
+                  ) : (
+                    'Role'
+                  )}
+                </TableHeadData>
               </TableHead>
               <ul>
                 {selectedMembers.map((selectedMember) => (
