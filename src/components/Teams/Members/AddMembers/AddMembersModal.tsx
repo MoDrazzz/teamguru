@@ -1,31 +1,28 @@
 'use client'
 
 import {
-  AddMemberInput,
+  SearchMemberInput,
   Button,
-  ButtonIcon,
   ButtonText,
-  MemberProfile,
   Modal,
-  Select,
   TableHead,
   TableHeadData,
-  TeamMemberWrapper,
   Title,
+  SelectedMember,
 } from '@/components'
 import { useAuth } from '@/contexts'
-import { DatabaseType, ModalPropsType, RoleType, TeamMemberType } from '@/types'
-import { faCrown, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  DatabaseType,
+  ModalPropsType,
+  RoleType,
+  SelectedMemberType,
+  TeamMemberType,
+} from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect, useState } from 'react'
 
 interface Props extends ModalPropsType {
   teamId: string
-}
-
-interface SelectedMember {
-  profile: TeamMemberType
-  role: RoleType | null
 }
 
 const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
@@ -35,7 +32,9 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     TeamMemberType[]
   >([])
   const [isFetching, setIsFetching] = useState(true)
-  const [selectedMembers, setSelectedMembers] = useState<SelectedMember[]>([])
+  const [selectedMembers, setSelectedMembers] = useState<SelectedMemberType[]>(
+    [],
+  )
   const [roles, setRoles] = useState<RoleType[]>([])
 
   const unselectedMembersWithoutTeam = membersWithoutTeam.filter(
@@ -89,7 +88,7 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       <div className="flex flex-col gap-6">
         <Title>Add Members</Title>
-        <AddMemberInput
+        <SearchMemberInput
           members={unselectedMembersWithoutTeam}
           setSelectedMembers={(member: TeamMemberType) => {
             setSelectedMembers((prev) => [
@@ -109,40 +108,13 @@ const AddMembersModal = ({ isVisible, setIsVisible }: Props) => {
           <ul className="min-w-[616px]">
             {isFetching
               ? 'Fetching...'
-              : selectedMembers.map((member) => (
-                  <TeamMemberWrapper key={member.profile.id}>
-                    <MemberProfile member={member.profile} />
-                    <div className="w-48">
-                      <Select
-                        items={roles.map((role) => role.name)}
-                        selectedItem={member.role?.name || roles[0].name}
-                        setSelectedItem={(roleName: string) => {
-                          setSelectedMembers((prev) => {
-                            return prev.with(prev.indexOf(member), {
-                              profile: member.profile,
-                              role: roles.find(
-                                (role) => role.name === roleName,
-                              )!,
-                            },)
-                          })
-                        }}
-                      />
-                    </div>
-                    <div className="flex w-14 items-center justify-center gap-3">
-                      <ButtonIcon
-                        onClick={() => {}}
-                        icon={faCrown}
-                        tooltipMessage="Mark as team leader"
-                        className="text-slate-600 transition-colors group-hover:text-slate-700 dark:text-zinc-400 dark:group-hover:text-zinc-300"
-                      />
-                      <ButtonIcon
-                        onClick={() => {}}
-                        icon={faTrashAlt}
-                        tooltipMessage="Delete member"
-                        className="text-red-500 transition-colors group-hover:text-red-600 dark:text-red-600 dark:group-hover:text-red-500"
-                      />
-                    </div>
-                  </TeamMemberWrapper>
+              : selectedMembers.map((selectedMember) => (
+                  <SelectedMember
+                    key={selectedMember.profile.id}
+                    member={selectedMember}
+                    roles={roles}
+                    setSelectedMembers={setSelectedMembers}
+                  />
                 ))}
           </ul>
         </div>

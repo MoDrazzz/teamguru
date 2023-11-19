@@ -11,7 +11,7 @@ interface Props {
   setSelectedMembers: (member: TeamMemberType) => void
 }
 
-const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
+const SearchMemberInput = ({ members, setSelectedMembers }: Props) => {
   const [searchInputValue, setSearchInputValue] = useState('')
   const [isMenuActive, setIsMenuActive] = useState(false)
   const [filteredMembers, setFilteredMembers] =
@@ -59,4 +59,4 @@ const AddMemberInput = ({ members, setSelectedMembers }: Props) => {
   )
 }
 
-export default AddMemberInput
+export default SearchMemberInput
