@@ -11,6 +11,7 @@ import {
   SelectedMember,
   PageHeading,
   TooltipIcon,
+  AddMembersModalSkeleton,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import {
@@ -107,84 +108,83 @@ const AddMembersModal = ({ isVisible, setIsVisible, teamId }: Props) => {
 
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
-      <div className="flex flex-col gap-6">
-        <Title>Add Members</Title>
-        <SearchMemberInput
-          members={sortTeamMembers(unselectedMembersWithoutTeam)}
-          setSelectedMembers={(member: TeamMemberType) => {
-            setSelectedMembers((prev) => [
-              ...prev,
-              {
-                profile: member,
-                role: member.role || null,
-                type: 'team_member',
-              },
-            ])
-          }}
-        />
-        <div
-          className={classNames('min-h-[282px] min-w-[616px]', {
-            'flex flex-col': selectedMembers.length,
-            'grid place-items-center text-center':
-              isFetching || !selectedMembers.length,
-          })}
-        >
-          {isFetching || !selectedMembers.length ? (
-            <PageHeading
-              title={isFetching ? 'Fetching...' : 'No Members Selected'}
-              subtitle={
-                isFetching
-                  ? 'We are preparing data for you. Please, stand by.'
-                  : 'Select members you want to add using above search box.'
-              }
-              noSpacer
-            />
-          ) : (
-            <>
-              <TableHead>
-                <TableHeadData width="16rem">Name</TableHeadData>
-                <TableHeadData width="12rem">
-                  {!roles.length ? (
-                    <span className="flex items-center gap-2">
-                      Role
-                      <TooltipIcon
-                        variant="error"
-                        tooltipMessage={[
-                          "You haven't set up any roles yet. To do this,",
-                          "go to the organisation tab. It's a good idea",
-                          'to do this before adding team members.',
-                        ]}
-                      />
-                    </span>
-                  ) : (
-                    'Role'
-                  )}
-                </TableHeadData>
-              </TableHead>
-              <ul>
-                {selectedMembers.map((selectedMember) => (
-                  <SelectedMember
-                    key={selectedMember.profile.id}
-                    member={selectedMember}
-                    roles={roles}
-                    setSelectedMembers={setSelectedMembers}
-                  />
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
-        <div className="flex w-full items-center justify-between">
-          <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
-          <Button
-            isLoading={isLoading}
-            disabled={!selectedMembers.length}
-            onClick={handleAddMembers}
+      {isFetching ? (
+        <AddMembersModalSkeleton />
+      ) : (
+        <div className="flex flex-col gap-6">
+          <Title>Add Members</Title>
+          <SearchMemberInput
+            members={sortTeamMembers(unselectedMembersWithoutTeam)}
+            setSelectedMembers={(member: TeamMemberType) => {
+              setSelectedMembers((prev) => [
+                ...prev,
+                {
+                  profile: member,
+                  role: member.role || null,
+                  type: 'team_member',
+                },
+              ])
+            }}
+          />
+          <div
+            className={classNames('min-h-[282px] min-w-[616px]', {
+              'flex flex-col': selectedMembers.length,
+              'grid place-items-center text-center': !selectedMembers.length,
+            })}
           >
-            Add Members
-          </Button>
+            {!selectedMembers.length ? (
+              <PageHeading
+                title="No Members Selected"
+                subtitle="Select members you want to add using above search box."
+                noSpacer
+              />
+            ) : (
+              <>
+                <TableHead>
+                  <TableHeadData width="16rem">Name</TableHeadData>
+                  <TableHeadData width="12rem">
+                    {!roles.length ? (
+                      <span className="flex items-center gap-2">
+                        Role
+                        <TooltipIcon
+                          variant="error"
+                          tooltipMessage={[
+                            "You haven't set up any roles yet. To do this,",
+                            "go to the organisation tab. It's a good idea",
+                            'to do this before adding team members.',
+                          ]}
+                        />
+                      </span>
+                    ) : (
+                      'Role'
+                    )}
+                  </TableHeadData>
+                </TableHead>
+                <ul>
+                  {selectedMembers.map((selectedMember) => (
+                    <SelectedMember
+                      key={selectedMember.profile.id}
+                      member={selectedMember}
+                      roles={roles}
+                      setSelectedMembers={setSelectedMembers}
+                    />
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
+          <div className="flex w-full items-center justify-between">
+            <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
+            <Button
+              isLoading={isLoading}
+              disabled={!selectedMembers.length}
+              onClick={handleAddMembers}
+            >
+              Add Members
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </Modal>
   )
 }

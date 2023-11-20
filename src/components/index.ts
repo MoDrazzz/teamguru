@@ -40,6 +40,7 @@ export { default as TeamsSearchInput } from './Teams/TeamsSearchInput'
 export { default as TeamsWrapper } from './Teams/TeamsWrapper'
 
 // SKELETONS
+export { default as AddMembersModalSkeleton } from './Skeletons/AddMembersModalSkeleton'
 export { default as AuthFormTitleSkeleton } from './Skeletons/AuthFormTitleSkeleton'
 export { default as AvatarSettingsSkeleton } from './Skeletons/AvatarSettingsSkeleton'
 export { default as AvatarSkeleton } from './Skeletons/AvatarSkeleton'
