@@ -6,6 +6,7 @@ import {
   KebabMenu,
   DeleteMemberModal,
   TeamMemberWrapper,
+  ManageMemberModal,
 } from '@/components'
 import { TeamMemberType } from '@/types'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -17,6 +18,7 @@ interface Props {
 
 const TeamMember = ({ member }: Props) => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+  const [isManageModalVisible, setIsManageModalVisible] = useState(false)
 
   return (
     <TeamMemberWrapper>
@@ -31,7 +33,7 @@ const TeamMember = ({ member }: Props) => {
             {
               label: 'Manage',
               icon: faEdit,
-              onClick: () => {},
+              onClick: () => setIsManageModalVisible(true),
             },
             {
               label: 'Delete member',
@@ -45,6 +47,11 @@ const TeamMember = ({ member }: Props) => {
       <DeleteMemberModal
         isVisible={isDeleteModalVisible}
         setIsVisible={setIsDeleteModalVisible}
+        member={member}
+      />
+      <ManageMemberModal
+        isVisible={isManageModalVisible}
+        setIsVisible={setIsManageModalVisible}
         member={member}
       />
     </TeamMemberWrapper>

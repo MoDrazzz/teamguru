@@ -29,6 +29,7 @@ export { default as AddMembersModal } from './Teams/Members/AddMembers/AddMember
 export { default as SearchMemberInput } from './Teams/Members/AddMembers/SearchMemberInput'
 export { default as SelectedMember } from './Teams/Members/AddMembers/SelectedMember'
 export { default as DeleteMemberModal } from './Teams/Members/DeleteMemberModal'
+export { default as ManageMemberModal } from './Teams/Members/ManageMemberModal'
 export { default as NoRolesLabel } from './Teams/Members/NoRolesLabel'
 export { default as TeamMember } from './Teams/Members/TeamMember'
 export { default as TeamMembers } from './Teams/Members/TeamMembers'
