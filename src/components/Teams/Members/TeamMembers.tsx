@@ -76,25 +76,27 @@ const TeamMembers = ({ teamId, members }: Props) => {
             Add members
           </ButtonAlt>
         </div>
-        <TableHead>
-          <TableHeadData width="16rem">Name</TableHeadData>
-          <TableHeadData width="8rem">Role</TableHeadData>
-        </TableHead>
-        <ul className="h-[230px]">
-          {pages.length ? (
-            pages[page - 1].map((member) => (
-              <TeamMember key={member.id} member={member} />
-            ))
-          ) : (
-            <div className="grid h-full w-[608px] place-items-center text-center">
-              <PageHeading
-                title="No Members Found"
-                subtitle="There is no member with specified name or role."
-                noSpacer
-              />
-            </div>
-          )}
-        </ul>
+        {pages.length ? (
+          <>
+            <TableHead>
+              <TableHeadData width="16rem">Name</TableHeadData>
+              <TableHeadData width="8rem">Role</TableHeadData>
+            </TableHead>
+            <ul className="h-[230px]">
+              {pages[page - 1].map((member) => (
+                <TeamMember key={member.id} member={member} />
+              ))}
+            </ul>
+          </>
+        ) : (
+          <div className="grid h-[250px] w-[608px] place-items-center text-center">
+            <PageHeading
+              title="No Members Found"
+              subtitle="There is no member with specified name or role."
+              noSpacer
+            />
+          </div>
+        )}
         <div className="px-8 py-3">
           <TeamFooter items={[`Members: ${members.length}`]}>
             <Pagination page={page} setPage={setPage} length={pages.length} />
