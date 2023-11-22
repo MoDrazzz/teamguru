@@ -7,7 +7,7 @@ interface Props {
 const ProfileSkeleton = ({ color = 'slate' }: Props) => {
   return (
     <div className="flex gap-3">
-      <AvatarSkeleton color={color} size="md" />
+      <AvatarSkeleton color={color} />
       <div className="grid min-h-full w-32">
         <div
           className={classNames('h-4 w-full rounded-full', {
