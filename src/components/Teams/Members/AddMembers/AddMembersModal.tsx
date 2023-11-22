@@ -12,6 +12,7 @@ import {
   PageHeading,
   AddMembersModalSkeleton,
   NoRolesLabel,
+  ModalFooter,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import {
@@ -159,7 +160,7 @@ const AddMembersModal = ({ isVisible, setIsVisible, teamId }: Props) => {
               </>
             )}
           </div>
-          <div className="flex w-full items-center justify-between">
+          <ModalFooter>
             <ButtonText onClick={() => setIsVisible(false)}>Cancel</ButtonText>
             <Button
               isLoading={isLoading}
@@ -168,7 +169,7 @@ const AddMembersModal = ({ isVisible, setIsVisible, teamId }: Props) => {
             >
               Add Members
             </Button>
-          </div>
+          </ModalFooter>
         </div>
       )}
     </Modal>

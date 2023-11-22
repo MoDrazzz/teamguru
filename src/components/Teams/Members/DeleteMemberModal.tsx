@@ -5,6 +5,7 @@ import {
   ButtonText,
   Modal,
   ModalError,
+  ModalFooter,
   Profile,
   Title,
 } from '@/components'
@@ -49,7 +50,7 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
         <p>You are about to delete this member from your team:</p>
         <Profile userProfile={member} />
         <p>Are you sure this is what you mean?</p>
-        <div className="flex w-full items-center justify-between">
+        <ModalFooter>
           <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>
             Cancel
           </ButtonText>
@@ -60,7 +61,7 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
           >
             Delete
           </Button>
-        </div>
+        </ModalFooter>
         <ModalError isError={isError} />
       </div>
     </Modal>

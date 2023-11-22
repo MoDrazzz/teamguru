@@ -8,6 +8,7 @@ import {
   InputError,
   Label,
   Modal,
+  ModalFooter,
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
@@ -71,7 +72,7 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
           />
           <InputError message={error} />
         </FormField>
-        <div className="flex items-center justify-between">
+        <ModalFooter>
           <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>
             Cancel
           </ButtonText>
@@ -82,7 +83,7 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
           >
             Create
           </Button>
-        </div>
+        </ModalFooter>
       </form>
     </Modal>
   )
