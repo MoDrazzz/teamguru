@@ -5,14 +5,15 @@ import {
   ButtonText,
   FormField,
   Label,
+  ManageMemberModalSkeleton,
   Modal,
   ModalError,
+  ModalFooter,
   NoRolesLabel,
   Profile,
   Select,
   Title,
 } from '@/components'
-import ModalFooter from '@/components/ModalFooter'
 import { useAuth } from '@/contexts'
 import { DatabaseType, ModalPropsType, RoleType, TeamMemberType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -86,7 +87,7 @@ const ManageMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
       {isFetching ? (
-        <p>Fetching</p>
+        <ManageMemberModalSkeleton />
       ) : (
         <div className="flex w-80 flex-col gap-6">
           <Title>Manage Member</Title>
