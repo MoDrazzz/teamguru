@@ -13,9 +13,17 @@ interface Props {
   selectedItem: Item
   // eslint-disable-next-line no-unused-vars
   setSelectedItem: (item: Item) => void
+  id?: string
+  disabled?: boolean
 }
 
-const Select = ({ items, selectedItem, setSelectedItem }: Props) => {
+const Select = ({
+  items,
+  selectedItem,
+  setSelectedItem,
+  id,
+  disabled,
+}: Props) => {
   const [isActive, setIsActive] = useState(false)
   const selectRef = useRef(null)
   const menuRef = useRef(null)
@@ -28,7 +36,7 @@ const Select = ({ items, selectedItem, setSelectedItem }: Props) => {
   }
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full" id={id}>
       <div
         ref={selectRef}
         className={classNames(
@@ -36,9 +44,10 @@ const Select = ({ items, selectedItem, setSelectedItem }: Props) => {
           {
             'border-slate-600 dark:border-zinc-400': isActive,
             'border-slate-400 dark:border-zinc-500': !isActive,
+            'opacity-70 pointer-events-none': disabled,
           },
         )}
-        onClick={() => setIsActive((prev) => !prev)}
+        onClick={!disabled ? () => setIsActive((prev) => !prev) : undefined}
       >
         <p className="text-sm font-medium">{selectedItem}</p>
         <Icon
