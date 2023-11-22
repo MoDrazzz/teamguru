@@ -10,11 +10,12 @@ type Item = string
 
 interface Props {
   items: Item[]
-  selectedItem: Item
+  selectedItem: Item | null
   // eslint-disable-next-line no-unused-vars
-  setSelectedItem: (item: Item) => void
+  setSelectedItem: (item: Item | null) => void
   id?: string
   disabled?: boolean
+  emptySelection?: string
 }
 
 const Select = ({
@@ -23,6 +24,7 @@ const Select = ({
   setSelectedItem,
   id,
   disabled,
+  emptySelection,
 }: Props) => {
   const [isActive, setIsActive] = useState(false)
   const selectRef = useRef(null)
@@ -30,7 +32,7 @@ const Select = ({
 
   useOutsideClick([selectRef, menuRef], () => setIsActive(false), !isActive)
 
-  const handleSelectItem = (item: Item) => {
+  const handleSelectItem = (item: Item | null) => {
     setSelectedItem(item)
     setIsActive(false)
   }
@@ -44,12 +46,12 @@ const Select = ({
           {
             'border-slate-600 dark:border-zinc-400': isActive,
             'border-slate-400 dark:border-zinc-500': !isActive,
-            'opacity-70 pointer-events-none': disabled,
+            'pointer-events-none opacity-70': disabled,
           },
         )}
         onClick={!disabled ? () => setIsActive((prev) => !prev) : undefined}
       >
-        <p className="text-sm font-medium">{selectedItem}</p>
+        <p className="text-sm font-medium">{selectedItem || emptySelection}</p>
         <Icon
           icon={faAngleDown}
           className={classNames(
@@ -61,9 +63,17 @@ const Select = ({
         />
       </div>
       <Menu refObj={menuRef} isActive={isActive}>
+        {emptySelection && (
+          <MenuItem
+            highlight={selectedItem === null}
+            onClick={() => handleSelectItem(null)}
+          >
+            <p className="text-sm font-medium">{emptySelection}</p>
+          </MenuItem>
+        )}
         {items.map((item, index) => (
           <MenuItem
-            highlight={item === selectedItem}
+            highlight={selectedItem === item}
             onClick={() => handleSelectItem(item)}
             key={index}
           >

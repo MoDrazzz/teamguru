@@ -98,11 +98,16 @@ const ManageMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
             <Select
               id="roleSelect"
               items={roles.map((role) => role.name)}
-              selectedItem={selectedRole?.name || 'No role'}
+              selectedItem={selectedRole?.name || null}
               setSelectedItem={(roleName) =>
-                setSelectedRole(roles.find((role) => role.name === roleName)!)
+                setSelectedRole(
+                  roleName
+                    ? roles.find((role) => role.name === roleName)!
+                    : null,
+                )
               }
               disabled={!roles.length}
+              emptySelection="No Role"
             />
           </FormField>
           <FormField>
