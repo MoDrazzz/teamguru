@@ -1,6 +1,13 @@
 'use client'
 
-import { Button, ButtonText, Modal, Profile, Title } from '@/components'
+import {
+  Button,
+  ButtonText,
+  Modal,
+  ModalError,
+  Profile,
+  Title,
+} from '@/components'
 import { DatabaseType, ModalPropsType, TeamMemberType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useState } from 'react'
@@ -11,7 +18,7 @@ interface Props extends ModalPropsType {
 
 const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [isError, setIsError] = useState(false)
   const supabase = createClientComponentClient<DatabaseType>()
 
   const handleDeleteMember = async () => {
@@ -21,14 +28,14 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
       .from('profiles')
       .update({
         team_id: null,
-        type: "team_member"
+        type: 'team_member',
       })
       .eq('id', member.id)
 
     setIsLoading(false)
 
     if (updateError) {
-      setError(true)
+      setIsError(true)
       return
     }
 
@@ -43,7 +50,9 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
         <Profile userProfile={member} />
         <p>Are you sure this is what you mean?</p>
         <div className="flex w-full items-center justify-between">
-          <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>Cancel</ButtonText>
+          <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>
+            Cancel
+          </ButtonText>
           <Button
             isLoading={isLoading}
             onClick={handleDeleteMember}
@@ -52,11 +61,7 @@ const DeleteMemberModal = ({ isVisible, setIsVisible, member }: Props) => {
             Delete
           </Button>
         </div>
-        {error && (
-          <p className="absolute bottom-3 right-12 font-bold text-red-500 dark:text-red-600">
-            An error occured.
-          </p>
-        )}
+        <ModalError isError={isError} />
       </div>
     </Modal>
   )
