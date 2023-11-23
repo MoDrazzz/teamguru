@@ -25,3 +25,7 @@ You can't see everything using the production app, so here are the screenshots o
 <img width="1757" alt="Teams-page" src="https://github.com/MoDrazzz/teamguru/assets/44100186/8c9927ae-8815-4b47-bf21-8ce29eeb9c7b">
 <img width="1509" alt="Teams-filtering" src="https://github.com/MoDrazzz/teamguru/assets/44100186/3d6fdfce-4c26-4642-ab0c-e2edbc0d5443">
 <img width="226" alt="Teams-tooltip" src="https://github.com/MoDrazzz/teamguru/assets/44100186/d592fae3-cd41-4a2b-882b-a65c18618aa9">
+<img width="958" alt="Screenshot 2023-11-23 at 10 12 12" src="https://github.com/MoDrazzz/teamguru/assets/44100186/7ccf0a96-7007-430c-a675-733cea5d8e3d">
+<img width="958" alt="Screenshot 2023-11-23 at 10 12 23" src="https://github.com/MoDrazzz/teamguru/assets/44100186/641ca5f9-dade-4b9e-ba2b-d95413c4404e">
+<img width="958" alt="Screenshot 2023-11-23 at 10 12 58" src="https://github.com/MoDrazzz/teamguru/assets/44100186/d5975cce-1841-4e0f-a8ce-7d9314a4594c">
+<img width="958" alt="Screenshot 2023-11-23 at 10 13 12" src="https://github.com/MoDrazzz/teamguru/assets/44100186/90fbcdd0-2d72-4494-a9d8-11b113c455b6">
