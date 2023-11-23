@@ -2,11 +2,13 @@
 
 import {
   Button,
+  ButtonText,
   FormField,
   Input,
   InputError,
   Label,
   Modal,
+  ModalFooter,
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
@@ -70,14 +72,10 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
           />
           <InputError message={error} />
         </FormField>
-        <div className="flex justify-between">
-          <Button
-            disabled={isLoading}
-            onClick={() => setIsVisible(false)}
-            color="red"
-          >
+        <ModalFooter>
+          <ButtonText onClick={() => setIsVisible(false)} disabled={isLoading}>
             Cancel
-          </Button>
+          </ButtonText>
           <Button
             type="submit"
             isLoading={isLoading}
@@ -85,7 +83,7 @@ const CreateTeamModal = ({ isVisible, setIsVisible }: ModalPropsType) => {
           >
             Create
           </Button>
-        </div>
+        </ModalFooter>
       </form>
     </Modal>
   )

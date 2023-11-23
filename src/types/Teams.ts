@@ -7,3 +7,9 @@ export interface TeamMemberType extends UserProfileType {
 export interface TeamDataType extends TeamType {
   members: TeamMemberType[]
 }
+
+export interface SelectedMemberType {
+  profile: TeamMemberType
+  role: RoleType | null
+  type: 'team_member' | 'team_leader'
+}

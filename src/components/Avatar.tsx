@@ -27,7 +27,7 @@ const AvatarWrapper = ({
   withTooltip,
 }: AvatarWrapperProps) => {
   return isTeamLeader || withTooltip ? (
-    <div className="relative">{children}</div>
+    <div className="relative w-inherit max-w-max">{children}</div>
   ) : (
     children
   )
@@ -35,7 +35,7 @@ const AvatarWrapper = ({
 
 const Avatar = ({
   profile,
-  size = 'sm',
+  size = 'md',
   customSrc,
   isTeamLeader = false,
   withTooltip = false,
@@ -76,12 +76,13 @@ const Avatar = ({
       <Image
         src={customSrc || src}
         alt={`${name}'s Avatar`}
-        className={classNames('rounded-lg', {
-          'h-40 w-40': size === 'lg',
-          'h-10 w-10': size === 'sm',
+        className={classNames({
+          'h-40 w-40 rounded-xl': size === 'lg',
+          'h-10 w-10 rounded-lg': size === 'md',
+          'h-8 w-8 rounded-md': size === 'sm',
         })}
-        width={size === 'lg' ? 160 : 40}
-        height={size === 'lg' ? 160 : 40}
+        width={size === 'lg' ? 160 : size === 'md' ? 40 : 32}
+        height={size === 'lg' ? 160 : size === 'md' ? 40 : 32}
         ref={avatarRef}
       />
       {isTeamLeader && (

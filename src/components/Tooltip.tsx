@@ -36,12 +36,13 @@ const Tooltip = ({ tooltipTargetRef, message }: Props) => {
   return (
     <span
       className={classNames(
-        'absolute left-1/2 top-full z-50 mt-1 w-max -translate-x-1/2 rounded-md bg-slate-800 px-3 py-2 transition-transform dark:bg-zinc-200',
+        'absolute cursor-default left-1/2 top-full z-50 mt-1 w-max -translate-x-1/2 rounded-md bg-slate-800 px-3 py-2 transition-transform dark:bg-zinc-200',
         {
           'scale-100': isTooltipVisible,
           'scale-0': !isTooltipVisible,
         },
       )}
+      onClick={(e) => e.stopPropagation()}
     >
       <p
         className={classNames(

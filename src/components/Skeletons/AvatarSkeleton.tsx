@@ -7,12 +7,13 @@ interface Props {
   color?: 'primary' | 'slate'
 }
 
-const AvatarSkeleton = ({ size = 'sm', color = 'slate' }: Props) => {
+const AvatarSkeleton = ({ size = 'md', color = 'slate' }: Props) => {
   return (
     <div
-      className={classNames('overflow-hidden rounded-lg', {
-        'h-40 w-40': size === 'lg',
-        'h-10 w-10': size === 'sm',
+      className={classNames('overflow-hidden', {
+        'h-40 w-40 rounded-xl': size === 'lg',
+        'h-10 w-10 rounded-lg': size === 'md',
+        'h-8 w-8 rounded-md': size === 'sm',
       })}
     >
       <ImageSkeleton color={color} />

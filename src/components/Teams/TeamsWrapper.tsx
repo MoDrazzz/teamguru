@@ -15,9 +15,14 @@ const TeamsWrapper = () => {
   const { setTeams: setSearchSource, searchResult } = useTeamsSearchContext()
 
   useEffect(() => {
+    if (!userProfile) return
+
     const getTeams = async () => {
       setIsLoading(true)
-      const { data } = await supabase.from('teams').select(`
+      const { data } = await supabase
+        .from('teams')
+        .select(
+          `
         *,
         members:profiles (
           *,
@@ -25,7 +30,9 @@ const TeamsWrapper = () => {
             *
           )
         )
-      `)
+      `,
+        )
+        .eq('organisation_id', userProfile.organisation_id)
 
       if (data) {
         setTeams(data)
@@ -35,7 +42,7 @@ const TeamsWrapper = () => {
     }
 
     getTeams()
-  }, [supabase])
+  }, [supabase, userProfile])
 
   useEffect(() => {
     setSearchSource(teams)

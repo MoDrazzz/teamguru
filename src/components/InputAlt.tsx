@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react'
 
 interface Props {
   type?: 'text' | 'email' | 'password'
-  id: string
+  id?: string
   placeholder: string
   value: string
   // eslint-disable-next-line no-unused-vars

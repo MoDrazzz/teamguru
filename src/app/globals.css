@@ -12,4 +12,10 @@
   .skeleton-alt {
     @apply animate-pulse bg-slate-50 dark:bg-zinc-700;
   }
+  .wrapper {
+    @apply rounded-xl bg-slate-50 shadow-main dark:bg-zinc-900;
+  }
+  .w-inherit {
+    width: inherit;
+  }
 }

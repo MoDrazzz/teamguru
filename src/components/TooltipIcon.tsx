@@ -1,16 +1,21 @@
 'use client'
 
 import { Icon, Tooltip } from '@/components'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleExclamation,
+  faInfoCircle,
+} from '@fortawesome/free-solid-svg-icons'
+import classNames from 'classnames'
 import { useRef } from 'react'
 
 interface Props {
-  variant: 'info'
+  variant: 'info' | 'error'
   tooltipMessage: string | string[]
 }
 
 const iconDefinitions = {
   info: faInfoCircle,
+  error: faCircleExclamation,
 }
 
 const TooltipIcon = ({ variant, tooltipMessage }: Props) => {
@@ -20,7 +25,10 @@ const TooltipIcon = ({ variant, tooltipMessage }: Props) => {
   return (
     <span className="relative flex w-fit" ref={tooltipTargetRef}>
       <Icon
-        className="h-3 w-3 text-slate-500 transition-colors hover:text-slate-700"
+        className={classNames('text-base transition-colors', {
+          'text-slate-500 hover:text-slate-700': variant === 'info',
+          'dark:text-red-600 dark:hover:text-red-500 text-red-500 hover:text-red-600': variant === 'error',
+        })}
         icon={icon}
       />
       <Tooltip tooltipTargetRef={tooltipTargetRef} message={tooltipMessage} />
