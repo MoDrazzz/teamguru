@@ -1,1 +1,7 @@
+export { doesStartWithValue } from './doesStartWithValue'
+export { filterMembersByName } from './filterMembersByName'
 export { isWithinOneMinute } from './isWithinOneMinute'
+export { sortObjectsArrayAlphabetically } from './sortObjectsArrayAlphabetically'
+export { sortTeamMembers } from './sortTeamMembers'
+export { sortTeams } from './sortTeams'
+export { splitArray } from './splitArray'

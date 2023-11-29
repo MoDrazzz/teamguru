@@ -9,6 +9,7 @@ import {
   Title,
 } from '@/components'
 import { useAuth } from '@/contexts'
+import { DatabaseType } from '@/types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { FormEvent, useEffect, useState } from 'react'
 
@@ -16,7 +17,7 @@ const PersonalInformationSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaveDisabled, setIsSaveDisabled] = useState(true)
   const { userProfile } = useAuth()
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
 
   const initialFormValues = {
     firstName: userProfile?.first_name || '',

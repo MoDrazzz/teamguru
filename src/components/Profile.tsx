@@ -1,8 +1,8 @@
 import { Avatar } from '@/components'
-import { UserProfile } from '@/types'
+import { UserProfileType } from '@/types'
 
 interface Props {
-  userProfile: UserProfile
+  userProfile: UserProfileType
 }
 
 const Profile = ({ userProfile }: Props) => {

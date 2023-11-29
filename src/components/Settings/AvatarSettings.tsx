@@ -12,6 +12,7 @@ import {
   Button,
   Spinner,
   ButtonAlt,
+  ButtonText,
 } from '@/components'
 import { useAuth } from '@/contexts'
 import { faImage, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
@@ -19,6 +20,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { v4 as generateUUID } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { ReactCropperElement } from 'react-cropper'
+import { DatabaseType } from '@/types'
 
 const AvatarSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false)
@@ -32,7 +34,7 @@ const AvatarSettings = () => {
   const cropperRef = useRef<ReactCropperElement>(null)
   const { userProfile } = useAuth()
 
-  const supabase = createClientComponentClient()
+  const supabase = createClientComponentClient<DatabaseType>()
 
   const handleEdit = () => {
     setIsUploadModalVisible(true)
@@ -161,7 +163,7 @@ const AvatarSettings = () => {
             onClick={handleSetDefault}
             icon={faRotateLeft}
           >
-            Set as default
+            Reset to default
           </ButtonAlt>
         )}
       </div>
@@ -237,12 +239,9 @@ const AvatarSettings = () => {
                 <Icon icon={faImage} className="text-3xl" />
               </div>
               <div className="flex justify-between">
-                <Button
-                  color="red"
-                  onClick={() => handleCrop({ isSkipped: true })}
-                >
+                <ButtonText onClick={() => handleCrop({ isSkipped: true })}>
                   Skip
-                </Button>
+                </ButtonText>
                 <Button onClick={handleCrop}>Confirm</Button>
               </div>
             </div>

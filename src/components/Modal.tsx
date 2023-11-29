@@ -1,12 +1,11 @@
 'use client'
 
 import { Icon } from '@/components'
+import { ModalPropsType } from '@/types'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
-interface Props extends PropsWithChildren {
-  isVisible: boolean
-  setIsVisible: Dispatch<SetStateAction<boolean>>
+interface Props extends PropsWithChildren, ModalPropsType {
   disableBackdropClick?: boolean
 }
 
@@ -28,7 +27,7 @@ const Modal = ({
   return (
     isVisible && (
       <div
-        className="fixed left-0 top-0 z-40 grid h-screen w-screen place-items-center bg-slate-900 bg-opacity-50 dark:bg-zinc-100 dark:bg-opacity-20"
+        className="fixed left-0 top-0 z-40 grid h-screen w-screen place-items-center bg-slate-900 bg-opacity-50 dark:bg-zinc-400 dark:bg-opacity-20"
         onClick={disableBackdropClick ? undefined : () => setIsVisible(false)}
       >
         <div
@@ -41,7 +40,7 @@ const Modal = ({
           >
             <Icon
               icon={faTimes}
-              className="text-xl text-slate-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition-colors hover:text-slate-900"
+              className="text-xl text-slate-600 transition-colors hover:text-slate-900 dark:text-zinc-400 dark:hover:text-zinc-300"
             />
           </span>
           {children}
